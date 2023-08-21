@@ -13,6 +13,51 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Public Routes
 Route::get('/', function () {
-    return view('welcome');
+    return view('public.beranda');
+});
+
+Route::get('/berita', function () {
+    return view('public.berita');
+});
+
+Route::get('/datapenduduk', function () {
+    return view('public.datapenduduk');
+});
+
+Route::get('/kontak', function () {
+    return view('public.kontak');
+});
+
+Route::get('/laporan', function () {
+    return view('public.laporan');
+});
+
+Route::get('/tentang', function () {
+    return view('public.tentang');
+});
+
+// Admin Routes
+Route::prefix('admin')->group(function () {
+    Route::get('/', function () {
+        return view('admin.dashboard');
+    });
+
+    Route::prefix('users')->group(function () {
+        Route::get('/', function () {
+            return view('admin.users.index');
+        });
+
+        Route::get('/create', function () {
+            return view('admin.users.create');
+        });
+
+        Route::get('/edit', function () {
+            return view('admin.users.edit');
+        });
+    });
+
+    // Repeat similar route definitions for other admin sections
+    // Example: berita, datapenduduk, galeri, informasiumum, laporan
 });

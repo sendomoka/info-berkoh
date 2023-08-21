@@ -21,20 +21,21 @@ Info Berkoh adalah website yang menyajikan informasi terkait data penduduk, info
     -   Tentang
     -   Berita Terkini
     -   Data Penduduk
-    -   Kontak dan Laporan
+    -   Kontak
+    -   Laporan
 -   Authentication
     -   <i>Registration</i>
     -   <i>Login</i>
 -   Multi User
     -   <i>Admin</i>
-        -   Mengelola <i>informasi umum terkait kelurahan</i>
+        -   Mengelola <i>informasi umum</i>
         -   Mengelola <i>data penduduk</i>
         -   Mengelola <i>berita</i>
         -   Menanggapi <i>laporan</i>
+        -   Mengelola <i>galeri</i>
         -   Mengelola <i>users</i>
         -   <i>Account</i>
     -   <i>Petugas</i>
-        -   Mengelola <i>data penduduk</i>
         -   Mengelola <i>data penduduk</i>
         -   Mengelola <i>berita</i>
         -   Menanggapi <i>laporan</i>
