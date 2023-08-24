@@ -123,6 +123,11 @@ php artisan serve
 <i>Contributions, issues and feature requests</i> sangat diapresiasi karena website ini jauh dari kata sempurna. Jangan ragu untuk melakukan <i>pull request</i> dan membuat perubahan pada <i>project</i> ini, yaaa!
 </p>
 
+```bash
+# Before commit, do unit test
+php artisan test
+```
+
 <h2 id="lisensi">📝 License</h2>
 
 <p>Info Berkoh is open-sourced software licensed under the MIT license.</p>

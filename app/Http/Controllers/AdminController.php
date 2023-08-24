@@ -4,22 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('admin.users.index');
+        return view('admin.dashboard');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function petugas()
     {
-        //
+        return view('admin.dashboard');
     }
 
     /**
