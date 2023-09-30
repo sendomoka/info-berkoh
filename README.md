@@ -13,48 +13,38 @@ Info Berkoh adalah website yang menyajikan informasi terkait data penduduk, info
 
 <h2 id="fitur">🤨 Fitur apa saja yang tersedia di Info Berkoh?</h2>
 
--   [Mazer Bootstrap Template](https://github.com/zuramai/mazer)
-    -   <i>Dark</i> dan <i>Light</i> mode
-    -   <i>Dashboard UI</i>
 -   Landing Page
     -   Beranda
     -   Tentang
-    -   Berita Terkini
     -   Data Penduduk
+    -   Berita Terkini
+    -   Lapor Pengaduan
+    -   Dokumentasi
     -   Kontak
-    -   Laporan
 -   Authentication
-    -   <i>Registration</i>
     -   <i>Login</i>
--   Multi User
+-   Manajemen Akun
     -   <i>Admin</i>
         -   Mengelola <i>informasi umum</i>
         -   Mengelola <i>data penduduk</i>
-        -   Mengelola <i>berita</i>
-        -   Menanggapi <i>laporan</i>
-        -   Mengelola <i>galeri</i>
-        -   Mengelola <i>users</i>
-        -   <i>Account</i>
+        -   Mengelola <i>berita terkini</i>
+        -   Menanggapi <i>lapor pengaduan</i>
+        -   Mengelola <i>dokumentasi</i>
+        -   Mengelola <i>manajemen akun</i>
+        -   Settings (profil, ganti password)
     -   <i>Petugas</i>
-        -   Mengelola <i>data penduduk</i>
-        -   Mengelola <i>berita</i>
-        -   Menanggapi <i>laporan</i>
-        -   Mengelola <i>galeri</i>
-        -   <i>Account</i>
-    -   <i>Pengunjung</i>
-        -   Membagikan berita
-        -   Membuat <i>laporan</i>
--   Account
-    -   <i>Profile</i>
-    -   <i>Setting</i>
-    -   <i>Change Password</i>
--   CRUD (Create, Read, Update, and Delete)
-    -   <i>Informasi Umum</i>
+        -   Mengelola <i>berita terkini</i>
+        -   Menanggapi <i>lapor pengaduan</i>
+        -   Mengelola <i>dokumentasi</i>
+-   <i>Pengunjung</i>
+    -   Membagikan berita
+    -   Membuat <i>laporan</i>
+-   CRUD (Create, Read, Update, Delete)
     -   <i>Data Penduduk</i>
-    -   <i>Berita</i>
-    -   <i>Laporan</i>
-    -   <i>Galeri</i>
-    -   <i>User</i>
+    -   <i>Berita Terkini</i>
+    -   <i>Lapor Pengaduan</i>
+    -   <i>Dokumentasi</i>
+    -   <i>Manajemen Akun</i>
 -   Pencarian <i>Berita</i> di <i>Halaman Berita</i>
 
 <h2 id="testing-account">👤 Default Account for Testing</h2>
@@ -87,46 +77,17 @@ Info Berkoh adalah website yang menyajikan informasi terkait data penduduk, info
 ```bash
 git clone https://github.com/jehianth/info-berkoh.git
 cd info-berkoh
-composer install
-npm install
-copy .env.example .env
 ```
 
-2. Konfigurasi database melalui `.env`
+2. Import database yang ada di backend/info-berkoh.sql di phpmyadmin
 
-```
-DB_PORT=3306
-DB_DATABASE=info-berkoh
-DB_USERNAME=root
-DB_PASSWORD=
-```
-
-3. Migrasi dan symlinks
-
-```bash
-php artisan key:generate
-php artisan migrate --seed
-php artisan storage:link
-```
-
-4. Jalankan website
-
-```bash
-npm run dev
-# Run in different terminal
-php artisan serve
-```
+3. Jalankan website
 
 <h2 id="kontribusi">🤝 Contributing</h2>
 
 <p>
 <i>Contributions, issues and feature requests</i> sangat diapresiasi karena website ini jauh dari kata sempurna. Jangan ragu untuk melakukan <i>pull request</i> dan membuat perubahan pada <i>project</i> ini, yaaa!
 </p>
-
-```bash
-# Before commit, do unit test
-php artisan test
-```
 
 <h2 id="lisensi">📝 License</h2>
 
