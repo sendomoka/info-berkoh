@@ -26,6 +26,9 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 <body>
     <h2>Dashboard</h2>
     <h1>Selamat Datang, Admin!</h1>
+    <a href="/admin/penduduk">Penduduk</a>
+    <a href="/admin/pelayanan">Pelayanan</a>
+    <br>
     <a name="logout" href="index.php?logout=1">Logout</a>
 </body>
 </html>
