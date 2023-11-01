@@ -6,7 +6,7 @@ if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM manajemen_akun WHERE username='$username' AND password='$password'";
+    $sql = "SELECT * FROM pengguna WHERE username='$username' AND password='$password'";
     $query = mysqli_query($conn, $sql);
     $cek = mysqli_num_rows($query);
 
