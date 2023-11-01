@@ -22,34 +22,40 @@ $query = mysqli_query($conn,$sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pelayanan - Admin</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <h1>Pelayanan</h1>
-    <a href="insert.php">Tambah Data</a>
-    <table border="1">
-        <tr>
-            <th>No</th>
-            <th>Penanggung Jawab</th>
-            <th>Nama Pelayanan</th>
-            <th>Deskripsi</th>
-            <th>Aksi</th>
-        </tr>
-        <?php
-        while($row=mysqli_fetch_array($query)){
-            echo "
+    <?php include '../sidenav.php' ?>
+    <main>
+        <h1>Pelayanan</h1>
+        <a href="insert.php">Tambah Data</a>
+        <table border="1">
             <tr>
-                <td>$row[pelayananID]</td>
-                <td>$row[penanggung_jawab]</td>
-                <td>$row[nama_pelayanan]</td>
-                <td>$row[deskripsi]</td>
-                <td>
-                <a href='update.php?id=$row[pelayananID]'>Update</a>| 
-                <a href='?id=$row[pelayananID]'>Delete</a>
-                </td>
+                <th>No</th>
+                <th>Penanggung Jawab</th>
+                <th>Nama Pelayanan</th>
+                <th>Deskripsi</th>
+                <th>Aksi</th>
             </tr>
-            ";
-        }
-        ?>
-    </table>
+            <?php
+            while($row=mysqli_fetch_array($query)){
+                echo "
+                <tr>
+                    <td>$row[pelayananID]</td>
+                    <td>$row[penanggung_jawab]</td>
+                    <td>$row[nama_pelayanan]</td>
+                    <td>$row[deskripsi]</td>
+                    <td>
+                    <a href='update.php?id=$row[pelayananID]'>Update</a>| 
+                    <a href='?id=$row[pelayananID]'>Delete</a>
+                    </td>
+                </tr>
+                ";
+            }
+            ?>
+        </table>
+        <a href="/admin">Kembali</a>
+    </main>
 </body>
 </html>

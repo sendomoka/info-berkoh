@@ -1,0 +1,50 @@
+.sidenav {
+    height: 100%;
+    width: 220px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+
+.sidenav a {
+    text-decoration: none;
+    font-size: var(--size-sm);
+    color: var(--black);
+    font-weight: var(--weight-medium);
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.menu a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    opacity: 0.45;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    margin: 0 5px;
+}
+
+.menu a:hover {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+main {
+    margin-left: 220px; /* Same as the width of the sidenav */
+    padding: 0 2rem;
+    margin-top: 1.25rem;
+}
