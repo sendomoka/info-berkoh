@@ -12,7 +12,7 @@ if ($id != "") {
     }
 }
 
-$sql = "SELECT pengaduan.pengaduanID, pengadu.nama_pengadu AS pengaduID, pengaduan.nama_pengaduan, pengaduan.alamat_pengadu, pengaduan.perihal_masalah, pengaduan.isi_aduan, pengaduan.upload_file FROM pengaduan INNER JOIN pengguna ON pengaduan.pengaduID = pengadu.pengaduID";
+$sql = "SELECT pengaduanID, NIK, pesan, media FROM pengaduan";
 $query = mysqli_query($conn, $sql);
 ?>
 
@@ -39,11 +39,9 @@ $query = mysqli_query($conn, $sql);
         <table border="1">
             <tr>
                 <th>No</th>
-                <th>Nama Pengadu</th>
-                <th>Alamat Pengadu</th>
-                <th>Perihal Masalah</th>
-                <th>Isi Aduan</th>
-                <th>Upload File</th>
+                <th>NIK</th>
+                <th>Pesan</th>
+                <th>Media</th>
                 <th>Action</th>
             </tr>
 
@@ -54,11 +52,9 @@ $query = mysqli_query($conn, $sql);
                 echo "
                 <tr>
                     <td>$no</td>
-                    <td>{$row['nama_pengadu']}</td>
-                    <td>{$row['alamat_pengadu']}</td>
-                    <td>{$row['perihal_masalah']}</td>
-                    <td>{$row['isi_aduan']}</td>
-                    <td>{$row['upload_file']}</td>
+                    <td>{$row['NIK']}</td>
+                    <td>{$row['pesan']}</td>
+                    <td>{$row['media']}</td>
                     <td>
                         <a class='update' href='update.php?id={$row['pengaduanID']}'>Update</a> | 
                         <a class='delete' href='?id={$row['pengaduanID']}'>Delete</a>

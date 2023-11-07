@@ -2,9 +2,9 @@
 session_start();
 include '../../backend/config.php';
 
-$id = $_GET['id'];
-if($id != ""){
-    $delete = "DELETE FROM penduduk WHERE nik='$id'";
+$nik = $_GET['nik'];
+if($nik != ""){
+    $delete = "DELETE FROM penduduk WHERE nik='$nik'";
     $query = mysqli_query($conn,$delete);
     if($query){
         ?>
@@ -69,8 +69,8 @@ $query = mysqli_query($conn,$sql);
                     <td>$row[pekerjaan]</td>
                     <td>$row[kewarganegaraan]</td>
                     <td>
-                    <a class='update' href='update.php?id=$row[nik]'>Update</a>| 
-                    <a class='delete' href='?id=$row[nik]'>Delete</a>
+                    <a class='update' href='update.php?nik=$row[nik]'>Update</a>| 
+                    <a class='delete' href='?nik=$row[nik]'>Delete</a>
                     </td>
                 </tr>
                 ";

@@ -5,14 +5,11 @@ include '../../backend/config.php';
 $id = $_GET['id'];
 
 if(isset($_POST['update'])){
-    $pengaduID = $_POST['pengaduID'];
-    $nama_pengaduan = $_POST['nama_pengaduan'];
-    $alamat_pengadu = $_POST['alamat_pengadu'];
-    $perihal_masalah = $_POST['perihal_masalah'];
-    $isi_aduan = $_POST['isi_aduan'];
-    $upload_file = $_POST['upload_file'];
+    $NIK = $_POST['NIK'];
+    $pesan = $_POST['pesan'];
+    $media = $_POST['media'];
 
-    $update_query = "UPDATE pengaduan SET pengaduID='$pengaduID', nama_pengaduan='$nama_pengaduan', alamat_pengadu='$alamat_pengadu', perihal_masalah='$perihal_masalah', isi_aduan='$isi_aduan', upload_file='$upload_file' WHERE pengaduanID='$id'";
+    $update_query = "UPDATE pengaduan SET NIK='$NIK', pesan='$pesan', media='$media' WHERE pengaduanID='$id'";
     $query = mysqli_query($conn, $update_query);
 
     if($query){
@@ -34,7 +31,7 @@ $data = mysqli_fetch_array($query);
     <title>Update Data Pengaduan - Admin</title>
 </head>
 <body>
-    <h1>Update Data Pengaduan/h1>
+    <h1>Update Data Pengaduan</h1>
     <a href="index.php">Kembali</a>
     <?php
     if($data['pengaduanID'] != "") {
@@ -43,66 +40,33 @@ $data = mysqli_fetch_array($query);
         <input type="hidden" name="pengaduanID" value="<?= $data['pengaduanID'] ?>">
         <table border='0'>
             <tr>
-                <td>Pengadu</td>
+                <td>NIK</td>
                 <td>:</td>
                 <td>
-                <select name='pengaduID'>
-                    <?php
-                    $s = "SELECT * FROM pengadu";
-                    $q = mysqli_query($conn, $s);
-                    while($row = mysqli_fetch_array($q)){
-                        if ($row['pengaduID'] == $data['pengaduID']) {
-                            echo "<option value='$row[pengaduID]' selected>$row[pengaduID] - $row[nama_pengaduan]</option>";
-                        } else {
-                            echo "<option value='$row[pengaduID]'>$row[pengaduID] - $row[nama_pengaduan]</option>";
-                        }
-                    }
-                    ?>
-                </select>
+                    <input type="text" name="NIK" value="<?= $data['NIK'] ?>">
                 </td>
             </tr>
-        <tr>
-            <td>Nama Pengaduan</td>
-            <td>:</td>
-            <td>
-            <input type="text" name="nama_pengaduan">
-            </td>
-        </tr>
-        <tr>
-            <td>Alamat Pengadu</td>
-            <td>:</td>
-            <td>
-            <textarea name="alamat" id="alamat" cols="30" rows="10"></textarea>
-            </td>
-        </tr>
-        <tr>
-            <td>Perihal Masalah</td>
-            <td>:</td>
-            <td>
-            <input type="text" name="perihal_masalah">
-            </td>
-        </tr>
-        <tr>
-            <td>Isi Aduan</td>
-            <td>:</td>
-            <td>
-            <textarea name="deskripsi" id="deskripsi" cols="30" rows="10"></textarea>
-            </td>
-        </tr>
-        <tr>
-            <td>Upload File</td>
-            <td>:</td>
-            <td>
-            <input name="file" id="file" cols="30" rows="10"></input>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td>
-            <input type='submit' name='insert' value='Insert Data'>
-            </td>
-        </tr>
+            <tr>
+                <td>Pesan</td>
+                <td>:</td>
+                <td>
+                    <textarea name="pesan" id="pesan" cols="30" rows="10"><?= $data['pesan'] ?></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>Media</td>
+                <td>:</td>
+                <td>
+                    <input type="text" name="media" value="<?= $data['media'] ?>">
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>
+                    <input type='submit' name='update' value='Update Data'>
+                </td>
+            </tr>
         </table>
     </form>
     <?php
