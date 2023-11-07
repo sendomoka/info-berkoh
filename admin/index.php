@@ -71,6 +71,9 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     <main>
         <h2>Dashboard</h2>
         <h1>Selamat Datang, Admin!</h1>
+        <div class="footer-admin">
+            &copy; 2023.INFO BERKOH
+        </div>
     </main>
 </body>
 </html>
