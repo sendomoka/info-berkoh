@@ -99,10 +99,19 @@ $data = mysqli_fetch_array($query);
             <td>Jenis Kelamin</td>
             <td>:</td>
             <td>
-            <select name="jk" id="jk">
-                <option value="PEREMPUAN">PEREMPUAN</option>
-                <option value="LAKI">LAKI-LAKI</option>
-            </select>
+            <select name='penggunaID'>
+                    <?php
+                    $s = "SELECT * FROM penduduk";
+                    $q = mysqli_query($conn, $s);
+                    while($row = mysqli_fetch_array($q)){
+                        if ($row['penggunaID'] == $data['penggunaID']) {
+                            echo "<option value='$row[penggunaID]' selected>$row[penggunaID] - $row[nama_pengguna]</option>";
+                        } else {
+                            echo "<option value='$row[penggunaID]'>$row[penggunaID] - $row[nama_pengguna]</option>";
+                        }
+                    }
+                    ?>
+                </select>
             </td>
         </tr>
         <tr>
