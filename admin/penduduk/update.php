@@ -17,7 +17,7 @@ $kewarganegaraan = $_POST['kewarganegaraan'];
 $update = $_POST['update'];
 
 if(isset($update)){
-    $update="UPDATE penduduk SET nama='$nama',nohp='$nohp', tempat_lahir='$tempat_lahir', tanggal_lahir='$tanggal_lahir', alamat='$alamat',agama='$agama', gol_darah='$gol_darah', jenis_kelamin='$jenis_kelamin',status_perkawinan='$status_perkawinan',pekerjaan='$pekerjaan', kewarganegaraan='$kewarganegaraan' WHERE nik='$id'";
+    $update="UPDATE penduduk SET nama='$nama',nohp='$nohp', tempat_lahir='$tempat_lahir', tanggal_lahir='$tanggal_lahir', alamat='$alamat',agama='$agama', gol_darah='$gol_darah', jenis_kelamin='$jenis_kelamin',status_perkawinan='$status_perkawinan',pekerjaan='$pekerjaan', kewarganegaraan='$kewarganegaraan' WHERE nik='$nik'";
     $query = mysqli_query($conn,$update);
     if($query){
         ?>
@@ -26,7 +26,7 @@ if(isset($update)){
     }
 }
 
-$sql = "SELECT * FROM penduduk WHERE nik = '$id'";
+$sql = "SELECT * FROM penduduk WHERE nik = '$nik'";
 $query = mysqli_query($conn, $sql);
 $data = mysqli_fetch_array($query);
 ?>
@@ -57,7 +57,7 @@ $data = mysqli_fetch_array($query);
             <td>No HP</td>
             <td>:</td>
             <td>
-            <input type="text" name="noh" value="<?php echo $data['nohp']; ?>">
+            <input type="text" name="nohp" value="<?php echo $data['nohp']; ?>">
             </td>
         </tr>
         <tr>
@@ -92,22 +92,22 @@ $data = mysqli_fetch_array($query);
             <td>Gol Darah</td>
             <td>:</td>
             <td>
-            <input type="text" name="goldar" <?php echo $data['gol_darah']; ?>>
+            <input type="text" name="goldar" value="<?php echo $data['gol_darah']; ?>">
             </td>
         </tr>
         <tr>
             <td>Jenis Kelamin</td>
             <td>:</td>
             <td>
-            <select name='penggunaID'>
+            <select name='nik'>
                     <?php
                     $s = "SELECT * FROM penduduk";
                     $q = mysqli_query($conn, $s);
                     while($row = mysqli_fetch_array($q)){
-                        if ($row['penggunaID'] == $data['penggunaID']) {
-                            echo "<option value='$row[penggunaID]' selected>$row[penggunaID] - $row[nama_pengguna]</option>";
+                        if ($row['nik'] == $data['nik']) {
+                            echo "<option value='$row[nik]' selected>$row[nik] - $row[jenis_kelamin]</option>";
                         } else {
-                            echo "<option value='$row[penggunaID]'>$row[penggunaID] - $row[nama_pengguna]</option>";
+                            echo "<option value='$row[nik]'>$row[nik] - $row[jenis_kelamin]</option>";
                         }
                     }
                     ?>
@@ -118,31 +118,40 @@ $data = mysqli_fetch_array($query);
             <td>Status Perkawinan</td>
             <td>:</td>
             <td>
-            <select name="status" id="status">
-                <option value="KAWIN">KAWIN</option>
-                <option value="BELUM">BELUM KAWIN</option>
-            </select>
+            <select name='nik'>
+                    <?php
+                    $s = "SELECT * FROM penduduk";
+                    $q = mysqli_query($conn, $s);
+                    while($row = mysqli_fetch_array($q)){
+                        if ($row['nik'] == $data['nik']) {
+                            echo "<option value='$row[nik]' selected>$row[nik] - $row[status_perkawinan]</option>";
+                        } else {
+                            echo "<option value='$row[nik]'>$row[nik] - $row[status_perkawinan]</option>";
+                        }
+                    }
+                    ?>
+                </select>
             </td>
         </tr>
         <tr>
             <td>Pekerjaan</td>
             <td>:</td>
             <td>
-            <input type="text" name="pekerjaan">
+            <input type="text" name="pekerjaan" value="<?php echo $data['pekerjaan']; ?>">
             </td>
         </tr>
         <tr>
             <td>Kewarganegaraan</td>
             <td>:</td>
             <td>
-            <input type="text" name="kewarganegaraan">
+            <input type="text" name="kewarganegaraan" value="<?php echo $data['kewarganegaraan']; ?>">
             </td>
         </tr>
         <tr>
             <td></td>
             <td></td>
             <td>
-            <input type='submit' name='insert' value='Insert Data'>
+            <input type='submit' name='insert' value='Update Data'>
             </td>
         </tr>
         </table>
