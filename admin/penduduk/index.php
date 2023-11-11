@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../../backend/config.php';
+include '../../config/models.php';
 
 $nik = $_GET['nik'];
 if($nik != ""){
@@ -33,9 +33,9 @@ $query = mysqli_query($conn,$sql);
             <img src="../../images/circle-add.svg">
             Tambah Data
         </a>
+        <div class="table-wrapper">
         <table border="1">
             <tr>
-                <th>No</th>
                 <th>NIK</th>
                 <th>Nama Penduduk</th>
                 <th>No HP</th>
@@ -48,14 +48,12 @@ $query = mysqli_query($conn,$sql);
                 <th>Status</th>
                 <th>Pekerjaan</th>
                 <th>Kewarganegaraan</th>
+                <th>Aksi</th>
             </tr>
             <?php
-            $no=1;
-            
             while($row=mysqli_fetch_array($query)){
                 echo "
                 <tr>
-                    <td>$no</td>
                     <td>$row[nik]</td>
                     <td>$row[nama]</td>
                     <td>$row[nohp]</td>
@@ -74,11 +72,10 @@ $query = mysqli_query($conn,$sql);
                     </td>
                 </tr>
                 ";
-                $no++;
             }
             ?>
         </table>
-        
+        </div>
         <div class="footer-admin">
             &copy; 2023.INFO BERKOH
         </div>

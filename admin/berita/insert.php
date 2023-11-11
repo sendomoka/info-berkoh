@@ -1,15 +1,16 @@
 <?php
 session_start();
-include '../../backend/config.php';
+include '../../config/models.php';
 
 $penggunaID = $_POST['penggunaID'];
-$nama_pelayanan = $_POST['nama_pelayanan'];
-$deskripsi = $_POST['deskripsi'];
+$isi = $_POST['isi'];
+$tanggal_dikirim = $_POST['tanggal_dikirim'];
 $insert = $_POST['insert'];
 
 if(isset($insert)){
-	$insert="insert into berita(penggunaID,nama_pelayanan,deskripsi) values('$penggunaID','$nama_pelayanan','$deskripsi') ";
-	$query = mysqli_query($conn,$insert);
+    $isi = mysqli_real_escape_string($conn, $isi);
+    $insert="insert into berita(penggunaID,judul,isi,tanggal_dikirim) values('$penggunaID','','$isi','$tanggal_dikirim') ";
+    $query = mysqli_query($conn,$insert);
 	if($query){
 		?>
 		<script>alert('Data Berhasil Dimasukkan!'); document.location='index.php';</script>
@@ -24,10 +25,13 @@ if(isset($insert)){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah Data Berita - Admin</title>
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/admin.css">
 </head>
 <body>
+    <?php include '../../components/admin/sidenav.php' ?>
+    <main>
     <h1>Tambah Data Berita</h1>
-    <a href="index.php">Kembali</a>
     <form name='formulir' method='POST' 
 action='<?php $_SERVER['PHP_SELF']; ?>'>
     <table border='0'>
@@ -44,13 +48,6 @@ action='<?php $_SERVER['PHP_SELF']; ?>'>
                 }
                 ?>
             </select>
-            </td>
-        </tr>
-        <tr>
-            <td>Judul</td>
-            <td>:</td>
-            <td>
-            <input type="text" name="judul">
             </td>
         </tr>
         <tr>
@@ -76,6 +73,7 @@ action='<?php $_SERVER['PHP_SELF']; ?>'>
         </tr>
     </table>
     </form>
+    </main>
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <script>
         var quill = new Quill('#editor', {

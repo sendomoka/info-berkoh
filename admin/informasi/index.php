@@ -4,7 +4,7 @@ include '../../config/models.php';
 
 $id = $_GET['id'];
 if($id != ""){
-    $delete = "DELETE FROM berita WHERE beritaID='$id'";
+    $delete = "DELETE FROM informasi WHERE informasiID='$id'";
     $query = mysqli_query($conn,$delete);
     if($query){
         ?>
@@ -13,7 +13,7 @@ if($id != ""){
     }
 }
 
-$sql = "SELECT berita.*, pengguna.username AS pengirim FROM berita INNER JOIN pengguna ON berita.penggunaID = pengguna.penggunaID";
+$sql = "SELECT * FROM informasi ORDER BY informasiID ASC";
 $query = mysqli_query($conn,$sql);
 ?>
 <!DOCTYPE html>
@@ -21,24 +21,24 @@ $query = mysqli_query($conn,$sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Berita Terkini - Admin</title>
-    <link rel="stylesheet" href="../../css/style.css">
-    <link rel="stylesheet" href="../../css/admin.css">
+    <title>Informasi Terkini - Admin</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-<?php include '../../components/admin/sidenav.php'; ?>
+    <?php include '../components/sidenav.php' ?>
     <main>
-        <h1>Berita Terkini</h1>
+        <h1>Informasi Terkini</h1>
         <a class="insert" href="insert.php">
-            <img src="../../assets/images/circle-add.svg">
+            <img src="../../images/circle-add.svg">
             Tambah Data
         </a>
         <table border="1">
             <tr>
                 <th>No</th>
-                <th>Pengirim</th>
-                <th>Isi</th>
-                <th>Tanggal Dikirim</th>
+                <th>Nama</th>
+                <th>Konten</th>
+                <th>Media</th>
                 <th>Aksi</th>
             </tr>
             <?php
@@ -48,12 +48,16 @@ $query = mysqli_query($conn,$sql);
                 echo "
                 <tr>
                     <td>$no</td>
-                    <td>$row[pengirim]</td>
-                    <td>$row[isi]</td>
-                    <td>$row[tanggal_dikirim]</td>
+                    <td>$row[nama]</td>
+                    <td>$row[konten]</td>
                     <td>
-                    <a class='update' href='update.php?id=$row[beritaID]'>Update</a>| 
-                    <a class='delete' href='?id=$row[beritaID]'>Delete</a>
+                        // <img src='../../images/$row[media]' width='100px'>
+                        // <video src='../../videos/$row[media]' width='100px' controls></video>
+                        $row[media]
+                    </td>
+                    <td>
+                    <a class='update' href='update.php?id=$row[informasiID]'>Update</a>| 
+                    <a class='delete' href='?id=$row[informasiID]'>Delete</a>
                     </td>
                 </tr>
                 ";

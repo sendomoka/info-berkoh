@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../../backend/config.php';
+include '../../config/models.php';
 
 $id = isset($_GET['id']) ? mysqli_real_escape_string($conn, $_GET['id']) : '';
 
@@ -22,17 +22,15 @@ $query = mysqli_query($conn, $sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pengaduan - Admin</title>
-    <link rel="stylesheet" href="../../style.css">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/admin.css">
 </head>
 <body>
-    <h1>Pengaduan</h1>
-    
-    <?php include '../components/sidenav.php'; ?>
-
+    <?php include '../../components/admin/sidenav.php'; ?>
     <main>
+        <h1>Pengaduan</h1>
         <a class="insert" href="insert.php">
-            <img src="../../images/circle-add.svg" alt="Tambah Data">
+            <img src="../../assets/images/circle-add.svg">
             Tambah Data
         </a>
 
@@ -42,7 +40,6 @@ $query = mysqli_query($conn, $sql);
                 <th>NIK</th>
                 <th>Pesan</th>
                 <th>Media</th>
-                <th>Action</th>
             </tr>
 
             <?php

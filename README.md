@@ -47,6 +47,75 @@ Info Berkoh adalah website yang menyajikan informasi terkait data penduduk, info
     -   <i>Manajemen Akun</i>
 -   Pencarian <i>Berita</i> di <i>Halaman Berita</i>
 
+```
+root
+|-- admin
+|   |-- berita
+|   |   |-- index.php
+|   |   |-- tambah.php
+|   |   |-- edit.php
+|   |-- dokumentasi
+|   |   |-- index.php
+|   |   |-- tambah.php
+|   |   |-- edit.php
+|   |-- informasi
+|   |   |-- index.php
+|   |   |-- tambah.php
+|   |   |-- edit.php
+|   |-- pelayanan
+|   |   |-- index.php
+|   |   |-- tambah.php
+|   |   |-- edit.php
+|   |-- penduduk
+|   |   |-- index.php
+|   |   |-- tambah.php
+|   |   |-- edit.php
+|   |-- pengaduan
+|   |   |-- index.php
+|   |   |-- tambah.php
+|   |   |-- edit.php
+|   |-- pengguna
+|   |   |-- index.php
+|   |   |-- tambah.php
+|   |   |-- edit.php
+|   |-- index.php
+|-- assets
+|   |-- images
+|   |-- videos
+|-- components
+|   |-- admin
+|   |   |-- sidenav.php
+|   |-- footer.php
+|   |-- header.php
+|-- config
+|   |-- connect.php
+|   |-- infoberkoh.sql
+|   |-- models.php
+|-- css
+|   |-- admin.css
+|   |-- login.css
+|   |-- style.css
+|-- petugas
+|   |-- berita
+|   |   |-- index.php
+|   |   |-- tambah.php
+|   |   |-- edit.php
+|   |-- dokumentasi
+|   |   |-- index.php
+|   |   |-- tambah.php
+|   |   |-- edit.php
+|   |...
+|-- berita.php
+|-- pelayanan.php
+|-- penduduk.php
+|-- pengaduan.php
+|-- dokumentasi.php
+|-- index.php
+|-- login.php
+|-- README.md
+|-- tentang.php
+```
+
 <h2 id="testing-account">👤 Default Account for Testing</h2>
 
 #### Admin

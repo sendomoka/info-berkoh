@@ -1,19 +1,5 @@
 <?php
-session_start();
-include '../backend/config.php';
 
-// sistem logout
-if (isset($_GET['logout'])) {
-    session_destroy();
-    header("location: ../login.php");
-    exit;
-}
-
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'petugas') {
-    // Jika bukan petugas, redirect ke halaman login
-    header("location: ../login.php");
-    exit;
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
