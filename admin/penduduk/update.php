@@ -1,24 +1,23 @@
 <?php
 session_start();
-include '../../backend/config.php';
-
-$nik = $_POST['nik'];
-$nama = $_POST['nama'];
-$nohp = $_POST['nohp'];
-$tempat_lahir = $_POST['tempat_lahir'];
-$tanggal_lahir = $_POST['tanggal_lahir'];
-$alamat = $_POST['alamat'];
-$agama = $_POST['agama'];
-$gol_darah = $_POST['gol_darah'];
-$jenis_kelamin = $_POST['jenis_kelamin'];
-$status_perkawinan = $_POST['status_perkawinan'];
-$pekerjaan = $_POST['pekerjaan'];
-$kewarganegaraan = $_POST['kewarganegaraan'];
-$update = $_POST['update'];
-
-if(isset($update)){
-    $update="UPDATE penduduk SET nama='$nama',nohp='$nohp', tempat_lahir='$tempat_lahir', tanggal_lahir='$tanggal_lahir', alamat='$alamat',agama='$agama', gol_darah='$gol_darah', jenis_kelamin='$jenis_kelamin',status_perkawinan='$status_perkawinan',pekerjaan='$pekerjaan', kewarganegaraan='$kewarganegaraan' WHERE nik='$nik'";
-    $query = mysqli_query($conn,$update);
+include '../../config/models.php';
+$nikupd = $_GET['nik'];
+if(isset($_POST['update'])){
+    $nik = $_POST['nik'];
+    $nama = $_POST['nama'];
+    $nohp = $_POST['nohp'];
+    $tempat_lahir = $_POST['tempat_lahir'];
+    $tanggal_lahir = $_POST['tanggal_lahir'];
+    $alamat = $_POST['alamat'];
+    $agama = $_POST['agama'];
+    $gol_darah = $_POST['gol_darah'];
+    $jenis_kelamin = $_POST['jenis_kelamin'];
+    $status_perkawinan = $_POST['status_perkawinan'];
+    $pekerjaan = $_POST['pekerjaan'];
+    $kewarganegaraan = $_POST['kewarganegaraan'];
+    $update = $_POST['update'];
+    $update_query="UPDATE penduduk SET nama='$nama',nohp='$nohp', tempat_lahir='$tempat_lahir', tanggal_lahir='$tanggal_lahir', alamat='$alamat',agama='$agama', gol_darah='$gol_darah', jenis_kelamin='$jenis_kelamin',status_perkawinan='$status_perkawinan',pekerjaan='$pekerjaan', kewarganegaraan='$kewarganegaraan' WHERE nik='$nikupd'";
+    $query = mysqli_query($conn,$update_query);
     if($query){
         ?>
         <script>alert('Data Berhasil Diupdate!'); document.location='index.php';</script>
@@ -26,7 +25,7 @@ if(isset($update)){
     }
 }
 
-$sql = "SELECT * FROM penduduk WHERE nik = '$nik'";
+$sql = "SELECT * FROM penduduk WHERE nik = '$nikupd'";
 $query = mysqli_query($conn, $sql);
 $data = mysqli_fetch_array($query);
 ?>
@@ -46,7 +45,7 @@ $data = mysqli_fetch_array($query);
     <form name='formulir' method='POST' action='<?php $_SERVER['PHP_SELF']; ?>'>
         <input type="hidden" name="nik" value="<?= $data['nik'] ?>">
         <table border='0'>
-            <tr>
+        <tr>
             <td>Nama penduduk</td>
             <td>:</td>
             <td>
@@ -64,14 +63,14 @@ $data = mysqli_fetch_array($query);
             <td>Tempat Lahir</td>
             <td>:</td>
             <td>
-            <input type="text" name="tempatlahir" <?php echo $data['tempat_lahir']; ?>>
+            <input type="text" name="tempat_lahir" value="<?php echo $data['tempat_lahir']; ?>" >
             </td>
         </tr>
         <tr>
             <td>Tanggal Lahir</td>
             <td>:</td>
             <td>
-            <input type="text" name="tgllahir" <?php echo $data['tanggal_lahir']; ?>>
+            <input type="date" name="tanggal_lahir" value="<?php echo $data['tanggal_lahir']; ?>">
             </td>
         </tr>
         <tr>
@@ -92,45 +91,39 @@ $data = mysqli_fetch_array($query);
             <td>Gol Darah</td>
             <td>:</td>
             <td>
-            <input type="text" name="goldar" value="<?php echo $data['gol_darah']; ?>">
+            <input type="text" name="gol_darah" value="<?php echo $data['gol_darah']; ?>">
             </td>
         </tr>
         <tr>
             <td>Jenis Kelamin</td>
             <td>:</td>
             <td>
-            <select name='nik'>
-                    <?php
-                    $s = "SELECT * FROM penduduk";
-                    $q = mysqli_query($conn, $s);
-                    while($row = mysqli_fetch_array($q)){
-                        if ($row['nik'] == $data['nik']) {
-                            echo "<option value='$row[nik]' selected>$row[nik] - $row[jenis_kelamin]</option>";
-                        } else {
-                            echo "<option value='$row[nik]'>$row[nik] - $row[jenis_kelamin]</option>";
-                        }
-                    }
-                    ?>
-                </select>
+            <select name='jenis_kelamin'>
+                            <?php
+                            $s = "SELECT * FROM penduduk";
+                            $q = mysqli_query($conn, $s);
+                            while ($row = mysqli_fetch_array($q)) {
+                                $selected = ($row['nik'] == $data['nik'] && $row['jenis_kelamin'] == $data['jenis_kelamin']) ? " selected" : "";
+                                echo "<option value='$row[nik]'$selected>$row[nik] - $row[jenis_kelamin]</option>";
+                            }
+                            ?>
+                        </select>
             </td>
         </tr>
         <tr>
             <td>Status Perkawinan</td>
             <td>:</td>
             <td>
-            <select name='nik'>
-                    <?php
-                    $s = "SELECT * FROM penduduk";
-                    $q = mysqli_query($conn, $s);
-                    while($row = mysqli_fetch_array($q)){
-                        if ($row['nik'] == $data['nik']) {
-                            echo "<option value='$row[nik]' selected>$row[nik] - $row[status_perkawinan]</option>";
-                        } else {
-                            echo "<option value='$row[nik]'>$row[nik] - $row[status_perkawinan]</option>";
-                        }
-                    }
-                    ?>
-                </select>
+            <select name='status_perkawinan'>
+                            <?php
+                            $s = "SELECT * FROM penduduk";
+                            $q = mysqli_query($conn, $s);
+                            while ($row = mysqli_fetch_array($q)) {
+                                $selected = ($row['nik'] == $data['nik'] && $row['status_perkawinan'] == $data['status_perkawinan']) ? " selected" : "";
+                                echo "<option value='$row[nik]'$selected>$row[nik] - $row[status_perkawinan]</option>";
+                            }
+                            ?>
+                        </select>
             </td>
         </tr>
         <tr>
@@ -151,7 +144,7 @@ $data = mysqli_fetch_array($query);
             <td></td>
             <td></td>
             <td>
-            <input type='submit' name='insert' value='Update Data'>
+            <input type='submit' name='update' value='Update Data'>
             </td>
         </tr>
         </table>

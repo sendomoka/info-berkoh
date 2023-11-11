@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../../backend/config.php';
+include '../../config/models.php';
 
 $id = $_GET['id'];
 $penggunaID = $_POST['penggunaID'];

@@ -1,21 +1,30 @@
 <?php
 session_start();
-include '../../backend/config.php';
+include '../../config/models.php';
 
 $id = $_GET['id'];
 
 if(isset($_POST['update'])){
     $NIK = $_POST['NIK'];
     $pesan = $_POST['pesan'];
-    $media = $_POST['media'];
 
-    $update_query = "UPDATE pengaduan SET NIK='$NIK', pesan='$pesan', media='$media' WHERE pengaduanID='$id'";
-    $query = mysqli_query($conn, $update_query);
+    if(isset($_FILES['media'])){
+        $media_name = $_FILES['media']['name'];
+        $media_tmp = $_FILES['media']['tmp_name'];
+        $media_destination = "upload/" . $media_name;
 
-    if($query){
-        echo '<script>alert("Data Berhasil Diupdate!"); document.location="index.php";</script>';
-    } else {
-        echo '<script>alert("Gagal mengupdate data!");</script>';
+        if(move_uploaded_file($media_tmp, $media_destination)){
+            $update_query = "UPDATE pengaduan SET NIK='$NIK', pesan='$pesan', media='$media_name' WHERE pengaduanID='$id'";
+            $query = mysqli_query($conn, $update_query);
+
+            if($query){
+                echo '<script>alert("Data Berhasil Diupdate!"); document.location="index.php";</script>';
+            } else {
+                echo '<script>alert("Gagal mengupdate data!");</script>';
+            }
+        } else {
+            echo '<script>alert("Gagal mengunggah file media!");</script>';
+        }
     }
 }
 
@@ -23,6 +32,7 @@ $sql = "SELECT * FROM pengaduan WHERE pengaduanID = '$id'";
 $query = mysqli_query($conn, $sql);
 $data = mysqli_fetch_array($query);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,14 +46,27 @@ $data = mysqli_fetch_array($query);
     <?php
     if($data['pengaduanID'] != "") {
     ?>
-    <form name='formulir' method='POST' action='<?php $_SERVER['PHP_SELF']; ?>'>
+    <form name='formulir' method='POST' action='<?php echo $_SERVER['PHP_SELF']; ?>'>
         <input type="hidden" name="pengaduanID" value="<?= $data['pengaduanID'] ?>">
         <table border='0'>
             <tr>
                 <td>NIK</td>
                 <td>:</td>
                 <td>
-                    <input type="text" name="NIK" value="<?= $data['NIK'] ?>">
+                <select name='nik'>
+     <?php
+     $s = "SELECT * FROM penduduk";
+     $q = mysqli_query($conn, $s);
+     while($row = mysqli_fetch_array($q)){
+         if ($row['nik'] == $data['nik']) {
+             echo "<option value='$row[nik]' selected>$row[nik] - $row[nama]</option>";
+         } else {
+             echo "<option value='$row[nik]'>$row[nik] - $row[nama]</option>";
+         }
+     }
+     ?>
+ </select>
+
                 </td>
             </tr>
             <tr>

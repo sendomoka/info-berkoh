@@ -1,6 +1,6 @@
 <nav>
     <a href="index.php">
-        <img src="images/logo.svg" alt="Logo" width="220px">
+        <img src="assets/images/logo.svg" alt="Logo" width="220px">
     </a>
     <ul>
         <li><a href="index.php">Beranda</a></li>
