@@ -1,6 +1,7 @@
 <h1 align="center">Selamat datang di Info Berkoh! 👋</h1>
 
-![Landing Page](https://github.com/jehianth/info-berkoh/blob/main/public/images/homepage.png?raw=true)
+<img src="assets/images/informasi/login.png">
+<img src="assets/images/informasi/admin.png">
 
 [![All Contributors](https://img.shields.io/github/contributors/jehianth/info-berkoh)](https://github.com/jehianth/info-berkoh/graphs/contributors)
 ![GitHub last commit](https://img.shields.io/github/last-commit/jehianth/info-berkoh)
@@ -13,10 +14,11 @@ Info Berkoh adalah website yang menyajikan informasi terkait data penduduk, info
 
 <h2 id="fitur">🤨 Fitur apa saja yang tersedia di Info Berkoh?</h2>
 
--   Landing Page
+-   Front Page
     -   Beranda
     -   Tentang
     -   Data Penduduk
+    -   Pelayanan Publik
     -   Berita Terkini
     -   Lapor Pengaduan
     -   Dokumentasi
@@ -27,106 +29,43 @@ Info Berkoh adalah website yang menyajikan informasi terkait data penduduk, info
     -   <i>Admin</i>
         -   Mengelola <i>informasi umum</i>
         -   Mengelola <i>data penduduk</i>
+        -   Mengelola <i>pelayanan publik</i>
         -   Mengelola <i>berita terkini</i>
         -   Menanggapi <i>lapor pengaduan</i>
         -   Mengelola <i>dokumentasi</i>
         -   Mengelola <i>manajemen akun</i>
         -   Settings (profil, ganti password)
     -   <i>Petugas</i>
+        -   Melihat <i>data penduduk</i>
+        -   Mengelola <i>pelayanan publik</i>
         -   Mengelola <i>berita terkini</i>
         -   Menanggapi <i>lapor pengaduan</i>
         -   Mengelola <i>dokumentasi</i>
+        -   Settings (profil, ganti password)
 -   <i>Pengunjung</i>
     -   Membagikan berita
-    -   Membuat <i>laporan</i>
+    -   Membuat <i>lapor pengaduan</i>
 -   CRUD (Create, Read, Update, Delete)
-    -   <i>Data Penduduk</i>
-    -   <i>Berita Terkini</i>
-    -   <i>Lapor Pengaduan</i>
+    -   <i>Informasi</i>
+    -   <i>Penduduk</i>
+    -   <i>Pelayanan</i>
+    -   <i>Berita</i>
+    -   <i>Pengaduan</i>
     -   <i>Dokumentasi</i>
-    -   <i>Manajemen Akun</i>
+    -   <i>Pengguna</i>
 -   Pencarian <i>Berita</i> di <i>Halaman Berita</i>
-
-```
-root
-|-- admin
-|   |-- berita
-|   |   |-- index.php
-|   |   |-- tambah.php
-|   |   |-- edit.php
-|   |-- dokumentasi
-|   |   |-- index.php
-|   |   |-- tambah.php
-|   |   |-- edit.php
-|   |-- informasi
-|   |   |-- index.php
-|   |   |-- tambah.php
-|   |   |-- edit.php
-|   |-- pelayanan
-|   |   |-- index.php
-|   |   |-- tambah.php
-|   |   |-- edit.php
-|   |-- penduduk
-|   |   |-- index.php
-|   |   |-- tambah.php
-|   |   |-- edit.php
-|   |-- pengaduan
-|   |   |-- index.php
-|   |   |-- tambah.php
-|   |   |-- edit.php
-|   |-- pengguna
-|   |   |-- index.php
-|   |   |-- tambah.php
-|   |   |-- edit.php
-|   |-- index.php
-|-- assets
-|   |-- images
-|   |-- videos
-|-- components
-|   |-- admin
-|   |   |-- sidenav.php
-|   |-- footer.php
-|   |-- header.php
-|-- config
-|   |-- connect.php
-|   |-- infoberkoh.sql
-|   |-- models.php
-|-- css
-|   |-- admin.css
-|   |-- login.css
-|   |-- style.css
-|-- petugas
-|   |-- berita
-|   |   |-- index.php
-|   |   |-- tambah.php
-|   |   |-- edit.php
-|   |-- dokumentasi
-|   |   |-- index.php
-|   |   |-- tambah.php
-|   |   |-- edit.php
-|   |...
-|-- berita.php
-|-- pelayanan.php
-|-- penduduk.php
-|-- pengaduan.php
-|-- dokumentasi.php
-|-- index.php
-|-- login.php
-|-- README.md
-|-- tentang.php
-```
 
 <h2 id="testing-account">👤 Default Account for Testing</h2>
 
 #### Admin
 
--   Username: ...
--   Password: ...
+-   Username: rosikin
+-   Password: rosikin123
 
 #### Petugas
 
--   Username: ...
--   Password: ...
+-   Username: sutardi
+-   Password: sut123
 
 <h2 id="demo">🏠 Demo Page</h2>
 
@@ -137,6 +76,7 @@ root
 <p>Berikut adalah <i>pre-requisite</i> yang diperlukan ketika melakukan instalasi dan <i>running</i> aplikasi.</p>
 
 -   PHP ^8.0 & Web Server (XAMPP, LAMPP, MAMPP, atau Laragon)
+-   Text Editor (VS Code, Sublime Text, Atom, atau Notepad++)
 -   Web Browser (Chrome, Firefox, Safari, Opera, atau Brave)
 
 <h2 id="download">💻 Install</h2>
@@ -148,7 +88,7 @@ git clone https://github.com/jehianth/info-berkoh.git
 cd info-berkoh
 ```
 
-2. Import database yang ada di backend/info-berkoh.sql di phpmyadmin
+2. Import database yang ada di ```config/info-berkoh.sql``` ke phpmyadmin
 
 3. Jalankan website
 
