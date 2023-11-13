@@ -32,19 +32,12 @@ if(isset($insert)){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah Data Penduduk - Admin</title>
-    <link rel="stylesheet" href="../../style.css">
-    <link rel="stylesheet" href="../style.css">
-    <style>
-        td {
-            text-align: left;
-        }
-        h1 {
-            margin-bottom: 1rem;
-        }
-    </style>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/admin.css">
+    <link rel="stylesheet" href="../../css/admin_data.css">
 </head>
 <body>
-    <?php include '../components/sidenav.php' ?>
+    <?php include '../../components/admin/sidenav.php' ?>
     <main>
         <h1>Tambah Data Penduduk</h1>
         <form name='formulir' method='POST' 
@@ -125,7 +118,7 @@ if(isset($insert)){
                 <td>
                 <select name="jenis_kelamin" id="jenis_kelamin">
                     <option value="PEREMPUAN">PEREMPUAN</option>
-                    <option value="LAKI">LAKI-LAKI</option>
+                    <option value="LAKI-LAKI">LAKI-LAKI</option>
                 </select>
                 </td>
             </tr>
@@ -135,7 +128,7 @@ if(isset($insert)){
                 <td>
                 <select name="status_perkawinan" id="status_perkawinan">
                     <option value="KAWIN">KAWIN</option>
-                    <option value="BELUM">BELUM KAWIN</option>
+                    <option value="BELUM KAWIN">BELUM KAWIN</option>
                 </select>
                 </td>
             </tr>

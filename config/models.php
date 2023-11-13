@@ -6,21 +6,21 @@ function login($username, $password) {
     global $conn;
     $query = "SELECT * FROM pengguna WHERE username = '$username' AND password = '$password'";
     $findUser = mysqli_query($conn, $query);
-    $find = mysqli_num_rows($findUser);
-    if ($find > 0) {
-        $getRole = mysqli_fetch_array($findUser);
-        $role = $getRole['role'];
-        if ($role == 'admin') {
-            $_SESSION['username'] = $username;
-            $_SESSION['role'] = $role;
-            header("Location: admin");
-        } else if ($role == 'petugas') {
-            $_SESSION['username'] = $username;
-            $_SESSION['role'] = $role;
-            header("Location: petugas");
-        } else {
-            echo "<script>alert('Username atau password salah!')</script>";
-        }
+    $user = mysqli_fetch_assoc($findUser);
+    $_SESSION['penggunaID'] = $user['penggunaID'];
+    $_SESSION['username'] = $user['username'];
+    $_SESSION['nama_pengguna'] = $user['nama_pengguna'];
+    $_SESSION['email'] = $user['email'];
+    $_SESSION['password'] = $user['password'];
+    $_SESSION['role'] = $user['role'];
+    $_SESSION['jabatan'] = $user['jabatan'];
+    $_SESSION['avatar'] = $user['avatar'];
+    if ($user['role'] == 'admin') {
+        header("Location: admin");
+    } else if ($user['role'] == 'petugas') {
+        header("Location: petugas");
+    } else {
+        echo "<script>alert('Username atau password salah!')</script>";
     }
 }
 ?>

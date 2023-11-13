@@ -2,34 +2,60 @@
 session_start();
 include '../../config/models.php';
 
-if (isset($_POST['insert'])) {
-    $NIK = $_POST['NIK'];
-    $pesan = $_POST['pesan'];
+$pengaduanID = $_POST['pengaduanID'];
+$nik = $_POST['nik'];
+$pesan = $_POST['pesan'];
+$insert = $_POST['insert'];
 
-    // Convert the Quill editor content to HTML
-    $html_pesan = $_POST['html_pesan'];
+if(isset($insert)){
+    // Ambil isi dari Quill editor
+    $pesanmedia = $_POST['pesan'];
 
-    if (isset($_FILES['media'])) {
-        $media_name = $_FILES['media']['name'];
-        $media_tmp = $_FILES['media']['tmp_name'];
-        $media_destination = $media_name;
+    // Tangkap semua tag img dari isi
+    preg_match_all('/<img[^>]+>/i', $pesan, $matches);
 
-        if (move_uploaded_file($media_tmp, $media_destination)) {
-            $insert_query = "INSERT INTO pengaduan (NIK, pesan, media) VALUES ('$NIK', '$html_pesan', '$media_name')";
-            $query = mysqli_query($conn, $insert_query);
+    // Lokasi folder untuk menyimpan gambar
+    $folderPath = '../../assets/images/pengaduan/';
 
-            if ($query) {
-                echo '<script>alert("Data Berhasil Dimasukkan!"); document.location="index.php";</script>';
-            } else {
-                echo '<script>alert("Gagal memasukkan data!");</script>';
-            }
-        } else {
-            echo '<script>alert("Gagal mengunggah file media!");</script>';
+    // Pastikan folder sudah ada atau buat jika belum
+    if (!file_exists($folderPath)) {
+        mkdir($folderPath, 0777, true);
+    }
+
+    // Loop melalui setiap tag img
+    foreach ($matches[0] as $imgTag) {
+        // Ekstrak src dari tag img
+        preg_match('/src="([^"]+)"/i', $imgTag, $srcMatch);
+        $imgSrc = $srcMatch[1];
+    
+        // Hanya proses gambar lokal (tidak dari URL eksternal)
+        if (strpos($imgSrc, 'data:image') !== false) {
+            // Dapatkan tipe gambar (jpeg, png, dll.)
+            preg_match('/data:image\/(.*?);/i', $imgSrc, $imageType);
+            $imageExtension = $imageType[1];
+    
+            // Generate nama unik untuk gambar
+            $imgName = uniqid('img_') . '.' . $imageExtension;
+    
+            // Lokasi penyimpanan gambar
+            $imgPath = $folderPath . $imgName;
+    
+            // Simpan gambar ke folder
+            file_put_contents($imgPath, base64_decode(explode(',', $imgSrc)[1]));
+    
+            // Ganti src dalam isi dengan path lokal baru
+            $pesan = str_replace($imgSrc, 'assets/images/pengaduan/' . $imgName, $pesan);
         }
+    }
+    $insert="INSERT INTO pengaduan (nik,pesan) VALUES ('$nik','$pesan') ";
+    $query = mysqli_query($conn,$insert);
+    if($query){
+        ?>
+        <script>alert('Data Berhasil Dimasukkan!'); document.location='index.php';</script>
+        <?php
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,18 +63,22 @@ if (isset($_POST['insert'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah Data Pengaduan - Admin</title>
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/admin.css">
+    <link rel="stylesheet" href="../../css/admin_data.css">
 </head>
 <body>
+    <?php include '../../components/admin/sidenav.php' ?>
+    <main>
     <h1>Tambah Data Pengaduan</h1>
-    <a href="index.php">Kembali</a>
-    <form name='formulir' method='POST' action='<?php echo $_SERVER['PHP_SELF']; ?>' enctype="multipart/form-data">
-
-    <table border='0'>
+    <form name='formulir' method='POST' 
+action='<?php $_SERVER['PHP_SELF']; ?>'>
+    <table>
         <tr>
             <td>NIK</td>
             <td>:</td>
             <td>
-                <select name='nik'>
+            <select name='nik'>
                     <?php
                     $s = "SELECT * FROM penduduk";
                     $q = mysqli_query($conn, $s);
@@ -56,38 +86,30 @@ if (isset($_POST['insert'])) {
                         echo "<option value='$row[nik]'>$row[nik] - $row[nama]</option>";
                     }
                     ?>
-                </select>
+            </select>
             </td>
         </tr>
         <tr>
-            <td>Pesan</td>
+            <td>Pesan dan Media</td>
             <td>:</td>
             <td>
-                <!-- Add Quill editor for Pesan -->
-                <div id="editor" name="html_pesan"></div>
-                <input type="hidden" name="pesan" id="pesan">
-            </td>
-        </tr>
-        <tr>
-            <td>Media</td>
-            <td>:</td>
-            <td>
-                <input type="file" name="media">
+            <div id="editor-insert"></div>
+            <input type="hidden" name="pesan" id="pesan">
             </td>
         </tr>
         <tr>
             <td></td>
             <td></td>
             <td>
-                <input type='submit' name='insert' value='Insert Data'>
+            <input type='submit' name='insert' value='Insert Data'>
             </td>
         </tr>
     </table>
     </form>
-
+    </main>
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <script>
-        var quill = new Quill('#editor', {
+        var quillInsert = new Quill('#editor-insert', {
             theme: 'snow',
             modules: {
                 toolbar: [
@@ -98,16 +120,14 @@ if (isset($_POST['insert'])) {
                     [{ 'indent': '-1'}, { 'indent': '+1' }],
                     [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
                     [{ 'color': [] }, { 'background': [] }],
-                    ['link', 'image', 'video'],
+                    ['link', 'image'],
                     ['clean']
                 ]
             }
         });
-
-        // Save Quill content to the hidden input field
-        quill.on('text-change', function() {
-            var html_content = quill.root.innerHTML;
-            document.getElementById('pesan').value = html_content;
+        document.forms['formulir'].addEventListener('submit', function(){
+            var quillHtml = quillInsert.root.innerHTML.trim();
+            document.getElementById('pesan').value = quillHtml;
         });
     </script>
 </body>

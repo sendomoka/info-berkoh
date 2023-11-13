@@ -22,15 +22,17 @@ $query = mysqli_query($conn,$sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pelayanan - Admin</title>
-    <link rel="stylesheet" href="../../style.css">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/admin.css">
+    <link rel="stylesheet" href="../../css/admin_index.css">
+    <link rel="stylesheet" href="../../css/admin_header.css">
 </head>
 <body>
-    <?php include '../components/sidenav.php' ?>
+    <?php include '../../components/admin/sidenav.php' ?>
     <main>
-        <h1>Pelayanan</h1>
+    <?php include '../../components/admin/header.php' ?>
         <a class="insert" href="insert.php">
-            <img src="../../images/circle-add.svg">
+            <img src="../../assets/images/circle-add.svg">
             Tambah Data
         </a>
         <table border="1">

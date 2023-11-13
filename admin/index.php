@@ -1,5 +1,10 @@
 <?php
+session_start();
 include '../config/models.php';
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+    header('Location: ../login.php');
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,12 +14,14 @@ include '../config/models.php';
     <title>Dashboard - Admin @infoberkoh</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/admin_header.css">
 </head>
 <body>
     <?php include '../components/admin/sidenav.php' ?>
     <main>
-        <h2>Dashboard</h2>
+        <?php include '../components/admin/header.php' ?>
         <h1>Selamat Datang, Admin!</h1>
+        
     </main>
 </body>
 </html>

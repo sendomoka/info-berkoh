@@ -35,10 +35,14 @@ $data = mysqli_fetch_array($query);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Data penduduk - Admin</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/admin.css">
+    <link rel="stylesheet" href="../../css/admin_data.css">
 </head>
 <body>
+<?php include '../../components/admin/sidenav.php' ?>
+<main>
     <h1>Update Data penduduk</h1>
-    <a href="index.php">Kembali</a>
     <?php
     if($data['nik'] != "") {
     ?>
@@ -77,21 +81,41 @@ $data = mysqli_fetch_array($query);
             <td>Alamat</td>
             <td>:</td>
             <td>
-            <textarea name="alamat" id="alamat" cols="30" rows="10"><?php echo $data['alamat']; ?></textarea>
+            <textarea name="alamat" id="alamat" cols="20" rows="5"><?php echo $data['alamat']; ?></textarea>
             </td>
         </tr>
         <tr>
             <td>Agama</td>
             <td>:</td>
             <td>
-            <input type="text" name="agama" value="<?php echo $data['agama']; ?>">
+            <select name='agama'>
+                <?php
+                $s = "SELECT DISTINCT agama FROM penduduk";
+                $q = mysqli_query($conn, $s);
+                $list = ['ISLAM', 'KRISTEN', 'KATOLIK', 'HINDU', 'BUDHA', 'KONGHUCHU'];
+                foreach ($list as $agama) {
+                    $selected = ($agama == $data['agama']) ? "selected" : "";
+                    echo "<option value='$agama' $selected>$agama</option>";
+                }
+                ?>
+            </select>
             </td>
         </tr>
         <tr>
             <td>Gol Darah</td>
             <td>:</td>
             <td>
-            <input type="text" name="gol_darah" value="<?php echo $data['gol_darah']; ?>">
+            <select name='gol_darah'>
+                <?php
+                $s = "SELECT DISTINCT gol_darah FROM penduduk";
+                $q = mysqli_query($conn, $s);
+                $list = ['A', 'B', 'AB', 'O', '-'];
+                foreach ($list as $gol_darah) {
+                    $selected = ($gol_darah == $data['gol_darah']) ? "selected" : "";
+                    echo "<option value='$gol_darah' $selected>$gol_darah</option>";
+                }
+                ?>
+            </select>
             </td>
         </tr>
         <tr>
@@ -99,15 +123,16 @@ $data = mysqli_fetch_array($query);
             <td>:</td>
             <td>
             <select name='jenis_kelamin'>
-                            <?php
-                            $s = "SELECT * FROM penduduk";
-                            $q = mysqli_query($conn, $s);
-                            while ($row = mysqli_fetch_array($q)) {
-                                $selected = ($row['nik'] == $data['nik'] && $row['jenis_kelamin'] == $data['jenis_kelamin']) ? " selected" : "";
-                                echo "<option value='$row[nik]'$selected>$row[nik] - $row[jenis_kelamin]</option>";
-                            }
-                            ?>
-                        </select>
+                <?php
+                $s = "SELECT DISTINCT jenis_kelamin FROM penduduk";
+                $q = mysqli_query($conn, $s);
+                $list = ['LAKI-LAKI', 'PEREMPUAN'];
+                foreach ($list as $jenis_kelamin) {
+                    $selected = ($jenis_kelamin == $data['jenis_kelamin']) ? "selected" : "";
+                    echo "<option value='$jenis_kelamin' $selected>$jenis_kelamin</option>";
+                }
+                ?>
+            </select>
             </td>
         </tr>
         <tr>
@@ -115,15 +140,16 @@ $data = mysqli_fetch_array($query);
             <td>:</td>
             <td>
             <select name='status_perkawinan'>
-                            <?php
-                            $s = "SELECT * FROM penduduk";
-                            $q = mysqli_query($conn, $s);
-                            while ($row = mysqli_fetch_array($q)) {
-                                $selected = ($row['nik'] == $data['nik'] && $row['status_perkawinan'] == $data['status_perkawinan']) ? " selected" : "";
-                                echo "<option value='$row[nik]'$selected>$row[nik] - $row[status_perkawinan]</option>";
-                            }
-                            ?>
-                        </select>
+                <?php
+                $s = "SELECT DISTINCT status_perkawinan FROM penduduk";
+                $q = mysqli_query($conn, $s);
+                $list = ['KAWIN', 'BELUM KAWIN'];
+                foreach ($list as $status_perkawinan) {
+                    $selected = ($status_perkawinan == $data['status_perkawinan']) ? "selected" : "";
+                    echo "<option value='$status_perkawinan' $selected>$status_perkawinan</option>";
+                }
+                ?>
+            </select>
             </td>
         </tr>
         <tr>
@@ -137,7 +163,17 @@ $data = mysqli_fetch_array($query);
             <td>Kewarganegaraan</td>
             <td>:</td>
             <td>
-            <input type="text" name="kewarganegaraan" value="<?php echo $data['kewarganegaraan']; ?>">
+            <select name='kewarganegaraan'>
+                <?php
+                $s = "SELECT DISTINCT kewarganegaraan FROM penduduk";
+                $q = mysqli_query($conn, $s);
+                $list = ['WNI', 'WNA'];
+                foreach ($list as $kewarganegaraan) {
+                    $selected = ($kewarganegaraan == $data['kewarganegaraan']) ? "selected" : "";
+                    echo "<option value='$kewarganegaraan' $selected>$kewarganegaraan</option>";
+                }
+                ?>
+            </select>
             </td>
         </tr>
         <tr>
@@ -154,5 +190,6 @@ $data = mysqli_fetch_array($query);
         echo "Data tidak ditemukan!";
     }
     ?>
+</main>
 </body>
 </html>

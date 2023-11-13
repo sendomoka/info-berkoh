@@ -40,7 +40,7 @@ if (isset($insert)) {
         <form name='formulir' method='POST' action='<?php $_SERVER['PHP_SELF']; ?>'>
         <table border='0'>
             <tr>
-                <td>Username</td>
+                <td>ID Pengguna</td>
                 <td>:</td>
                 <td>
                 <select name='penggunaID'>
@@ -55,6 +55,13 @@ if (isset($insert)) {
                 </td>
             </tr>
             <tr>
+                <td>username</td>
+                <td>:</td>
+                <td>
+                <input type="text" name="username">
+                </td>
+            </tr>
+            <tr>
                 <td>Nama</td>
                 <td>:</td>
                 <td>
@@ -62,10 +69,31 @@ if (isset($insert)) {
                 </td>
             </tr>
             <tr>
-                <td>Deskripsi</td>
+                <td>Email</td>
                 <td>:</td>
                 <td>
-                <textarea name="deskripsi" id="deskripsi" cols="30" rows="10"></textarea>
+                <input type="email" name="email">
+                </td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td>:</td>
+                <td>
+                <input type="password" name="pass">
+                </td>
+            </tr>
+            <tr>
+                <td>Role</td>
+                <td>:</td>
+                <td>
+                <input type="text" name="role">
+                </td>
+            </tr>
+            <tr>
+                <td>Jabatan</td>
+                <td>:</td>
+                <td>
+                <input type="text" name="jabatan">
                 </td>
             </tr>
             <tr>

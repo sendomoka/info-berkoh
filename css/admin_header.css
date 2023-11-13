@@ -1,0 +1,31 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.box-pengguna {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+}
+.box-pengguna img {
+    height: 34px;
+    width: 34px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.pengguna {
+    font-size: 14px;
+    font-weight: 700;
+    color: black;
+    text-transform: capitalize;
+}
+
+.pengguna .role {
+    font-size: 10px;
+    font-weight: 600;
+    color: gray;
+}
