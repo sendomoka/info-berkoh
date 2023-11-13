@@ -1,7 +1,13 @@
 <?php
 session_start();
 include 'config/models.php';
-// panggil fungsi login
+if (isset($_SESSION['role'])) {
+    if ($_SESSION['role'] == 'admin') {
+        header('Location: admin');
+    } else if ($_SESSION['role'] == 'petugas') {
+        header('Location: petugas');
+    }
+}
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -24,16 +30,16 @@ if (isset($_POST['login'])) {
     <p class="sub-header">Mohon masukkan kredensial Anda untuk akses ke kontrol</p>
     <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post">
         <div class="username">
-            <img src="assets/images/mdi_user.png" width="24">
+            <img src="assets/images/mdi_user.png">
             <input type="text" name="username" placeholder="Masukkan Username" required>
         </div>
         <div class="password">
-            <span>Password</span>
+            <img src="assets/images/mdi_eye.png">
             <input type="password" name="password" placeholder="Masukkan password" required>
         </div>
         <div class="buttons">
-            <a href="index.php">Kembali</a>
             <button name="login" type="submit">Login</button>
+            <a href="index.php">Kembali</a>
         </div>
     </form>
 </div>

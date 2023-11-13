@@ -1,0 +1,14 @@
+/* Menentukan lebar gambar di dalam Quill editor */
+#editor-insert img, #editor-update img {
+    max-width: 300px; /* Sesuaikan dengan kebutuhan Anda */
+    height: auto; /* Agar rasio aspek gambar tetap terjaga */
+}
+
+input, textarea, select, button {
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    padding: 5px;
+}
+
+td {
+    text-align: left;
+}

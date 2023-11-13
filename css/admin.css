@@ -68,10 +68,6 @@ main {
     background-color: #a3b4ff;
 }
 
-table {
-    border-radius: 10px;
-}
-
 th {
     background-color: #f6f6f6;
 }
@@ -79,6 +75,7 @@ th {
 th, td {
     padding: 0.5rem 1rem;
     text-align: center;
+    border: 1px solid #797979;
 }
 
 .update {
@@ -101,3 +98,4 @@ th, td {
     max-width: 100%;
     overflow-x: auto;
 }
+

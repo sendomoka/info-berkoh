@@ -3,19 +3,19 @@ session_start();
 include '../../config/models.php';
 
 $id = $_GET['id'];
-$informasiID = $_POST['informasiID'];
+$dokumentasiID = $_POST['dokumentasiID'];
 $nama = $_POST['nama'];
 $update = $_POST['update'];
 
 if (isset($update)) {
     // Ambil konten dari Quill editor
-    $konten = $_POST['konten'];
+    $media = $_POST['media'];
 
     // Tangkap semua tag img dari konten
-    preg_match_all('/<img[^>]+>/i', $konten, $matches);
+    preg_match_all('/<img[^>]+>/i', $media, $matches);
 
     // Lokasi folder untuk menyimpan gambar
-    $folderPath = '../../assets/images/informasi/';
+    $folderPath = '../../assets/images/dokumentasi/';
 
     // Pastikan folder sudah ada atau buat jika belum
     if (!file_exists($folderPath)) {
@@ -44,11 +44,11 @@ if (isset($update)) {
             file_put_contents($imgPath, base64_decode(explode(',', $imgSrc)[1]));
 
             // Ganti src dalam konten dengan path lokal baru
-            $konten = str_replace($imgSrc, 'assets/images/informasi/' . $imgName, $konten);
+            $media = str_replace($imgSrc, 'assets/images/dokumentasi/' . $imgName, $media);
         }
     }
 
-    $update = "UPDATE informasi SET nama='$nama', konten='$konten' WHERE informasiID='$id'";
+    $update = "UPDATE dokumentasi SET nama='$nama', media='$media' WHERE dokumentasiID='$id'";
     $query = mysqli_query($conn, $update);
     if ($query) {
         ?>
@@ -57,7 +57,7 @@ if (isset($update)) {
     }
 }
 
-$sql = "SELECT * FROM informasi WHERE informasiID = '$id'";
+$sql = "SELECT * FROM dokumentasi WHERE dokumentasiID = '$id'";
 $query = mysqli_query($conn, $sql);
 $data = mysqli_fetch_array($query);
 ?>
@@ -66,7 +66,7 @@ $data = mysqli_fetch_array($query);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Data Informasi - Admin</title>
+    <title>Edit Data Dokumentasi - Admin</title>
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/admin.css">
@@ -75,12 +75,13 @@ $data = mysqli_fetch_array($query);
 <body>
     <?php include '../../components/admin/sidenav.php' ?>
     <main>
-        <h1>Edit Data Informasi</h1>
+        <h1>Edit Data Dokumentasi</h1>
         <?php
-        if ($data['informasiID'] != "") {
+        if ($data['dokumentasiID'] != "") {
         ?>
-            <form name='formulir' method='POST' action='<?php $_SERVER['PHP_SELF']; ?>'>
-                <input type="hidden" name="informasiID" value="<?= $data['informasiID'] ?>">
+            <form name='formulir' method='POST' action='<?php echo $_SERVER['PHP_SELF']; ?>' enctype="multipart/form-data">
+
+                <input type="hidden" name=" dokumentasiID" value="<?= $data['dokumentasiID'] ?>">
                 <table border='0'>
                     <tr>
                         <td>Nama</td>
@@ -90,19 +91,22 @@ $data = mysqli_fetch_array($query);
                         </td>
                     </tr>
                     <tr>
-                        <td>Konten</td>
+                        <td>Media</td>
                         <td>:</td>
                         <td>
+                        <div id="editor"></div>
                         <?php
-                        if ($data['konten'] != "") {
-                            // Menyesuaikan path gambar
-                            $kontenContent = str_replace('src="assets/images/informasi/', 'src="../../assets/images/informasi/', $data['konten']);
+                        // Pernyataan debugging
+                        echo 'Path Gambar: ' . $data['media'] . '<br>';
+                        if ($data['media'] != "") {
+                            // Sesuaikan path untuk gambar di sini
+                            $mediaContent = str_replace('src="assets/images/dokumentasi/', 'src="../../assets/images/dokumentasi/', $data['media']);
                             // Menambahkan gaya CSS untuk membatasi lebar gambar
-                            $kontenContent = str_replace('<img ', '<img style="max-width: 300px;" ', $kontenContent);
+                            $mediaContent = str_replace('<img ', '<img style="max-width: 300px;" ', $mediaContent);
+                            echo $mediaContent;
                         }
                         ?>
-                            <div id="editor-update"><?= $kontenContent ?></div>
-                            <input type="hidden" name="konten" id="konten">
+                            <input type="file" name="media" id="media">
                         </td>
                     </tr>
                     <tr>
@@ -115,28 +119,17 @@ $data = mysqli_fetch_array($query);
                 </table>
             </form>
             <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-            <script>
-                var quillUpdate = new Quill('#editor-update', {
-                    theme: 'snow',
-                    modules: {
-                        toolbar: [
-                            [{ 'font': [] }, { 'align': [] }],
-                            ['bold', 'italic', 'underline', 'code-block'],
-                            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                            [{ 'script': 'sub' }, { 'script': 'super' }],
-                            [{ 'indent': '-1' }, { 'indent': '+1' }],
-                            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                            [{ 'color': [] }, { 'background': [] }],
-                            ['link', 'image'],
-                            ['clean']
-                        ]
-                    }
-                });
-                document.forms['formulir'].addEventListener('submit', function () {
-                    var quillHtml = quillUpdate.root.innerHTML.trim();
-                    document.getElementById('konten').value = quillHtml;
-                });
-            </script>
+<script>
+    var quill = new Quill('#editor', {
+        theme: 'snow'
+    });
+
+    document.forms['formulir'].addEventListener('submit', function () {
+        var quillHtml = quill.root.innerHTML.trim();
+        document.getElementById('media').value = quillHtml;
+    });
+</script>
+
         <?php
         } else {
             echo "Data tidak ditemukan.";

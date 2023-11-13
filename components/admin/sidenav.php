@@ -35,7 +35,7 @@
                 <img src="../../assets/images/pengguna.svg" width="20">
                 Manajemen Akun
             </a>
-            <a name="logout" style="margin-top: 11.5rem;" href="index.php?logout=1">
+            <a name="logout" style="margin-top: 9rem;" href="../../logout.php">
                 <img src="../../assets/images/keluar.svg" width="20">
                 Keluar
             </a>
