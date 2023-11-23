@@ -5,7 +5,7 @@ include '../../config/models.php';
 $id = $_GET['id'];
 
 if ($id != "") {
-    $delete = "DELETE FROM pengguna WHERE penggunaID='$id'";
+    $delete = "DELETE FROM pengguna WHERE penggunaID=$id";
     $query = mysqli_query($conn, $delete);
 
     if ($query) {
@@ -57,7 +57,7 @@ $query = mysqli_query($conn, $sql);
                 <tr>
                     <td>$no</td>
                     <td>$row[username]</td>
-                    <td>$row[nama]</td>
+                    <td>$row[nama_pengguna]</td>
                     <td>$row[email]</td>
                     <td>$row[password]</td>
                     <td>$row[role]</td>

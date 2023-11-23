@@ -3,16 +3,16 @@ session_start();
 include '../../config/models.php';
 
 $username = $_POST['username'];
-$nama = $_POST['nama'];
+$nama_pengguna = $_POST['nama_pengguna'];
 $email = $_POST['email'];
-$password = $_POST['password'];
+$password = $_POST['pass'];
 $role = $_POST['role'];
 $jabatan = $_POST['jabatan'];
 $insert = $_POST['insert'];
 
 if (isset($insert)) {
-    $insert_query = "INSERT INTO pengguna(username, nama, email, password, role, jabatan) 
-                     VALUES ('$username', '$nama', '$email', '$password', '$role', '$jabatan')";
+    $insert_query = "INSERT INTO pengguna(username, nama_pengguna, email, password, role, jabatan)  
+                  VALUES ('$username', '$nama_pengguna', '$email', '$password', '$role', '$jabatan')";
     $query = mysqli_query($conn, $insert_query);
 
     if ($query) {
@@ -29,33 +29,19 @@ if (isset($insert)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah Data Pengguna - Admin</title>
-    <link rel="stylesheet" href="../../style.css">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/admin.css">
+    <link rel="stylesheet" href="../../css/admin_data.css">
 </head>
 <body>
-    <?php include '../components/sidenav.php' ?>
+    <?php include '../../components/admin/sidenav.php' ?>
     <main>
         <h1>Tambah Data Pengguna</h1>
         <a href="index.php">Kembali</a>
-        <form name='formulir' method='POST' action='<?php $_SERVER['PHP_SELF']; ?>'>
+        <form name='formulir' method='POST' action="<?php echo $_SERVER['PHP_SELF']; ?>">
         <table border='0'>
             <tr>
-                <td>ID Pengguna</td>
-                <td>:</td>
-                <td>
-                <select name='penggunaID'>
-                    <?php
-                    $s = "SELECT * FROM pengguna";
-                    $q = mysqli_query($conn, $s);
-                    while($row = mysqli_fetch_array($q)){
-                        echo "<option value='$row[penggunaID]'>$row[penggunaID] - $row[nama_pengguna]</option>";
-                    }
-                    ?>
-                </select>
-                </td>
-            </tr>
-            <tr>
-                <td>username</td>
+                <td>Username</td>
                 <td>:</td>
                 <td>
                 <input type="text" name="username">
@@ -65,7 +51,7 @@ if (isset($insert)) {
                 <td>Nama</td>
                 <td>:</td>
                 <td>
-                <input type="text" name="nama">
+                <input type="text" name="nama_pengguna">
                 </td>
             </tr>
             <tr>

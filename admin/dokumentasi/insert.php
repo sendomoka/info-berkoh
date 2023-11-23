@@ -14,7 +14,7 @@ if(isset($insert)){
     preg_match_all('/<img[^>]+>/i', $media, $matches);
 
     // Lokasi folder untuk menyimpan gambar
-    $folderPath = '../../assets/images/dokumentasi/';
+    $folderPath = 'assets/images/dokumentasi/gambar.jpg';
 
     // Pastikan folder sudah ada atau buat jika belum
     if (!file_exists($folderPath)) {
@@ -26,24 +26,24 @@ if(isset($insert)){
         // Ekstrak src dari tag img
         preg_match('/src="([^"]+)"/i', $imgTag, $srcMatch);
         $imgSrc = $srcMatch[1];
-    
+
         // Hanya proses gambar lokal (tidak dari URL eksternal)
         if (strpos($imgSrc, 'data:image') !== false) {
             // Dapatkan tipe gambar (jpeg, png, dll.)
             preg_match('/data:image\/(.*?);/i', $imgSrc, $imageType);
             $imageExtension = $imageType[1];
-    
+
             // Generate nama unik untuk gambar
             $imgName = uniqid('img_') . '.' . $imageExtension;
-    
+
             // Lokasi penyimpanan gambar
             $imgPath = $folderPath . $imgName;
-    
+
             // Simpan gambar ke folder
             file_put_contents($imgPath, base64_decode(explode(',', $imgSrc)[1]));
-    
+
             // Ganti src dalam konten dengan path lokal baru
-            $media = str_replace($imgSrc, '../../assets/images/dokumentasi/' . $imgName, $media);
+            $media = str_replace($imgSrc, 'assets/images/dokumentasi/gambar.jpg' . $imgName, $media);
         }
     }
     $insert="INSERT INTO dokumentasi (nama,media) VALUES ('$nama','$media') ";
@@ -67,38 +67,37 @@ if(isset($insert)){
     <link rel="stylesheet" href="../../css/admin_data.css">
 </head>
 <body>
-    <?php include '../../components/admin/sidenav.php' ?>
-    <main>
+<?php include '../../components/admin/sidenav.php' ?>
+<main>
     <h1>Tambah Data Dokumentasi</h1>
     <form name='formulir' method='POST' action='<?php echo $_SERVER['PHP_SELF']; ?>' enctype="multipart/form-data">
-
-    <table>
-        <tr>
-            <td>Nama</td>
-            <td>:</td>
-            <td>
-            <input type="text" name="nama">
-            </td>
-        </tr>
-        <tr>
-            <td>Media</td>
-            <td>:</td>
-            <td>
-            <div id="editor"></div>
-            <input type="file" name="media" id="media">
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td>
-            <input type='submit' name='insert' value='Insert Data'>
-            </td>
-        </tr>
-    </table>
+        <table>
+            <tr>
+                <td>Nama</td>
+                <td>:</td>
+                <td>
+                    <input type="text" name="nama">
+                </td>
+            </tr>
+            <tr>
+                <td>Media</td>
+                <td>:</td>
+                <td>
+                    <div id="editor"></div>
+                    <input type="file" name="media" id="media">
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>
+                    <input type='submit' name='insert' value='Insert Data'>
+                </td>
+            </tr>
+        </table>
     </form>
-    </main>
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+</main>
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 <script>
     var quill = new Quill('#editor', {
         theme: 'snow'
@@ -109,6 +108,5 @@ if(isset($insert)){
         document.getElementById('media').value = quillHtml;
     });
 </script>
-
 </body>
 </html>

@@ -1,21 +1,41 @@
 <?php
 session_start();
 include '../../config/models.php';
-$id = $_GET['id'];
 
-if (isset($_POST['update'])) {
-    $update="UPDATE pelayanan SET penggunaID='$penggunaID',nama_pelayanan='$nama_pelayanan',deskripsi='$deskripsi' WHERE pelayananID='$id'";
-    $query = mysqli_query($conn,$update);
+$penggunaIDupd = $_GET['penggunaID'];
+
+if(isset($_POST['update'])){
+    $penggunaID = $_POST['penggunaID'];
+    $username = $_POST['username'];
+    $nama_pengguna = $_POST['nama_pengguna'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $role = $_POST['role'];
+    $jabatan = $_POST['jabatan'];
+
+    // Use prepared statement to prevent SQL injection
+    $update_query = "UPDATE pengguna SET username=?, nama_pengguna=?, email=?, password=?, role=?, jabatan=? WHERE penggunaID=?";
+    $stmt = mysqli_prepare($conn, $update_query);
+    
+    // Bind parameters
+    mysqli_stmt_bind_param($stmt, "ssssssi", $username, $nama_pengguna, $email, $password, $role, $jabatan, $penggunaIDupd);
+    
+    // Execute statement
+    $query = mysqli_stmt_execute($stmt);
+
     if($query){
         ?>
         <script>alert('Data Berhasil Diupdate!'); document.location='index.php';</script>
         <?php
+    } else {
+        echo "Error updating data: " . mysqli_error($conn);
     }
-    header("Location: index.php");
-    exit();
+
+    // Close statement
+    mysqli_stmt_close($stmt);
 }
 
-$sql = "SELECT * FROM pengguna WHERE penggunaID = '$id'";
+$sql = "SELECT * FROM pengguna WHERE penggunaID = '$penggunaIDupd'";
 $query = mysqli_query($conn, $sql);
 $data = mysqli_fetch_array($query);
 ?>
@@ -25,88 +45,77 @@ $data = mysqli_fetch_array($query);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Data Pengguna - Admin</title>
-    <link rel="stylesheet" href="../../style.css">
-    <link rel="stylesheet" href="../style.css">
+    <title>Update Data pengguna - Admin</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/admin.css">
+    <link rel="stylesheet" href="../../css/admin_data.css">
 </head>
 <body>
-    <?php include '../components/sidenav.php' ?>
-    <main>
-        <h1>Update Data Pengguna</h1>
-        <a href="index.php">Kembali</a>
-        <form name='formulir' method='POST' action='<?php $_SERVER['PHP_SELF'] . "?id=$id"; ?>'>
+<?php include '../../components/admin/sidenav.php' ?>
+<main>
+    <h1>Update Data pengguna</h1>
+    <?php
+    if($data['penggunaID'] != "") {
+    ?>
+    <form name='formulir' method='POST' action='<?php echo $_SERVER['PHP_SELF']; ?>'>
         <input type="hidden" name="penggunaID" value="<?= $data['penggunaID'] ?>">
         <table border='0'>
-            <tr>
-                <td>ID Pengguna</td>
-                <td>:</td>
-                <td>
-                <select name='penggunaID'>
-                    <?php
-                    $s = "SELECT * FROM pengguna";
-                    $q = mysqli_query($conn, $s);
-                    while($row = mysqli_fetch_array($q)){
-                        if ($row['penggunaID'] == $data['penggunaID']) {
-                            echo "<option value='$row[penggunaID]' selected>$row[penggunaID] - $row[nama_pengguna]</option>";
-                        } else {
-                            echo "<option value='$row[penggunaID]'>$row[penggunaID] - $row[nama_pengguna]</option>";
-                        }
-                    }
-                    ?>
-                </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Username</td>
-                <td>:</td>
-                <td>
-                <input type="text" name="username">
-                </td>
-            </tr>
-            <tr>
-                <td>Nama</td>
-                <td>:</td>
-                <td>
-                <input type="text" name="nama">
-                </td>
-            </tr>
-            <tr>
-                <td>Email</td>
-                <td>:</td>
-                <td>
-                <input type="email" name="email">
-                </td>
-            </tr>
-            <tr>
-                <td>Password</td>
-                <td>:</td>
-                <td>
-                <input type="password" name="pass">
-                </td>
-            </tr>
-            <tr>
-                <td>Role</td>
-                <td>:</td>
-                <td>
-                <input type="text" name="role">
-                </td>
-            </tr>
-            <tr>
-                <td>Jabatan</td>
-                <td>:</td>
-                <td>
-                <input type="text" name="jabatan">
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td>
-                <input type='submit' name='update' value='Update Data'>
-                </td>
-            </tr>
+        <tr>
+            <td>Username</td>
+            <td>:</td>
+            <td>
+            <input type="text" name="username" value="<?php echo $data['username']; ?>">
+            </td>
+        </tr>
+        <tr>
+            <td>Nama</td>
+            <td>:</td>
+            <td>
+            <input type="text" name="nama_pengguna" value="<?php echo $data['nama_pengguna']; ?>">
+            </td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>:</td>
+            <td>
+            <input type="text" name="email" value="<?php echo $data['email']; ?>" >
+            </td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td>:</td>
+            <td>
+            <input type="date" name="password" value="<?php echo $data['password']; ?>">
+            </td>
+        </tr>
+        <tr>
+            <td>Role</td>
+            <td>:</td>
+            <td>
+            <input type="text" name="role" value="<?php echo $data['role']; ?>">
+            </td>
+        </tr>
+        <tr>
+            <td>Jabatan</td>
+            <td>:</td>
+            <td>
+            <input type="text" name="jabatan" value="<?php echo $data['jabatan']; ?>">
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+            <input type='submit' name='update' value='Update Data'>
+            </td>
+        </tr>
         </table>
-        </form>
-    </main>
+    </form>
+    <?php
+    } else {
+        echo "Data tidak ditemukan!";
+    }
+    ?>
+</main>
 </body>
 </html>

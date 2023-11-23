@@ -15,7 +15,7 @@ if ($id != "") {
 
     // Hapus gambar dari direktori
     if ($gambarFilenameToDelete !== '') {
-        $gambarPath = '../../assets/images/dokumentasi/' . basename($gambarFilenameToDelete);
+        $gambarPath = 'assets/images/dokumentasi/' . basename($gambarFilenameToDelete);
         if (file_exists($gambarPath)) {
             unlink($gambarPath);
         }
@@ -53,43 +53,43 @@ $query = mysqli_query($conn, $sql);
 </head>
 <body>
 <?php include '../../components/admin/sidenav.php'; ?>
-    <main>
+<main>
     <?php include '../../components/admin/header.php' ?>
-        <a class="insert" href="insert.php">
-            <img src="../../assets/images/circle-add.svg">
-            Tambah Data
-        </a>
-        <table>
-            <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>Media</th>
-                <th>Aksi</th>
-            </tr>
-            <?php
-    $no = 1;
-    while ($row = mysqli_fetch_array($query)) {
-        echo "
+    <a class="insert" href="insert.php">
+        <img src="../../assets/images/circle-add.svg">
+        Tambah Data
+    </a>
+    <table>
         <tr>
-            <td>$no</td>
-            <td>$row[nama]</td>
-            <td>";
-        if ($row['media'] != "") {
-            echo '<img src="' . $row['media'] . '" alt="Image">';
+            <th>No</th>
+            <th>Nama</th>
+            <th>Media</th>
+            <th>Aksi</th>
+        </tr>
+        <?php
+        $no = 1;
+        while ($row = mysqli_fetch_array($query)) {
+            echo "
+            <tr>
+                <td>$no</td>
+                <td>$row[nama]</td>
+                <td>";
+            if ($row['media'] != "") {
+                echo '<img src="' . BASE_URL . $row['media'] . '" alt="Image">';
+            }
+            echo "</td>
+                <td>
+                    <a class='update' href='update.php?id=$row[dokumentasiID]'>Update</a> | 
+                    <a class='delete' href='?id=$row[dokumentasiID]'>Delete</a>
+                </td>
+            </tr>";
+            $no++;
         }
-        echo "</td>
-            <td>
-                <a class='update' href='update.php?id=$row[dokumentasiID]'>Update</a> | 
-                <a class='delete' href='?id=$row[dokumentasiID]'>Delete</a>
-            </td>
-        </tr>";
-        $no++;
-    }
-    ?>
-        </table>
-        <div class="footer-admin">
-            &copy; 2023.INFO BERKOH
-        </div>
-    </main>
+        ?>
+    </table>
+    <div class="footer-admin">
+        &copy; 2023.INFO BERKOH
+    </div>
+</main>
 </body>
 </html>
