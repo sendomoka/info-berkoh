@@ -54,8 +54,12 @@ $query = mysqli_query($conn,$sql);
                     <td>$row[nama_pelayanan]</td>
                     <td>$row[deskripsi]</td>
                     <td>
-                    <a class='update' href='update.php?id=$row[pelayananID]'>Update</a>| 
-                    <a class='delete' href='?id=$row[pelayananID]'>Delete</a>
+                        <a class='update' href='update.php?id=$row[pelayananID]'>
+                            <img src='../../assets/images/edit.svg'>
+                        </a> 
+                        <a class='delete' href='?id=$row[pelayananID]'>
+                            <img src='../../assets/images/delete.svg'>
+                        </a>
                     </td>
                 </tr>
                 ";
@@ -64,36 +68,37 @@ $query = mysqli_query($conn,$sql);
             ?>
         </table>
         <br><br>
-        <p>#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Table Gabungan dari Data Master Penduduk dan Pelayanan</p>
+        <a class="insert" href="insert_daftar.php">
+            <img src="../../assets/images/circle-add.svg">
+            Daftarkan Pelayanan
+        </a>
         <table border="1">
             <tr>
                 <th>No</th>
-                <th>ID (Pelayanan)</th>
                 <th>Nama Pelayanan</th>
-                <th>NIK</th>
-                <th>Nama Penduduk</th>
+                <th>Penduduk yang mengikuti</th>
+                <th>Tanggal</th>
+                <th>Status</th>
             </tr>
             <?php
             $no=1;
-            $fksql = "SELECT penduduk_terdaftar_pelayanan.pelayananID AS pelayananID, pelayanan.nama_pelayanan AS nama_pelayanan, penduduk_terdaftar_pelayanan.nik AS nik, penduduk.nama AS nama_penduduk FROM penduduk_terdaftar_pelayanan, pelayanan, penduduk WHERE pelayanan.pelayananID = penduduk_terdaftar_pelayanan.pelayananID AND penduduk.nik = penduduk_terdaftar_pelayanan.nik";
+            $fksql = "SELECT pelayanan.nama_pelayanan AS nama_pelayanan, penduduk.nama AS list_nama, daftar_pelayanan.tanggal AS tanggal, daftar_pelayanan.status AS status FROM daftar_pelayanan, pelayanan, penduduk WHERE pelayanan.pelayananID = daftar_pelayanan.pelayananID AND penduduk.nik = daftar_pelayanan.nik";
             $fkquery = mysqli_query($conn,$fksql);
             while($row=mysqli_fetch_array($fkquery)){
                 echo "
                 <tr>
                     <td>$no</td>
-                    <td>$row[pelayananID]</td>
                     <td>$row[nama_pelayanan]</td>
-                    <td>$row[nik]</td>
-                    <td>$row[nama_penduduk]</td>
+                    <td>$row[list_nama]</td>
+                    <td>$row[tanggal]</td>
+                    <td>$row[status]</td>
                 </tr>
                 ";
                 $no++;
             }
             ?>
         </table>
-        <div class="footer-admin">
-            &copy; 2023.INFO BERKOH
-        </div>
     </main>
+    <?php include '../../components/admin/footer.php' ?>
 </body>
 </html>

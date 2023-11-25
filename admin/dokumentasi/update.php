@@ -1,79 +1,65 @@
 <?php
 session_start();
 include '../../config/models.php';
-
-$id = $_GET['id'];
-$dokumentasiID = $_POST['dokumentasiID'];
-$nama = $_POST['nama'];
-$update = $_POST['update'];
-
-if (isset($update)) {
-    // Ambil konten dari Quill editor
-    $media = $_POST['media'];
-
-    // ... (rest of your code remains unchanged)
-    $folderPath = 'assets/images/dokumentasi/';
-
-    // ... (rest of your code remains unchanged)
-
-    $update = "UPDATE dokumentasi SET nama='$nama', media='$media' WHERE dokumentasiID='$id'";
-    $query = mysqli_query($conn, $update);
-    if ($query) {
+$idupd = $_GET['id'];
+if(isset($_POST['update'])){
+    $nama = $_POST['nama'];
+    $media = $_FILES['media'];
+    $media_name = $media['name'];
+    $media_tmp = $media['tmp_name'];
+    $media_name = time() . '_' . $media_name;
+    $destination = $_SERVER['DOCUMENT_ROOT'] . '/assets/images/dokumentasi/' . $media_name;
+    if (move_uploaded_file($media_tmp, $destination)) {
+        $media_name = $media_name;
+    } else {
+        $media_name = $data['media'];
+    }
+    $update = $_POST['update'];
+    $update_query = "UPDATE dokumentasi SET nama = '$nama', media = '$media_name' WHERE dokumentasiID = '$idupd'";
+    $query = mysqli_query($conn, $update_query);
+    if($query){
         ?>
-        <script>alert('Data Berhasil Dimasukkan!'); document.location='index.php';</script>
+        <script>alert('Data Berhasil Diupdate!'); document.location='index.php';</script>
         <?php
     }
 }
 
-$sql = "SELECT * FROM dokumentasi WHERE dokumentasiID = '$id'";
+$sql = "SELECT * FROM dokumentasi WHERE dokumentasiID = '$idupd'";
 $query = mysqli_query($conn, $sql);
 $data = mysqli_fetch_array($query);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Data Dokumentasi - Admin</title>
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <title>Update Dokumentasi - Admin</title>
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/admin.css">
     <link rel="stylesheet" href="../../css/admin_data.css">
 </head>
 <body>
-<?php include '../../components/admin/sidenav.php' ?>
-<main>
-    <h1>Edit Data Dokumentasi</h1>
-    <?php
-    if ($data['dokumentasiID'] != "") {
-    ?>
-        <form name='formulir' method='POST' action='<?php echo $_SERVER['PHP_SELF']; ?>' enctype="multipart/form-data">
-            <input type="hidden" name="dokumentasiID" value="<?= $data['dokumentasiID'] ?>">
-            <table border='0'>
+    <?php include '../../components/admin/sidenav.php' ?>
+    <main>
+        <h1>Update Dokumentasi</h1>
+        <?php
+        if($data['dokumentasiID'] != "") {
+        ?>
+        <form method='POST' action='<?php $_SERVER['PHP_SELF']; ?>' enctype="multipart/form-data">
+            <input type="hidden" name="dokumentasiID" value="<?php echo $data['dokumentasiID']; ?>">
+            <table>
                 <tr>
                     <td>Nama</td>
                     <td>:</td>
-                    <td>
-                        <input type="text" name="nama" value="<?= $data['nama'] ?>">
-                    </td>
+                    <td><input type="text" name="nama" value="<?php echo $data['nama']; ?>" required></td>
                 </tr>
                 <tr>
                     <td>Media</td>
                     <td>:</td>
-                    <td>
-                        <div id="editor"></div>
-                        <?php
-                        // Pernyataan debugging
-                        echo 'Path Gambar: ' . $data['media'] . '<br>';
-                        if ($data['media'] != "") {
-                            // Sesuaikan path untuk gambar di sini
-                            $mediaContent = str_replace('src="assets/images/dokumentasi/gambar.jpg', 'src="assets/images/dokumentasi/gambar.jpg', $data['media']);
-                            // Menambahkan gaya CSS untuk membatasi lebar gambar
-                            $mediaContent = str_replace('<img ', '<img style="max-width: 300px;" ', $mediaContent);
-                            echo $mediaContent;
-                        }
-                        ?>
-                        <input type="file" name="media" id="media">
+                    <td style="display: inline-flex; align-items: center; gap: 10px;">
+                        <input type="file" name="media" accept="image/png, image/gif, image/jpeg">
+                        <img src="<?php echo '/assets/images/dokumentasi/' . $data['media']; ?>" width="50">
                     </td>
                 </tr>
                 <tr>
@@ -85,22 +71,12 @@ $data = mysqli_fetch_array($query);
                 </tr>
             </table>
         </form>
-        <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-        <script>
-            var quill = new Quill('#editor', {
-                theme: 'snow'
-            });
-
-            document.forms['formulir'].addEventListener('submit', function () {
-                var quillHtml = quill.root.innerHTML.trim();
-                document.getElementById('media').value = quillHtml;
-            });
-        </script>
-    <?php
-    } else {
-        echo "Data tidak ditemukan.";
-    }
-    ?>
-</main>
+        <?php
+        } else {
+            echo "Data tidak ditemukan!";
+        }
+        ?>
+    </main>
+    <?php include '../../components/admin/footer.php' ?>
 </body>
 </html>

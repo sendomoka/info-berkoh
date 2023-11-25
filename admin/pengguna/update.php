@@ -1,79 +1,37 @@
 <?php
-// Start session dan koneksi database
 session_start();
 include '../../config/models.php';
-
-// Variabel dari form
-$penggunaID = $_POST['penggunaID'];
-$update = $_POST['update'];
-
-// Ambil data pengguna dari database
-$pengguna = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM pengguna WHERE penggunaID='$penggunaID'"));
-
-// Inisialisasi nilai variabel
-$username = $pengguna['username'];
-$nama_pengguna = $pengguna['nama_pengguna'];
-$email = $pengguna['email'];
-$password = $pengguna['password'];
-$role = $pengguna['role'];
-$jabatan = $pengguna['jabatan'];
-$avatar = $pengguna['avatar'];
-
-// Jika tombol update ditekan
-if(isset($update)){
-
-    // Upload avatar baru jika ada
-    if($avatar['error'] === UPLOAD_ERR_OK){
-        
-        $avatar_name = $avatar['name'];
-        $avatar_tmp = $avatar['tmp_name'];
-
-        $upload_dir = $_SERVER['DOCUMENT_ROOT'] . '/assets/images/pengguna/';
-        
-        $avatar_name = time() . '_' . $avatar_name; 
-        
-        $destination = $upload_dir . $avatar_name;
-
-        // Pindahkan file avatar
-        if(move_uploaded_file($avatar_tmp, $destination)){
-            
-            // Hapus avatar lama
-            if($pengguna['avatar'] && file_exists($upload_dir . $pengguna['avatar'])){
-                unlink($upload_dir . $pengguna['avatar']); 
-            }
-
-        } else {
-            echo "Gagal upload avatar baru.";
-        }
-
+$idupd = $_GET['id'];
+if(isset($_POST['update'])){
+    $username = $_POST['username'];
+    $nama_pengguna = $_POST['nama_pengguna'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $role = $_POST['role'];
+    $jabatan = $_POST['jabatan'];
+    $avatar = $_FILES['avatar'];
+    $avatar_name = $avatar['name'];
+    $avatar_tmp = $avatar['tmp_name'];
+    $avatar_name = time() . '_' . $avatar_name;
+    $destination = $_SERVER['DOCUMENT_ROOT'] . '/assets/images/pengguna/' . $avatar_name;
+    if (move_uploaded_file($avatar_tmp, $destination)) {
+        $avatar_name = $avatar_name;
+    } else {
+        $avatar_name = $data['avatar'];
     }
-
-    // Query update data pengguna
-    $update_query = "UPDATE pengguna SET  
-                    username = '$username',
-                    nama_pengguna = '$nama_pengguna',
-                    email = '$email',
-                    password = '$password',  
-                    role = '$role',
-                    jabatan = '$jabatan',
-                    avatar = '" . (isset($avatar_name) ? $avatar_name : $pengguna['avatar']) . "'
-                    WHERE penggunaID = '$penggunaID'";
-
+    $update = $_POST['update'];
+    $update_query = "UPDATE pengguna SET username = '$username', nama_pengguna = '$nama_pengguna', email = '$email', password = '$password', role = '$role', jabatan = '$jabatan', avatar = '$avatar_name' WHERE penggunaID = '$idupd'";
     $query = mysqli_query($conn, $update_query);
-
-    // Redirect
     if($query){
         ?>
-        <script>
-            alert('Data berhasil diupdate!');
-            document.location='index.php';  
-        </script>
+        <script>alert('Data Berhasil Diupdate!'); document.location='index.php';</script>
         <?php
-    } else {
-        echo "Gagal memperbarui data.";
-    }  
-
+    }
 }
+
+$sql = "SELECT * FROM pengguna WHERE penggunaID = '$idupd'";
+$query = mysqli_query($conn, $sql);
+$data = mysqli_fetch_array($query);
 ?>
 
 <!DOCTYPE html>
@@ -90,36 +48,39 @@ if(isset($update)){
     <?php include '../../components/admin/sidenav.php' ?>
     <main>
         <h1>Update Data Pengguna</h1>
-        <form method='POST' enctype="multipart/form-data">
-            <input type="hidden" name="penggunaID" value="<?php echo $penggunaID; ?>">
+        <?php
+        if($data['penggunaID'] != "") {
+        ?>
+        <form method='POST' action='<?php $_SERVER['PHP_SELF']; ?>' enctype="multipart/form-data">
+            <input type="hidden" name="penggunaID" value="<?php echo $data['penggunaID']; ?>">
             <table>
                 <tr>
                     <td>Username</td>
                     <td>:</td>
-                    <td><input type="text" name="username" value="<?php echo $username; ?>"></td>
+                    <td><input type="text" name="username" value="<?php echo $data['username']; ?>"></td>
                 </tr>
                 <tr>
                     <td>Nama</td>
                     <td>:</td>
-                    <td><input type="text" name="nama_pengguna" value="<?php echo $nama_pengguna; ?>" required></td>
+                    <td><input type="text" name="nama_pengguna" value="<?php echo $data['nama_pengguna']; ?>" required></td>
                 </tr>
                 <tr>
                     <td>Email</td>
                     <td>:</td>
-                    <td><input type="email" name="email" value="<?php echo $email; ?>" required></td>
+                    <td><input type="email" name="email" value="<?php echo $data['email']; ?>" required></td>
                 </tr>
                 <tr>
                     <td>Password</td>
                     <td>:</td>
-                    <td><input type="text" name="password" value="<?php echo $password; ?>" required></td>
+                    <td><input type="text" name="password" value="<?php echo $data['password']; ?>" required></td>
                 </tr>
                 <tr>
                     <td>Role</td>
                     <td>:</td>
                     <td>
                         <select name="role">
-                            <option value="Petugas" <?php if ($role === 'Petugas') echo 'selected'; ?>>Petugas</option>
-                            <option value="Admin" <?php if ($role === 'Admin') echo 'selected'; ?>>Admin</option>
+                            <option value="Petugas" <?php if ($data['role'] === 'Petugas') echo 'selected'; ?>>Petugas</option>
+                            <option value="Admin" <?php if ($data['role'] === 'Admin') echo 'selected'; ?>>Admin</option>
                         </select>
                     </td>
                 </tr>
@@ -128,15 +89,16 @@ if(isset($update)){
                     <td>:</td>
                     <td>
                         <select name="jabatan">
-                            <option value="Kepala Dusun" <?php if ($jabatan === 'Kepala Dusun') echo 'selected'; ?>>Kepala Dusun</option>
-                            <option value="Kasi Pemerintahan" <?php if ($jabatan === 'Kasi Pemerintahan') echo 'selected'; ?>>Kasi Pemerintahan</option>
-                            <option value="Kasi Kesejahteraan" <?php if ($jabatan === 'Kasi Kesejahteraan') echo 'selected'; ?>>Kasi Kesejahteraan</option>
-                            <option value="Kasi Pelayanan" <?php if ($jabatan === 'Kasi Pelayanan') echo 'selected'; ?>>Kasi Pelayanan</option>
-                            <option value="Kaur Keuangan" <?php if ($jabatan === 'Kaur Keuangan') echo 'selected'; ?>>Kaur Keuangan</option>
-                            <option value="Kaur Tata Usaha & Umum" <?php if ($jabatan === 'Kaur Tata Usaha & Umum') echo 'selected'; ?>>Kaur Tata Usaha & Umum</option>
-                            <option value="Kaur Perencanaan" <?php if ($jabatan === 'Kaur Perencanaan') echo 'selected'; ?>>Kaur Perencanaan</option>
-                            <option value="Sekretaris" <?php if ($jabatan === 'Sekretaris') echo 'selected'; ?>>Sekretaris</option>
-                            <option value="BPD" <?php if ($jabatan === 'BPD') echo 'selected'; ?>>BPD</option>
+                            <option value="Kepala Dusun" <?php if ($data['jabatan'] === 'Kepala Dusun') echo 'selected'; ?>>Kepala Dusun</option>
+                            <option value="Kasi Pemerintahan" <?php if ($data['jabatan'] === 'Kasi Pemerintahan') echo 'selected'; ?>>Kasi Pemerintahan</option>
+                            <option value="Kasi Kesejahteraan" <?php if ($data['jabatan'] === 'Kasi Kesejahteraan') echo 'selected'; ?>>Kasi Kesejahteraan</option>
+                            <option value="Kasi Pelayanan" <?php if ($data['jabatan'] === 'Kasi Pelayanan') echo 'selected'; ?>>Kasi Pelayanan</option>
+                            <option value="Kaur Keuangan" <?php if ($data['jabatan'] === 'Kaur Keuangan') echo 'selected'; ?>>Kaur Keuangan</option>
+                            <option value="Kaur Tata Usaha & Umum" <?php if ($data['jabatan'] === 'Kaur Tata Usaha & Umum') echo 'selected'; ?>>Kaur Tata Usaha & Umum</option>
+                            <option value="Kaur Perencanaan" <?php if ($data['jabatan'] === 'Kaur Perencanaan') echo 'selected'; ?>>Kaur Perencanaan</option>
+                            <option value="Sekretaris" <?php if ($data['jabatan'] === 'Sekretaris') echo 'selected'; ?>>Sekretaris</option>
+                            <option value="BPD" <?php if ($data['jabatan'] === 'BPD') echo 'selected'; ?>>BPD</option>
+                            <option value="Kepala Desa" <?php if ($data['jabatan'] === 'Kepala Desa') echo 'selected'; ?>>Kepala Desa</option>
                         </select>
                     </td>
                 </tr>
@@ -144,8 +106,8 @@ if(isset($update)){
                     <td>Foto</td>
                     <td>:</td>
                     <td style="display: inline-flex; align-items: center; gap: 10px;">
-                        <input type="file" name="new_avatar" accept="image/png, image/gif, image/jpeg">
-                        <img src="<?php echo '/assets/images/pengguna/' . $avatar; ?>" width="50">
+                        <input type="file" name="avatar" accept="image/png, image/gif, image/jpeg">
+                        <img src="<?php echo '/assets/images/pengguna/' . $data['avatar']; ?>" width="50">
                     </td>
                 </tr>
                 <tr>
@@ -157,6 +119,12 @@ if(isset($update)){
                 </tr>
             </table>
         </form>
+        <?php
+        } else {
+            echo "Data tidak ditemukan!";
+        }
+        ?>
     </main>
+    <?php include '../../components/admin/footer.php' ?>
 </body>
 </html>

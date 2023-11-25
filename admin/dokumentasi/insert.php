@@ -2,111 +2,83 @@
 session_start();
 include '../../config/models.php';
 
-$dokumentasiID = $_POST['dokumentasiID'];
 $nama = $_POST['nama'];
+$media = $_FILES['media'];
 $insert = $_POST['insert'];
 
-if(isset($insert)){
-    // Ambil konten dari Quill editor
-    $media = $_POST['media'];
+if (isset($insert)) {
+    // Memeriksa apakah ada file yang diunggah
+    if ($media['error'] === UPLOAD_ERR_OK) {
+        $media_name = $media['name'];
+        $media_tmp = $media['tmp_name'];
+        
+        // Lokasi tujuan untuk menyimpan file media
+        $upload_dir = $_SERVER['DOCUMENT_ROOT'] . '/assets/images/dokumentasi/';
+        $media_name = time() . '_' . $media_name; // Menambahkan timestamp ke nama file
+        $destination = $upload_dir . $media_name;
 
-    // Tangkap semua tag img dari konten
-    preg_match_all('/<img[^>]+>/i', $media, $matches);
-
-    // Lokasi folder untuk menyimpan gambar
-    $folderPath = 'assets/images/dokumentasi/gambar.jpg';
-
-    // Pastikan folder sudah ada atau buat jika belum
-    if (!file_exists($folderPath)) {
-        mkdir($folderPath, 0777, true);
-    }
-
-    // Loop melalui setiap tag img
-    foreach ($matches[0] as $imgTag) {
-        // Ekstrak src dari tag img
-        preg_match('/src="([^"]+)"/i', $imgTag, $srcMatch);
-        $imgSrc = $srcMatch[1];
-
-        // Hanya proses gambar lokal (tidak dari URL eksternal)
-        if (strpos($imgSrc, 'data:image') !== false) {
-            // Dapatkan tipe gambar (jpeg, png, dll.)
-            preg_match('/data:image\/(.*?);/i', $imgSrc, $imageType);
-            $imageExtension = $imageType[1];
-
-            // Generate nama unik untuk gambar
-            $imgName = uniqid('img_') . '.' . $imageExtension;
-
-            // Lokasi penyimpanan gambar
-            $imgPath = $folderPath . $imgName;
-
-            // Simpan gambar ke folder
-            file_put_contents($imgPath, base64_decode(explode(',', $imgSrc)[1]));
-
-            // Ganti src dalam konten dengan path lokal baru
-            $media = str_replace($imgSrc, 'assets/images/dokumentasi/gambar.jpg' . $imgName, $media);
+        // Memindahkan file media ke lokasi tujuan
+        if (move_uploaded_file($media_tmp, $destination)) {
+            // Jika berhasil, lakukan penambahan data ke database
+            $insert_query = "INSERT INTO dokumentasi(nama, media) VALUES ('$nama', '$media_name')";
+            
+            $query = mysqli_query($conn, $insert_query);
+            if ($query) {
+                ?>
+                <script>alert('Data Berhasil Dimasukkan!'); document.location='index.php';</script>
+                <?php
+            } else {
+                echo "Gagal menambahkan data ke database.";
+            }
+        } else {
+            echo "Gagal menyimpan file media.";
         }
-    }
-    $insert="INSERT INTO dokumentasi (nama,media) VALUES ('$nama','$media') ";
-    $query = mysqli_query($conn,$insert);
-    if($query){
-        ?>
-        <script>alert('Data Berhasil Dimasukkan!'); document.location='index.php';</script>
-        <?php
+    } else {
+        echo "Error dalam mengunggah file media.";
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Data Dokumentasi - Admin</title>
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <title>Tambah Data dokumentasi - Admin</title>
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/admin.css">
     <link rel="stylesheet" href="../../css/admin_data.css">
 </head>
 <body>
-<?php include '../../components/admin/sidenav.php' ?>
-<main>
-    <h1>Tambah Data Dokumentasi</h1>
-    <form name='formulir' method='POST' action='<?php echo $_SERVER['PHP_SELF']; ?>' enctype="multipart/form-data">
+    <?php include '../../components/admin/sidenav.php' ?>
+    <main>
+        <h1>Tambah Data dokumentasi</h1>
+        <form name='formulir' method='POST' action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
         <table>
             <tr>
                 <td>Nama</td>
                 <td>:</td>
                 <td>
-                    <input type="text" name="nama">
+                <input type="text" name="nama" required>
                 </td>
             </tr>
             <tr>
-                <td>Media</td>
+                <td>Foto</td>
                 <td>:</td>
                 <td>
-                    <div id="editor"></div>
-                    <input type="file" name="media" id="media">
+                <input type="file" name="media" accept="image/png, image/gif, image/jpeg" required>
                 </td>
             </tr>
             <tr>
                 <td></td>
                 <td></td>
                 <td>
-                    <input type='submit' name='insert' value='Insert Data'>
+                <input type='submit' name='insert' value='Insert Data'>
                 </td>
             </tr>
-        </table>
-    </form>
-</main>
-<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-<script>
-    var quill = new Quill('#editor', {
-        theme: 'snow'
-    });
-
-    document.forms['formulir'].addEventListener('submit', function () {
-        var quillHtml = quill.root.innerHTML.trim();
-        document.getElementById('media').value = quillHtml;
-    });
-</script>
+        </tableder=>
+        </form>
+    </main>
+    <?php include '../../components/admin/footer.php' ?>
 </body>
 </html>

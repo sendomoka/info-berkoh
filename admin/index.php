@@ -134,5 +134,6 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Admin') {
             <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terima kasih tak terhingga kami sampaikan kepada seluruh warga dan perangkat desa Berkoh yang telah dengan sukarela dan penuh semangat membantu dalam mewujudkan website <b>INFO BERKOH Integrasi Navigasi dan Fakta Online Desa Berkoh</b>. Kerjasama dan dedikasi Anda semua adalah fondasi utama dalam menghadirkan sumber informasi yang berharga ini bagi seluruh masyarakat. Website ini bukan hanya sebuah sarana untuk mendapatkan informasi, tetapi juga cerminan dari semangat gotong royong dan kolaborasi yang begitu kuat di Desa Berkoh. Terima kasih atas komitmen Anda dalam memajukan desa kita. Semoga website ini menjadi alat yang bermanfaat dan dapat terus berkembang untuk kebaikan bersama. Terima kasih sekali lagi untuk semua kontribusi berharga Anda.</p>
         </div>
     </main>
+    <?php include '../components/admin/footer.php' ?>
 </body>
 </html>

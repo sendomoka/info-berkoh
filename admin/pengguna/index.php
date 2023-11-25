@@ -89,9 +89,7 @@ $query = mysqli_query($conn, $sql);
             }
             ?>
         </table>
-        <div class="footer-admin">
-            &copy; 2023.INFO BERKOH
-        </div>
     </main>
+    <?php include '../../components/admin/footer.php' ?>
 </body>
 </html>

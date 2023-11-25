@@ -9,8 +9,8 @@ $deskripsi = $_POST['deskripsi'];
 $update = $_POST['update'];
 
 if(isset($update)){
-    $update="UPDATE pelayanan SET penggunaID='$penggunaID',nama_pelayanan='$nama_pelayanan',deskripsi='$deskripsi' WHERE pelayananID='$id'";
-    $query = mysqli_query($conn,$update);
+    $update_query="UPDATE pelayanan p JOIN pengguna u ON u.penggunaID = p.penggunaID SET p.penggunaID = u.penggunaID, p.penggunaID = '$penggunaID',p.nama_pelayanan = '$nama_pelayanan', p.deskripsi = '$deskripsi' WHERE p.pelayananID = '$id'";
+    $query = mysqli_query($conn,$update_query);
     if($query){
         ?>
         <script>alert('Data Berhasil Diupdate!'); document.location='index.php';</script>
@@ -28,10 +28,14 @@ $data = mysqli_fetch_array($query);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Data Pelayanan - Admin</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/admin.css">
+    <link rel="stylesheet" href="../../css/admin_data.css">
 </head>
 <body>
-    <h1>Update Data Pelayanan</h1>
-    <a href="index.php">Kembali</a>
+    <?php include '../../components/admin/sidenav.php' ?>
+    <main>
+    <h1>Edit Data Pelayanan</h1>
     <?php
     if($data['pelayananID'] != "") {
     ?>
@@ -85,5 +89,7 @@ $data = mysqli_fetch_array($query);
         echo "Data tidak ditemukan!";
     }
     ?>
+    </main>
+    <?php include '../../components/admin/footer.php' ?>
 </body>
 </html>

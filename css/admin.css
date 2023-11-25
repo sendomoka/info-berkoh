@@ -86,14 +86,6 @@ th, td {
     color: red;
 }
 
-.footer-admin {
-    bottom: 0;
-    right: 0;
-    position: fixed;
-    margin-bottom: 20px;
-    margin-right: 20px;
-}
-
 .table-wrapper{
     max-width: 100%;
     overflow-x: auto;

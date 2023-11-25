@@ -112,6 +112,7 @@ if (isset($insert)) {
                     <option value="Kaur Perencanaan">Kaur Perencanaan</option>
                     <option value="Sekretaris">Sekretaris</option>
                     <option value="BPD">BPD</option>
+                    <option value="Kepala Desa">Kepala Desa</option>
                 </select>
                 </td>
             </tr>
@@ -132,5 +133,6 @@ if (isset($insert)) {
         </tableder=>
         </form>
     </main>
+    <?php include '../../components/admin/footer.php' ?>
 </body>
 </html>

@@ -191,5 +191,6 @@ $data = mysqli_fetch_array($query);
     }
     ?>
 </main>
+<?php include '../../components/admin/footer.php' ?>
 </body>
 </html>

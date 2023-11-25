@@ -70,10 +70,16 @@ $query = mysqli_query($conn, $sql);
                     <td style='text-align:left'>$row[pengirim]</td>
                     <td style='text-align:left'>$row[judul]</td>
                     <td>$row[tanggal_dikirim]</td>
-                    <td>
-                        <a class='detail' href='detail.php?id=$row[beritaID]'>Detail</a> |
-                        <a class='update' href='update.php?id=$row[beritaID]'>Update</a> | 
-                        <a class='delete' href='?id=$row[beritaID]'>Delete</a>
+                    <td style='display: flex; gap: 5px; justify-content: center;'>
+                        <a class='delete' href='detail.php?id=$row[beritaID]'>
+                            <img src='../../assets/images/detail.svg'>
+                        </a>
+                        <a class='update' href='update.php?id=$row[beritaID]'>
+                            <img src='../../assets/images/edit.svg'>
+                        </a> 
+                        <a class='delete' href='?id=$row[beritaID]'>
+                            <img src='../../assets/images/delete.svg'>
+                        </a>
                     </td>
                 </tr>
                 ";
@@ -81,9 +87,7 @@ $query = mysqli_query($conn, $sql);
             }
             ?>
         </table>
-        <div class="footer-admin">
-            &copy; 2023.INFO BERKOH
-        </div>
     </main>
+    <?php include '../../components/admin/footer.php' ?>
 </body>
 </html>

@@ -2,7 +2,6 @@
 session_start();
 include '../../config/models.php';
 
-$pengaduanID = $_POST['pengaduanID'];
 $nik = $_POST['nik'];
 $pesan = $_POST['pesan'];
 $insert = $_POST['insert'];
@@ -44,7 +43,7 @@ if(isset($insert)){
             file_put_contents($imgPath, base64_decode(explode(',', $imgSrc)[1]));
     
             // Ganti src dalam isi dengan path lokal baru
-            $pesan = str_replace($imgSrc, 'assets/images/pengaduan/' . $imgName, $pesan);
+            $pesan = str_replace($imgSrc, '../../assets/images/pengaduan/' . $imgName, $pesan);
         }
     }
     $insert="INSERT INTO pengaduan (nik,pesan) VALUES ('$nik','$pesan') ";
@@ -107,6 +106,7 @@ action='<?php $_SERVER['PHP_SELF']; ?>'>
     </table>
     </form>
     </main>
+    <?php include '../../components/admin/footer.php' ?>
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <script>
         var quillInsert = new Quill('#editor-insert', {

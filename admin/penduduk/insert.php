@@ -159,5 +159,6 @@ if(isset($insert)){
         </table>
         </form>
     </main>
+    <?php include '../../components/admin/footer.php' ?>
 </body>
 </html>

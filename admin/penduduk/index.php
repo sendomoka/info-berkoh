@@ -55,6 +55,9 @@ $query = mysqli_query($conn,$sql);
         .import:hover {
             background: #7AC7A4;
         }
+        table {
+            margin-bottom: 3rem;
+        }
     </style>
     <script>
         function formToggle(id) {
@@ -137,9 +140,7 @@ $query = mysqli_query($conn,$sql);
             }
             ?>
         </table>
-        </div>
-        <div class="footer-admin">
-            &copy; 2023.INFO BERKOH
+        <?php include '../../components/admin/footer.php' ?>
         </div>
     </main>
 </body>

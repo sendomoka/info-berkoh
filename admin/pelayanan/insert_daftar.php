@@ -8,7 +8,7 @@ $deskripsi = $_POST['deskripsi'];
 $insert = $_POST['insert'];
 
 if(isset($insert)){
-	$insert="insert into pelayanan(penggunaID,nama_pelayanan,deskripsi) values('$penggunaID','$nama_pelayanan','$deskripsi') ";
+	$insert="insert into daftar_pelayanan(penggunaID,nama_pelayanan,deskripsi) values('$penggunaID','$nama_pelayanan','$deskripsi') ";
 	$query = mysqli_query($conn,$insert);
 	if($query){
 		?>
@@ -22,7 +22,7 @@ if(isset($insert)){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Data Pelayanan - Admin</title>
+    <title>Daftarkan Pelayanan - Admin</title>
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/admin.css">
     <link rel="stylesheet" href="../../css/admin_data.css">
@@ -30,7 +30,7 @@ if(isset($insert)){
 <body>
     <?php include '../../components/admin/sidenav.php' ?>
     <main>
-        <h1>Tambah Data Pelayanan</h1>
+        <h1>Daftarkan Pelayanan</h1>
         <form name='formulir' method='POST' 
     action='<?php $_SERVER['PHP_SELF']; ?>'>
         <table border='0'>

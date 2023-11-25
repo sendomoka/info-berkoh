@@ -121,6 +121,7 @@ action='<?php $_SERVER['PHP_SELF']; ?>'>
     </table>
     </form>
     </main>
+    <?php include '../../components/admin/footer.php' ?>
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <script>
         var quillInsert = new Quill('#editor-insert', {
