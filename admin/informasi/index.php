@@ -3,32 +3,39 @@ session_start();
 include '../../config/models.php';
 
 $id = $_GET['id'];
-if ($id != "") {
-    // Ambil nama file gambar dari database sebelum menghapus
+if($id != "") {
+    // Get image name
     $sqlGetImage = "SELECT konten FROM informasi WHERE informasiID='$id'";
     $queryGetImage = mysqli_query($conn, $sqlGetImage);
     $rowGetImage = mysqli_fetch_assoc($queryGetImage);
 
-    // Ambil nama file gambar dari konten kolom
-    preg_match('/src="([^"]+)"/', $rowGetImage['konten'], $matches);
+    // Get image name from content column
+    preg_match('/src="([^\"]+)"/', $rowGetImage['konten'], $matches);  
     $gambarFilenameToDelete = isset($matches[1]) ? $matches[1] : '';
 
-    // Hapus gambar dari direktori
-    if ($gambarFilenameToDelete !== '') {
+    echo "<script>
+        var confirmDelete = confirm('Yakin untuk hapus?');
+        if (confirmDelete) {
+    ";
+
+    // Delete image  
+    if($gambarFilenameToDelete !== '') {
         $gambarPath = '../../assets/images/informasi/' . basename($gambarFilenameToDelete);
-        if (file_exists($gambarPath)) {
+        if(file_exists($gambarPath)) {
             unlink($gambarPath);
         }
     }
 
-    // Hapus data informasi dari database
-    $delete = "DELETE FROM informasi WHERE informasiID='$id'";
-    $query = mysqli_query($conn, $delete);
-    if ($query) {
-        ?>
-        <script>alert('Data Berhasil Dihapus!'); document.location='index.php';</script>
-        <?php
-    }
+    // Delete data
+    $deleteSQL = "DELETE FROM informasi WHERE informasiID='$id'";
+    $deleteQuery = mysqli_query($conn, $deleteSQL);
+    echo "
+        alert('Data berhasil terhapus!');
+        window.location.href = 'index.php';
+        } else {
+            window.history.back();
+        }
+        </script>";
 }
 
 $sql = "SELECT * FROM informasi";
@@ -75,8 +82,12 @@ $query = mysqli_query($conn, $sql);
                     <td>$row[nama]</td>
                     <td>$row[konten]</td>
                     <td>
-                        <a class='update' href='update.php?id=$row[informasiID]'>Update</a> | 
-                        <a class='delete' href='?id=$row[informasiID]'>Delete</a>
+                        <a class='update' href='update.php?id=$row[informasiID]'>
+                            <img src='../../assets/images/edit.svg'>
+                        </a> 
+                        <a class='delete' href='?id=$row[informasiID]'>
+                            <img src='../../assets/images/delete.svg'>
+                        </a>
                     </td>
                 </tr>
                 ";

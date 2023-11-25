@@ -4,12 +4,20 @@ include '../../config/models.php';
 
 $nik = $_GET['nik'];
 if($nik != ""){
+    echo "<script>
+        var confirmDelete = confirm('Yakin untuk hapus?');
+        if (confirmDelete) {
+    ";
     $delete = "DELETE FROM penduduk WHERE nik='$nik'";
     $query = mysqli_query($conn,$delete);
     if($query){
-        ?>
-        <script>alert('Data Berhasil Dihapus!'); document.location='index.php';</script>
-        <?php
+        echo "
+        alert('Data berhasil terhapus!');
+        window.location.href = 'index.php';
+        } else {
+            window.history.back();
+        }
+        </script>";
     }
 }
 
@@ -26,18 +34,63 @@ $query = mysqli_query($conn,$sql);
     <link rel="stylesheet" href="../../css/admin.css">
     <link rel="stylesheet" href="../../css/admin_index.css">
     <link rel="stylesheet" href="../../css/admin_header.css">
+    <style>
+        .buttons {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .import {
+            cursor: pointer;
+            background: #98D4B3;
+            font-weight: 600;
+            border-radius: 10px;
+            padding: 0.75rem 1.5rem;
+            margin: 1rem 0;
+            width: fit-content;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .import:hover {
+            background: #7AC7A4;
+        }
+    </style>
+    <script>
+        function formToggle(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
 </head>
 <body>
     <?php include '../../components/admin/sidenav.php' ?>
     <main>
     <?php include '../../components/admin/header.php' ?>
-        <a class="insert" href="insert.php">
-            <img src="../../assets/images/circle-add.svg">
-            Tambah Data
-        </a>
+        <div class="buttons">
+            <a class="insert" href="insert.php">
+                <img src="../../assets/images/circle-add.svg">
+                Tambah Data
+            </a>
+            <a href="javascript:void(0);" class="import" onclick="formToggle('importForm');">
+                <img src="../../assets/images/upload.svg">
+                Import CSV
+            </a>
+            <div id="importForm" style="display: none; border: 1px dashed black; padding: 10px;">
+                <form action="import.php" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file" id="file" accept=".csv">
+                    <input type="submit" name="import" value="IMPORT">
+                </form>
+            </div>
+        </div>
         <div class="table-wrapper">
         <table border="1">
             <tr>
+                <th>No</th>
                 <th>NIK</th>
                 <th>Nama Penduduk</th>
                 <th>No HP</th>
@@ -53,9 +106,11 @@ $query = mysqli_query($conn,$sql);
                 <th>Aksi</th>
             </tr>
             <?php
+            $no=1;
             while($row=mysqli_fetch_array($query)){
                 echo "
                 <tr>
+                    <td>$no</td>
                     <td>$row[nik]</td>
                     <td>$row[nama]</td>
                     <td>$row[nohp]</td>
@@ -69,11 +124,16 @@ $query = mysqli_query($conn,$sql);
                     <td>$row[pekerjaan]</td>
                     <td>$row[kewarganegaraan]</td>
                     <td>
-                    <a class='update' href='update.php?nik=$row[nik]'>Update</a>| 
-                    <a class='delete' href='?nik=$row[nik]'>Delete</a>
+                    <a class='update' href='update.php?nik=$row[nik]'>
+                        <img src='../../assets/images/edit.svg'>
+                    </a> 
+                    <a class='delete' href='?nik=$row[nik]'>
+                        <img src='../../assets/images/delete.svg'>
+                    </a>
                     </td>
                 </tr>
                 ";
+                $no++;
             }
             ?>
         </table>

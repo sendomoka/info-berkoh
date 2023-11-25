@@ -15,9 +15,9 @@ function login($username, $password) {
     $_SESSION['role'] = $user['role'];
     $_SESSION['jabatan'] = $user['jabatan'];
     $_SESSION['avatar'] = $user['avatar'];
-    if ($user['role'] == 'admin') {
+    if ($user['role'] == 'Admin') {
         header("Location: admin");
-    } else if ($user['role'] == 'petugas') {
+    } else if ($user['role'] == 'Petugas') {
         header("Location: petugas");
     } else {
         echo "<script>alert('Username atau password salah!')</script>";

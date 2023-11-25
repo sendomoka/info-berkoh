@@ -109,7 +109,7 @@ $data = mysqli_fetch_array($query);
                         <td></td>
                         <td></td>
                         <td>
-                            <input type='submit' name='update' value='Update Data'>
+                            <input type='submit' name='update' class="insert" value='Update Data'>
                         </td>
                     </tr>
                 </table>

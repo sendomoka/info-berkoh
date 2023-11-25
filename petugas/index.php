@@ -1,7 +1,7 @@
 <?php
 session_start();
 include '../config/models.php';
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'petugas') {
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Petugas') {
     header('Location: ../login.php');
     exit();
 }

@@ -1,7 +1,7 @@
 <?php
 $ambilurl = explode('/', $_SERVER['REQUEST_URI']); 
 $ambilslash = $ambilurl[count($ambilurl)-2];
-if ($ambilslash == 'admin') {
+if ($ambilslash == 'Admin') {
     $menu = 'Dashboard';  
 } elseif ($ambilslash == 'profil') {
     $menu = 'Profil';

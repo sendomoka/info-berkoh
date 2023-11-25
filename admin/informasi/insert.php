@@ -92,7 +92,7 @@ action='<?php $_SERVER['PHP_SELF']; ?>'>
             <td></td>
             <td></td>
             <td>
-            <input type='submit' name='insert' value='Insert Data'>
+            <input type='submit' name='insert' class="insert" value='Insert Data'>
             </td>
         </tr>
     </table>

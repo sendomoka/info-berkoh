@@ -2,9 +2,9 @@
 session_start();
 include 'config/models.php';
 if (isset($_SESSION['role'])) {
-    if ($_SESSION['role'] == 'admin') {
+    if ($_SESSION['role'] == 'Admin') {
         header('Location: admin');
-    } else if ($_SESSION['role'] == 'petugas') {
+    } else if ($_SESSION['role'] == 'Petugas') {
         header('Location: petugas');
     }
 }
