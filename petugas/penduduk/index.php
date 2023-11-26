@@ -2,7 +2,7 @@
 session_start();
 include '../../config/models.php';
 
-$sql = "SELECT * FROM penduduk ORDER BY nik ASC";
+$sql = "SELECT * FROM penduduk ORDER BY nama ASC";
 $query = mysqli_query($conn,$sql);
 ?>
 <!DOCTYPE html>
@@ -39,6 +39,9 @@ $query = mysqli_query($conn,$sql);
         table {
             margin-bottom: 3rem;
         }
+        td {
+            font-size: 12px;
+        }
     </style>
 </head>
 <body>
@@ -51,16 +54,14 @@ $query = mysqli_query($conn,$sql);
                 <th>No</th>
                 <th>NIK</th>
                 <th>Nama Penduduk</th>
-                <th>No HP</th>
-                <th>Tempat Lahir</th>
-                <th>Tanggal Lahir</th>
+                <th>Jenis Kelamin</th>
+                <th>Tempat, Tanggal Lahir</th>
                 <th>Alamat</th>
                 <th>Agama</th>
-                <th>Golongan Darah</th>
-                <th>Jenis Kelamin</th>
-                <th>Status</th>
-                <th>Pekerjaan</th>
-                <th>Kewarganegaraan</th>
+                <th>Status Perkawinan</th>
+                <th>Status Kerja</th>
+                <th>Status Hidup</th>
+                <th>Dibuat</th>
             </tr>
             <?php
             $no=1;
@@ -70,16 +71,21 @@ $query = mysqli_query($conn,$sql);
                     <td>$no</td>
                     <td>$row[nik]</td>
                     <td>$row[nama]</td>
-                    <td>$row[nohp]</td>
-                    <td>$row[tempat_lahir]</td>
-                    <td>$row[tanggal_lahir]</td>
+                    <td>$row[jenis_kelamin]</td>
+                    <td>$row[tempat_lahir],<br>$row[tanggal_lahir]</td>
                     <td>$row[alamat]</td>
                     <td>$row[agama]</td>
-                    <td>$row[gol_darah]</td>
-                    <td>$row[jenis_kelamin]</td>
-                    <td>$row[status_perkawinan]</td>
-                    <td>$row[pekerjaan]</td>
-                    <td>$row[kewarganegaraan]</td>
+                    <td>
+                        $row[status_perkawinan]
+                        "; 
+                        if($row['status_perkawinan'] == "Kawin"){
+                            echo "sebagai <i>$row[status_keluarga]</i>";
+                        }
+                        echo "
+                    </td>
+                    <td>$row[status_kerja]</td>
+                    <td>$row[status_hidup]</td>
+                    <td>$row[createdat]</td>
                 </tr>
                 ";
                 $no++;

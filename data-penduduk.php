@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Penduduk</title>
+    <title>@infoberkoh</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap">
 <style>
-        body,
-        html {
+        body,html {
             background-color: #3E5670;
             margin: 0;
             padding: 0;
@@ -16,210 +18,12 @@
         body{
           overflow-x: hidden;
         }
-  /* Colors */
-  gray: #A0A3A5;
-  secondary: #468662;
-  white-new: #F5F5F5;
-  black: #000000;
-  light-gray: #D9D9D9;
-  dark-blue: #080C11;
-
-  /* Layout */
-  width: 1920px;
-  height: 1726px;
-  background: #3E5670;
-
-  /* INFO BERKOH */
-  color: #F5F5F5;
-  font-size: 28px;
-  font-family: 'Plus Jakarta Sans';
-  font-weight: 700;
-  line-height: 48px;
-  word-wrap: break-word;
-
-  /* Integrasi Navigasi dan Fakta Online Desa Berkoh */
-  color: #F5F5F5;
-  font-size: 8.20px;
-  font-family: 'Plus Jakarta Sans';
-  font-weight: 500;
-  line-height: 48px;
-  word-wrap: break-word;
-
-  /* Beranda */
-  color: #F5F5F5;
-  font-size: 20px;
-  font-family: 'Plus Jakarta Sans';
-  font-weight: 400;
-  line-height: 48px;
-  word-wrap: break-word;
-
-  /* Data Penduduk */
-  color: #F5F5F5;
-  font-size: 20px;
-  font-family: 'Plus Jakarta Sans';
-  font-weight: 700;
-  line-height: 48px;
-  word-wrap: break-word;
-
-  /* Berita */
-  color: #F5F5F5;
-  font-size: 20px;
-  font-family: 'Plus Jakarta Sans';
-  font-weight: 400;
-  line-height: 48px;
-  word-wrap: break-word;
-
-  /* Pengaduan */
-  color: #F5F5F5;
-  font-size: 20px;
-  font-family: 'Plus Jakarta Sans';
-  font-weight: 400;
-  line-height: 48px;
-  word-wrap: break-word;
-
-  /* Pelayanan Publik */
-  color: #F5F5F5;
-  font-size: 20px;
-  font-family: 'Plus Jakarta Sans';
-  font-weight: 400;
-  line-height: 48px;
-  word-wrap: break-word;
-
-  /* Statistik Penduduk */
-  color: #F5F5F5;
-  font-size: 40px;
-  font-family: 'Plus Jakarta Sans';
-  font-weight: 700;
-  word-wrap: break-word;
-
-  /* Total Penduduk */
-  color: black;
-  font-size: 25px;
-  font-family: 'Poppins';
-  font-weight: 400;
-  word-wrap: break-word;
-
-  /* Total Yang Sudah Menikah */
-  color: black;
-  font-size: 25px;
-  font-family: 'Poppins';
-  font-weight: 400;
-  word-wrap: break-word;
-
-  /* Total Yang Sudah Wafat */
-  color: black;
-  font-size: 25px;
-  font-family: 'Poppins';
-  font-weight: 400;
-  word-wrap: break-word;
-
-  /* Jumlah Kepala Keluarga */
-  color: black;
-  font-size: 25px;
-  font-family: 'Poppins';
-  font-weight: 400;
-  word-wrap: break-word;
-
-  /* Numbers */
-  font-size-40: 40px;
-  font-size-25: 25px;
-
-  /* Last Year */
-  color: #A0A3A5;
-  font-size: 25px;
-  font-family: 'Poppins';
-  font-weight: 300;
-  word-wrap: break-word;
-
-  /* Months */
-  color-month: #F5F5F5;
-  font-size-month: 25px;
-  font-family-month: 'Poppins';
-  font-weight-month: 300;
-  word-wrap-month: break-word;
-
-  /* Data Points */
-  font-size-data: 25px;
-  font-family-data: 'Poppins';
-  font-weight-data: 300;
-  word-wrap-data: break-word;
-
-  /* Kenaikan Data Penduduk */
-  color-increase: #F5F5F5;
-  font-size-increase: 40px;
-  font-family-increase: 'Plus Jakarta Sans';
-  font-weight-increase: 800;
-  line-height-increase: 48px;
-  word-wrap-increase: break-word;
-
-  /* Follow */
-  color-follow: #F5F5F5;
-  font-size-follow: 28px;
-  font-family-follow: 'Plus Jakarta Sans';
-  font-weight-follow: 700;
-  line-height-follow: 48px;
-  word-wrap-follow: break-word;
-
-  /* Address */
-  color-address: #F5F5F5;
-  font-size-address: 20px;
-  font-family-address: 'Plus Jakarta Sans';
-  font-weight-address: 400;
-  word-wrap-address: break-word;
-
-  /* Hubungi Kami */
-  color-contact: #F5F5F5;
-  font-size-contact: 28px;
-  font-family-contact: 'Plus Jakarta Sans';
-  font-weight-contact: 700;
-  line-height-contact: 48px;
-  word-wrap-contact: break-word;
-
-  /* Website Resmi Pemerintah Desa Berkoh */
-  color-website: #F5F5F5;
-  font-size-website: 20px;
-  font-family-website: 'Plus Jakarta Sans';
-  font-weight-website: 500;
-  word-wrap-website: break-word;
-
-  /* Telepon/Fax */
-  color-telepon: #F5F5F5;
-  font-size-telepon: 20px;
-  font-family-telepon: 'Plus Jakarta Sans';
-  font-weight-telepon: 400;
-  word-wrap-telepon: break-word;
-
-  /* Email */
-  color-email: #F5F5F5;
-  font-size-email: 20px;
-  font-family-email: 'Plus Jakarta Sans';
-  font-weight-email: 400;
-  word-wrap-email: break-word;
-
-  /* Copyright */
-  color-copyright: #080C11;
-  font-size-copyright: 25px;
-  font-family-copyright: 'Plus Jakarta Sans';
-  font-weight-copyright: 500;
-  line-height-copyright: 40px;
-  word-wrap-copyright: break-word;
 </style>
 
 </head>
 <body>
+<?php include 'components/header.php'; ?>
 <div class="DataPenduduk" style="width: 100%; height: 100%; position: relative; background: #3E5670">
-    <div class="Logo" style="width: 272px; left: 53px; top: 46px; position: absolute; justify-content: flex-start; align-items: center; gap: 24px; display: inline-flex">
-        <img class="Logo" style="width: 46.10px; height: 60px" src="https://s3-alpha-sig.figma.com/img/61d1/2d5f/8f8a38b5fb576bbd8441a5f750b3657e?Expires=1701648000&Signature=n05Ryli3HA0nozm9WCgRAjl8XL640BRwPENnH7-OeIHJl9TWZaGCinsxXYK2f~T89plRg~Ak2UXrum38Lni860Sz8OlUNDOuRgALBRjx06zI5TcFo1FWLzrRq989RZu-jAd39SCK9TXsCWuu3zVqHSRbU3dSpa3KY2pzqnd3n~yzP6jkHI0RepSVVYJX8dbgrLhPAiOzLiHxHn-7CDyJFS969x-3FinDSA1TXhRyXGxmNwq6dJHwAB60ICaqz4qGl0TvT~yd-AHlv9pZxs6u7vT-wAwxlfaSpPMEahTRDgOIsc4zQs78nJuzL4p-14m1loniNSqWRcL7X2rQJ2Gn1Q__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4" />
-        <div class="Frame4" style="flex-direction: column; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
-            <div class="InfoBerkoh" style="color: #F5F5F5; font-size: 28px; font-family: Plus Jakarta Sans; font-weight: 700; line-height: 20px; word-wrap: break-word">INFO BERKOH</div>
-            <div class="IntegrasiNavigasiDanFaktaOnlineDesaBerkoh" style="color: #F5F5F5; font-size: 8.20px; font-family: Plus Jakarta Sans; font-weight: 500; line-height: 20px; word-wrap: break-word">Integrasi Navigasi dan Fakta Online Desa Berkoh</div>
-        </div>
-    </div>
-    <div class="Beranda" style="left: 389px; top: 69px; position: absolute; color: #F5F5F5; font-size: 20px; font-family: Plus Jakarta Sans; font-weight: 400; line-height: 48px; word-wrap: break-word">Beranda</div>
-    <div class="DataPenduduk" style="left: 516px; top: 69px; position: absolute; color: #F5F5F5; font-size: 20px; font-family: Plus Jakarta Sans; font-weight: 700; line-height: 48px; word-wrap: break-word">Data Penduduk</div>
-    <div class="Berita" style="left: 705px; top: 69px; position: absolute; color: #F5F5F5; font-size: 20px; font-family: Plus Jakarta Sans; font-weight: 400; line-height: 48px; word-wrap: break-word">Berita</div>
-    <div class="Pengaduan" style="left: 806px; top: 69px; position: absolute; color: #F5F5F5; font-size: 20px; font-family: Plus Jakarta Sans; font-weight: 400; line-height: 48px; word-wrap: break-word">Pengaduan</div>
-    <div class="PelayananPublik" style="left: 959px; top: 69px; position: absolute; color: #F5F5F5; font-size: 20px; font-family: Plus Jakarta Sans; font-weight: 400; line-height: 48px; word-wrap: break-word">Pelayanan Publik</div>
     <div class="StatistikPenduduk" style="left: 76px; top: 162px; position: absolute; color: #F5F5F5; font-size: 40px; font-family: Plus Jakarta Sans; font-weight: 700; word-wrap: break-word">Statistik Penduduk</div>
     <div class="Rectangle18" style="width: 270px; height: 190px; left: 50px; top: 252px; position: absolute; background: #F5F5F5; border-radius: 10px; border: 1px black solid"></div>
     <div class="Rectangle22" style="width: 270px; height: 190px; left: 350px; top: 252px; position: absolute; background: #F5F5F5; border-radius: 10px; border: 1px black solid"></div>
@@ -230,40 +34,39 @@
     <div class="TotalYangSudahMenikah" style="width: 338px; left: 370px; top: 269px; position: absolute; color: black; font-size: 20px; font-family: Poppins; font-weight: 400; word-wrap: break-word">Total Yang Sudah Menikah</div>
     <div class="TotalYangSudahWafat" style="left: 675px; top: 277px; position: absolute; color: black; font-size: 20px; font-family: Poppins; font-weight: 400; word-wrap: break-word">Total Yang Sudah Wafat</div>
     <div class="JumlahKepalaKeluarga" style="left: 980px; top: 277px; position: absolute; color: black; font-size: 20px; font-family: Poppins; font-weight: 400; word-wrap: break-word">Jumlah Kepala Keluarga</div>
-    <div style="left: 70px; top: 342px; position: absolute; color: black; font-size: 40px; font-family: Poppins; font-weight: 700; word-wrap: break-word">1500</div>
-    <div style="left: 370px; top: 333px; position: absolute; color: black; font-size: 40px; font-family: Poppins; font-weight: 700; word-wrap: break-word">900</div>
-    <div style="left: 675px; top: 328px; position: absolute; color: black; font-size: 40px; font-family: Poppins; font-weight: 700; word-wrap: break-word">350</div>
-    <div style="left: 980px; top: 317px; position: absolute; color: black; font-size: 40px; font-family: Poppins; font-weight: 700; word-wrap: break-word">200</div>
-    <div class="LastYear" style="left: 70px; top: 410px; position: absolute; color: #A0A3A5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Last Year</div>
-    <div class="LastYear" style="left: 370px; top: 409px; position: absolute; color: #A0A3A5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Last Year</div>
-    <div class="LastYear" style="left: 675px; top: 402px; position: absolute; color: #A0A3A5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Last Year</div>
-    <div class="LastYear" style="left: 980px; top: 400px; position: absolute; color: #A0A3A5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Last Year</div>
+    <div style="left: 70px; top: 320px; position: absolute; color: black; font-size: 40px; font-family: Poppins; font-weight: 700; word-wrap: break-word">1500</div>
+    <div style="left: 370px; top: 320px; position: absolute; color: black; font-size: 40px; font-family: Poppins; font-weight: 700; word-wrap: break-word">900</div>
+    <div style="left: 675px; top: 320px; position: absolute; color: black; font-size: 40px; font-family: Poppins; font-weight: 700; word-wrap: break-word">350</div>
+    <div style="left: 980px; top: 320px; position: absolute; color: black; font-size: 40px; font-family: Poppins; font-weight: 700; word-wrap: break-word">200</div>
+    <div class="LastYear" style="left: 70px; top: 390px; position: absolute; color: #A0A3A5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Last Year</div>
+    <div class="LastYear" style="left: 370px; top: 390px; position: absolute; color: #A0A3A5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Last Year</div>
+    <div class="LastYear" style="left: 675px; top: 390px; position: absolute; color: #A0A3A5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Last Year</div>
+    <div class="LastYear" style="left: 980px; top: 390px; position: absolute; color: #A0A3A5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Last Year</div>
     <div class="Group25" style="width: 1278px; height: 423px; left: 299px; top: 627px; position: absolute">
-        <div class="Rectangle25" style="width: 55px; height: 375px; left: -80px; top: 0px; position: absolute; background: #D9D9D9"></div>
-        <div class="Rectangle26" style="width: 55px; height: 375px; left: 100px; top: 0px; position: absolute; background: #D9D9D9"></div>
-        <div class="Rectangle27" style="width: 55px; height: 375px; left: 170px; top: 0px; position: absolute; background: #D9D9D9"></div>
-        <div class="Rectangle28" style="width: 55px; height: 375px; left: 240px; top: 0px; position: absolute; background: #D9D9D9"></div>
-        <div class="Rectangle29" style="width: 55px; height: 375px; left: 310px; top: 0px; position: absolute; background: #D9D9D9"></div>
-        <div class="Rectangle30" style="width: 55px; height: 375px; left: 380px; top: 0px; position: absolute; background: #D9D9D9"></div>
-
-        <div class="Rectangle31" style="width: 55px; height: 375px; left: 450px; top: 0px; position: absolute; background: #D9D9D9"></div>
-        <div class="Rectangle32" style="width: 55px; height: 375px; left: 520px; top: 0px; position: absolute; background: #D9D9D9"></div>
-        <div class="Rectangle33" style="width: 55px; height: 375px; left: 590px; top: 0px; position: absolute; background: #D9D9D9"></div>
-        <div class="Rectangle34" style="width: 55px; height: 375px; left: 660px; top: 0px; position: absolute; background: #D9D9D9"></div>
-        <div class="Rectangle35" style="width: 55px; height: 375px; left: 730px; top: 0px; position: absolute; background: #D9D9D9"></div>
-        <div class="Rectangle36" style="width: 55px; height: 375px; left: 800px; top: 0px; position: absolute; background: #D9D9D9"></div>
-        <div class="Jan" style="left: 17px; top: 385px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Jan</div>
-        <div class="Feb" style="left: 126px; top: 385px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Feb</div>
-        <div class="Mar" style="left: 234px; top: 385px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Mar</div>
-        <div class="Apr" style="left: 345px; top: 385px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Apr</div>
-        <div class="Mei" style="left: 454px; top: 385px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Mei</div>
-        <div class="Jun" style="left: 562px; top: 385px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Jun</div>
-        <div class="Jul" style="left: 676px; top: 385px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Jul</div>
-        <div class="Ags" style="left: 780px; top: 385px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Ags</div>
-        <div class="Sep" style="left: 888px; top: 385px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Sep</div>
-        <div class="Okt" style="left: 1000px; top: 385px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Okt</div>
-        <div class="Nov" style="left: 1109px; top: 385px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Nov</div>
-        <div class="Des" style="left: 1215px; top: 385px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Des</div>
+        <div class="Rectangle25" style="width: 55px; height: 375px; left: -50px; top: 0px; position: absolute; background: #D9D9D9"></div>
+        <div class="Rectangle26" style="width: 55px; height: 375px; left: 35px; top: 0px; position: absolute; background: #D9D9D9"></div>
+        <div class="Rectangle27" style="width: 55px; height: 375px; left: 110px; top: 0px; position: absolute; background: #D9D9D9"></div>
+        <div class="Rectangle28" style="width: 55px; height: 375px; left: 180px; top: 0px; position: absolute; background: #D9D9D9"></div>
+        <div class="Rectangle29" style="width: 55px; height: 375px; left: 250px; top: 0px; position: absolute; background: #D9D9D9"></div>
+        <div class="Rectangle30" style="width: 55px; height: 375px; left: 320px; top: 0px; position: absolute; background: #D9D9D9"></div>
+        <div class="Rectangle31" style="width: 55px; height: 375px; left: 390px; top: 0px; position: absolute; background: #D9D9D9"></div>
+        <div class="Rectangle32" style="width: 55px; height: 375px; left: 460px; top: 0px; position: absolute; background: #D9D9D9"></div>
+        <div class="Rectangle33" style="width: 55px; height: 375px; left: 530px; top: 0px; position: absolute; background: #D9D9D9"></div>
+        <div class="Rectangle34" style="width: 55px; height: 375px; left: 600px; top: 0px; position: absolute; background: #D9D9D9"></div>
+        <div class="Rectangle35" style="width: 55px; height: 375px; left: 680px; top: 0px; position: absolute; background: #D9D9D9"></div>
+        <div class="Rectangle36" style="width: 55px; height: 375px; left: 760px; top: 0px; position: absolute; background: #D9D9D9"></div>
+        <div class="Jan" style="left: -35px; top: 385px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Jan</div>
+        <div class="Feb" style="left: 50px; top: 385px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Feb</div>
+        <div class="Mar" style="left: 130px; top: 385px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Mar</div>
+        <div class="Apr" style="left: 190px; top: 385px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Apr</div>
+        <div class="Mei" style="left: 260px; top: 385px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Mei</div>
+        <div class="Jun" style="left: 330px; top: 385px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Jun</div>
+        <div class="Jul" style="left: 405px; top: 385px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Jul</div>
+        <div class="Ags" style="left: 470px; top: 385px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Ags</div>
+        <div class="Sep" style="left: 540px; top: 385px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Sep</div>
+        <div class="Okt" style="left: 609px; top: 385px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Okt</div>
+        <div class="Nov" style="left: 690px; top: 385px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Nov</div>
+        <div class="Des" style="left: 770px; top: 385px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">Des</div>
     </div>
     <div style="left: 150px; top: 954px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">100</div>
     <div style="left: 150px; top: 892px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">200</div>
@@ -271,21 +74,21 @@
     <div style="left: 150px; top: 768px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">400</div>
     <div style="left: 150px; top: 706px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">500</div>
     <div style="left: 150px; top: 644px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Poppins; font-weight: 300; word-wrap: break-word">600</div>
-    <div class="Rectangle37" style="width: 79px; height: 32px; left: 299px; top: 970px; position: absolute; background: #468662"></div>
-    <div class="Rectangle38" style="width: 79px; height: 82px; left: 408px; top: 920px; position: absolute; background: #468662"></div>
-    <div class="Rectangle39" style="width: 79px; height: 144px; left: 517px; top: 858px; position: absolute; background: #468662"></div>
-    <div class="Rectangle40" style="width: 79px; height: 134px; left: 626px; top: 868px; position: absolute; background: #468662"></div>
-    <div class="Rectangle41" style="width: 79px; height: 159px; left: 735px; top: 843px; position: absolute; background: #468662"></div>
-    <div class="Rectangle42" style="width: 79px; height: 159px; left: 844px; top: 843px; position: absolute; background: #468662"></div>
-    <div class="Rectangle43" style="width: 79px; height: 159px; left: 953px; top: 843px; position: absolute; background: #468662"></div>
-    <div class="Rectangle44" style="width: 79px; height: 159px; left: 1062px; top: 843px; position: absolute; background: #468662"></div>
-    <div class="Rectangle45" style="width: 79px; height: 172px; left: 1171px; top: 830px; position: absolute; background: #468662"></div>
-    <div class="Rectangle46" style="width: 79px; height: 186px; left: 1280px; top: 816px; position: absolute; background: #468662"></div>
-    <div class="Rectangle47" style="width: 79px; height: 186px; left: 1389px; top: 816px; position: absolute; background: #468662"></div>
-    <div class="Rectangle48" style="width: 79px; height: 206px; left: 1498px; top: 796px; position: absolute; background: #468662"></div>
-    <div class="KenaikanDataPenduduk" style="left: 450px; top: 529px; position: absolute; color: #F5F5F5; font-size: 40px; font-family: Plus Jakarta Sans; font-weight: 800; line-height: 48px; word-wrap: break-word">Kenaikan Data Penduduk</div>
-    <div class="Group35" style="width: 1920px; height: 499px; left: 0px; top: 1227px; position: absolute">
-        <div class="Rectangle11" style="width: 1920px; height: 499px; left: 0px; top: 0px; position: absolute; background: #468662"></div>
+    <div class="Rectangle37" style="width: 55px; height: 32px; left: 249px; top: 970px; position: absolute; background: #468662"></div>
+    <div class="Rectangle38" style="width: 55px; height: 82px; left: 334px; top: 920px; position: absolute; background: #468662"></div>
+    <div class="Rectangle39" style="width: 55px; height: 144px; left: 409px; top: 858px; position: absolute; background: #468662"></div>
+    <div class="Rectangle40" style="width: 55px; height: 134px; left: 479px; top: 868px; position: absolute; background: #468662"></div>
+    <div class="Rectangle41" style="width: 55px; height: 159px; left: 549px; top: 843px; position: absolute; background: #468662"></div>
+    <div class="Rectangle42" style="width: 55px; height: 159px; left: 619px; top: 843px; position: absolute; background: #468662"></div>
+    <div class="Rectangle43" style="width: 55px; height: 159px; left: 689px; top: 843px; position: absolute; background: #468662"></div>
+    <div class="Rectangle44" style="width: 55px; height: 159px; left: 759px; top: 843px; position: absolute; background: #468662"></div>
+    <div class="Rectangle45" style="width: 55px; height: 172px; left: 829px; top: 830px; position: absolute; background: #468662"></div>
+    <div class="Rectangle46" style="width: 55px; height: 186px; left: 899px; top: 816px; position: absolute; background: #468662"></div>
+    <div class="Rectangle47" style="width: 55px; height: 186px; left: 979px; top: 816px; position: absolute; background: #468662"></div>
+    <div class="Rectangle48" style="width: 55px; height: 206px; left: 1059px; top: 796px; position: absolute; background: #468662"></div>
+    <div class="KenaikanDataPenduduk" style="left: 420px; top: 529px; position: absolute; color: #F5F5F5; font-size: 40px; font-family: Plus Jakarta Sans; font-weight: 800; line-height: 48px; word-wrap: break-word">Kenaikan Data Penduduk</div>
+    <div class="Group35" style="width: 1920px; height: 400px; left: 0px; top: 1227px; position: absolute">
+        <div class="Rectangle11" style="width: 1920px; height: 400px; left: 0px; top: 0px; position: absolute; background: #468662"></div>
         <div class="Follow" style="left: 1000px; top: 54px; position: absolute; color: #F5F5F5; font-size: 28px; font-family: Plus Jakarta Sans; font-weight: 700; line-height: 48px; word-wrap: break-word">Follow</div>
         <div class="JlGerilyaTimurNo26SokabaruBerkohKecPurwokertoSelKabupatenBanyumasJawaTengah53146" style="width: 332px; left: 600px; top: 120px; position: absolute; color: #F5F5F5; font-size: 20px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">Jl. Gerilya Timur No.26, Sokabaru, Berkoh, Kec. Purwokerto Sel., Kabupaten Banyumas, Jawa Tengah 53146</div>
         <div class="HubungiKami" style="left: 600px; top: 54px; position: absolute; color: #F5F5F5; font-size: 28px; font-family: Plus Jakarta Sans; font-weight: 700; line-height: 48px; word-wrap: break-word">Hubungi Kami</div>
@@ -309,8 +112,6 @@
                 <div class="Vector" style="width: 30.83px; height: 24.67px; left: 3.08px; top: 6.17px; position: absolute; background: #F5F5F5"></div>
             </div>
         </div>
-        <div class="Rectangle17" style="width: 1920px; height: 98px; left: 0px; top: 401px; position: absolute; background: #F5F5F5"></div>
-        <div class="2023InfoBerkoh" style="left: 85px; top: 440px; position: absolute; color: #080C11; font-size: 25px; font-family: Plus Jakarta Sans; font-weight: 500; line-height: 40px; word-wrap: break-word">© 2023, INFO BERKOH</div>
         <div class="MdiInstagram" style="width: 30px; height: 30px; left: 1000px; top: 99px; position: absolute">
             <div class="Vector" style="width: 25px; height: 25px; left: 2.50px; top: 2.50px; position: absolute; background: #F5F5F5"></div>
         </div>
@@ -325,5 +126,6 @@
         </div>
     </div>
 </div>
+<?php include 'components/footer.php'; ?>
 </body>
 </html>

@@ -1,4 +1,4 @@
-<nav>
+<nav style="background: white;">
     <a href="index.php">
         <img src="assets/images/logo.svg" alt="Logo" width="220px">
     </a>

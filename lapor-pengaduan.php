@@ -36,22 +36,22 @@
         }
 
         .form-image img {
-            width: 100%;
-            height: auto;
+            width: 500px;
+            height: 500px;
         }
 
         .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.8);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 50%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Change align-items to flex-start */
+    align-items: center;
+}
 
         .form-fields {
             flex: 1;
@@ -102,11 +102,11 @@
     <?php include 'components/header.php'; ?>
     <div class="form-container">
         <div class="form-image">
-            <img src="path/to/image.jpg" alt="Image">
+            <img src="assets/images/pengaduan/img_6550aa47de00f.png" alt="Image">
             <div class="overlay">
                 <div class="overlay-content">
-                    <h2>Judul</h2>
-                    <p>Isi</p>
+                    <h2>Halaman Pengaduan</h2>
+                    <p>Sebuah halaman pengaduan biasanya adalah tempat di situs web atau aplikasi yang memungkinkan pengguna untuk melaporkan masalah, memberikan umpan balik, atau mengajukan keluhan.</p>
                 </div>
             </div>
         </div>
