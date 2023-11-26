@@ -23,17 +23,16 @@
             margin-right: 20px;
         }
 
-        .form-container {
-            padding-top: 80px;
-            display: flex;
-            width: 80%;
-            margin-bottom: 20px; /* Tambahkan margin-bottom sesuai kebutuhan */
-        }
-
-        .form-image {
-            flex: 1;
-            position: relative;
-        }
+            .form-container {
+        padding-top: 80px;
+        display: flex;
+        width: 80%;
+        margin-bottom: auto; /* Adjust margin-bottom as needed */
+    }
+            .form-image {
+                flex: 1;
+                position: relative;
+            }
 
         .form-image img {
             width: 500px;
@@ -130,14 +129,6 @@
         </div>
     </div>
 
-    <script>
-        function setBold(element) {
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.classList.remove('bold');
-            });
-            element.classList.add('bold');
-        }
-    </script>
     <?php include 'components/footer.php'; ?>
 </body>
 </html>

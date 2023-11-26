@@ -35,6 +35,61 @@ $queryKeluarga = "SELECT COUNT(*) as totalKeluarga FROM penduduk WHERE status_ke
 $resultKeluarga = mysqli_query($conn, $queryKeluarga);
 $rowKeluarga = mysqli_fetch_assoc($resultKeluarga);
 $selectKeluarga = $rowKeluarga['totalKeluarga'];
+
+// Function to extract image URLs from HTML content
+function getImageUrls($html) {
+    $dom = new DOMDocument;
+    libxml_use_internal_errors(true);
+    $dom->loadHTML($html);
+    libxml_clear_errors();
+
+    $images = $dom->getElementsByTagName('img');
+    $urls = [];
+
+    foreach ($images as $image) {
+        $urls[] = $image->getAttribute('src');
+    }
+
+    return $urls;
+}
+
+// Fungsi untuk membatasi teks berdasarkan jumlah kata
+function limitTextByWords($text, $limit) {
+    $words = str_word_count($text, 1); // Mendapatkan array kata-kata dari teks
+    $limitedWords = array_slice($words, 0, $limit); // Mengambil sejumlah kata sesuai batas
+    $limitedText = implode(' ', $limitedWords); // Menggabungkan kembali kata-kata menjadi teks
+    return $limitedText;
+}
+
+// ...
+
+// Function to extract text (without images) from HTML content and limit by words
+function getTextWithoutImagesAndLimit($html, $limit) {
+    $dom = new DOMDocument;
+    libxml_use_internal_errors(true);
+    $dom->loadHTML($html);
+    libxml_clear_errors();
+
+    $paragraphs = $dom->getElementsByTagName('p');
+    $text = '';
+
+    foreach ($paragraphs as $paragraph) {
+        // Check if the paragraph contains any images
+        $images = $paragraph->getElementsByTagName('img');
+        if ($images->length === 0) {
+            $text .= $dom->saveHTML($paragraph);
+        }
+    }
+
+    // Limit the text by words
+    $text = limitTextByWords(strip_tags($text), $limit);
+
+    return $text;
+}
+
+// Query to get data from 'berita' table
+$queryBerita = "SELECT * FROM berita LIMIT 3";
+$resultBerita = mysqli_query($conn, $queryBerita);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -148,9 +203,9 @@ $selectKeluarga = $rowKeluarga['totalKeluarga'];
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 5rem;
+            padding: 5rem 8rem;
             height: fit-content;
-            gap: 3rem;
+            gap: 15rem;
             background: #3e5670;
             color: white;
         }
@@ -160,14 +215,13 @@ $selectKeluarga = $rowKeluarga['totalKeluarga'];
         #solusi .left h1 {
             font-size: 2.3rem;
             font-weight: 700;
-            line-height: 30px;
+            line-height: 50px;
             margin-bottom: 1rem;
         }
         #solusi .left p {
             font-size: 1rem;
             font-weight: 400;
             text-align: justify;
-            margin-top: -10px;
         }
         #solusi .right {
             width: 50%;
@@ -186,10 +240,12 @@ $selectKeluarga = $rowKeluarga['totalKeluarga'];
             border-radius: 10px;
             padding: 1rem;
             background: white;
+            box-shadow: 10px 10px 4px 0px rgba(0, 0, 0, 0.25);
         }
         #solusi .right .item .title {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
         }
         #solusi .right .item .title img {
@@ -203,8 +259,167 @@ $selectKeluarga = $rowKeluarga['totalKeluarga'];
         #solusi .right .item p {
             font-size: 1rem;
             font-weight: 400;
-            text-align: justify;
+            text-align: center;
             margin-top: -10px;
+        }
+        /* kata */
+        #kata {
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: start;
+            padding: 3rem;
+            height: fit-content;
+        }
+        #kata h1 {
+            font-size: 2.3rem;
+            font-weight: 700;
+            line-height: 30px;
+            margin-bottom: 1rem;
+        }
+        #kata .sub-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 3rem;
+        }
+        #kata .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 13rem;
+        }
+        #kata .item {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+        }
+        #kata .item img {
+            height: 140px;
+        }
+        #kata .item .text {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        #kata .item .text hr {
+            border: 1px solid rgba(0, 0, 0, 0.25);
+        }
+        /* berita */
+        #berita {
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: start;
+            padding: 3rem;
+            height: fit-content;
+            background: #3e5670;
+            color: white;
+        }
+        #berita h1 {
+            font-size: 2.3rem;
+            font-weight: 700;
+            line-height: 30px;
+            margin-bottom: 1rem;
+        }
+        #berita .sub-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 3rem;
+        }
+        #berita .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        #berita .item {
+            display: flex;
+            flex-direction: row;
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            height: fit-content;
+            color: #3e5670;
+            gap: 1rem;
+        }
+        #berita .item img {
+            height: 140px;
+        }
+        #berita .item .text {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        #berita .item .text p {
+            font-size: 11px;
+            text-align: justify;
+        }
+        /* ucapan */
+        #ucapan {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5rem;
+            height: fit-content;
+            gap: 5rem;
+        }
+        #ucapan .left h1 {
+            font-size: 2.3rem;
+            font-weight: 700;
+            line-height: 40px;
+            margin-bottom: 1rem;
+        }
+        #ucapan .left a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 1rem 4rem;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            border: 1px solid #46627e;
+            border-radius: 10px;
+            background: #46627e;
+            color: white;
+        }
+        #ucapan .right img {
+            margin-top: -100px;
+        }
+        /* kontak */
+        #kontak {
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: start;
+            padding: 3rem;
+            height: fit-content;
+            background: #336248;
+            color: white;
+        }
+        #kontak .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+        #kontak .left img {
+            margin-bottom: 1rem;
+        }
+        #kontak .middle {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        #kontak .middle .call {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        #kontak .right .sosmed {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+        #kontak .right .sosmed a:hover {
+            background-color: rgba(0, 0, 0, 0.25);
         }
     </style>
 </head>
@@ -274,24 +489,107 @@ $selectKeluarga = $rowKeluarga['totalKeluarga'];
                 </div>
                 <div class="item">
                     <div class="title">
-                        <img src="assets/images/profil.svg">
-                        <h3>Profil</h3>
+                        <img src="assets/images/pembangunan.svg" style="width: 20px;">
+                        <h3>Pembangunan</h3>
                     </div>
-                    <p>Salah satu desa yang berada di Kecamatan Pagerbarang, Kabupaten Tegal, Provinsi Jawa Tengah, Indonesia</p>
+                    <p>Program Desa diawali dengan musyawarah Desa untuk membahas dan menyepakati program pembangunan, pemerintahan, dan pemberdayaan masyarakat.</p>
                 </div>
                 <div class="item">
                     <div class="title">
-                        <img src="assets/images/profil.svg">
-                        <h3>Profil</h3>
+                        <img src="assets/images/layanan.svg">
+                        <h3>Layanan</h3>
                     </div>
-                    <p>Salah satu desa yang berada di Kecamatan Pagerbarang, Kabupaten Tegal, Provinsi Jawa Tengah, Indonesia</p>
+                    <p>Pemerintah Desa selalu berusaha memberikan layanan publik secara prima kepada masyarakat.</p>
                 </div>
                 <div class="item">
                     <div class="title">
-                        <img src="assets/images/profil.svg">
-                        <h3>Profil</h3>
+                        <img src="assets/images/potensi.svg">
+                        <h3>Potensi</h3>
                     </div>
-                    <p>Salah satu desa yang berada di Kecamatan Pagerbarang, Kabupaten Tegal, Provinsi Jawa Tengah, Indonesia</p>
+                    <p>Potensi desa kami berfokus pada beberapa sumber daya seperti alam, manusia, sosial, dan ekonomi</p>
+                </div>
+            </div>
+        </section>
+        <section id="kata">
+            <h1>Apa Kata Mereka?</h1>
+            <p class="sub-title">Mengenai <span style="color:#468662">INFO BERKOH</span></p>
+            <div class="grid">
+                <div class="item">
+                    <img src="assets/images/amin.png">
+                    <div class="text">
+                        <b>Testimoni</b>
+                        <p>“Desa saya menjadi maju dengan adanya sistem INFO BERKOH, semua yang dibutuhkan terasa lebih mudah dan ringan”</p>
+                        <hr>
+                        <p>Amin, Petani Desa Berkoh</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="assets/images/dimas.png">
+                    <div class="text">
+                        <b>Testimoni</b>
+                        <p>“Desa saya menjadi maju dengan adanya sistem INFO BERKOH, semua yang dibutuhkan terasa lebih mudah dan ringan”</p>
+                        <hr>
+                        <p>Dimas, Petani Desa Berkoh</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="berita">
+            <h1>Berita Desa Berkoh</h1>
+            <p class="sub-title">Rangkuman berita terbaru dan terpilih dari Desa Berkoh</p>
+            <div class="grid">
+                <?php
+                while ($rowBerita = mysqli_fetch_assoc($resultBerita)) {
+                    // Extracting image URLs using the new function
+                    $imageUrls = getImageUrls($rowBerita['isi']);
+                    echo '<div class="item">';
+                    echo '<img src="' . $imageUrls[0] . '">';
+                    echo '<div class="text">';
+                    echo '<b>' . $rowBerita['judul'] . '</b>';
+                    echo '<p>' . getTextWithoutImagesAndLimit($rowBerita['isi'], 28) . '...</p>';
+                    echo '<hr>';
+                    echo '<a href="" style="color: #3e5670"><b>Selengkapnya</b></a>';
+                    echo '</div>';
+                    echo '</div>';
+                }
+                ?>
+            </div>
+        </section>
+        <section id="ucapan">
+            <div class="left">
+                <h1>Mari Bersama Menjadikan <span style="color: #468662">Desa</span> Lebih Maju dan Terintegrasi</h1>
+                <a href="">Login</a>
+            </div>
+            <div class="right">
+                <img src="assets/images/ucapan.png">
+            </div>
+        </section>
+        <section id="kontak">
+            <div class="grid">
+                <div class="left">
+                    <img src="assets/images/logowhite.svg" height="50px">
+                    <p>Website Resmi Pemerintah Desa Berkoh, Kecamatan Purwokerto Selatan, Kabupaten Banyumas</p>
+                </div>
+                <div class="middle">
+                    <h3>Hubungi Kami</h3>
+                    <p>Jl. Gerilya Timur No.26, Sokabaru, Berkoh, Kec. Purwokerto Sel., Kabupaten Banyumas, Jawa Tengah 53146</p>
+                    <div class="call">
+                        <img src="assets/images/telp.svg" height="24px">
+                        <p>Telepon/Fax: 0281633014</p>
+                    </div>
+                    <div class="call">
+                        <img src="assets/images/email.svg" height="24px">
+                        <p>Email: berkoh.banyumas@gmail.com</p>
+                    </div>
+                </div>
+                <div class="right">
+                    <h3>Ikuti Kami</h3>
+                    <div class="sosmed">
+                        <a href=""><img src="assets/images/insta.svg"></a>
+                        <a href=""><img src="assets/images/twit.svg"></a>
+                        <a href=""><img src="assets/images/fb.svg"></a>
+                        <a href=""><img src="assets/images/linked.svg"></a>
+                    </div>
                 </div>
             </div>
         </section>
