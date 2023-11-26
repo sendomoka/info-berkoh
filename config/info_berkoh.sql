@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 26, 2023 at 12:31 PM
+-- Generation Time: Nov 26, 2023 at 10:44 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -40,7 +40,10 @@ CREATE TABLE `berita` (
 --
 
 INSERT INTO `berita` (`beritaID`, `penggunaID`, `judul`, `isi`, `tanggal_dikirim`) VALUES
-(31, 1, 'ini pancuran emas', '<p>dasdasdsa<img src=\"../../assets/images/berita/img_6561619936d9e.png\"></p>', '2023-11-09');
+(1, 1, 'Open Recuitment Panitia Pemilu', '<p><img src=\"assets/images/berita/img_6563b2fdf3209.png\"></p><p>Dalam rangka mensukseskan acara historis ini, dengan ini mengumumkan pembukaan rekrutmen untuk individu yang berkomitmen untuk turut serta dalam penyelenggaraan pemilihan presiden yang berlangsung pada tahun 2024. Bergabunglah dalam panitia pemilihan presiden kami dan berkontribusi dalam mewujudkan peristiwa bersejarah ini. Jadilah bagian dari tim yang bertanggung jawab atas kelancaran dan keberhasilan pemilihan presiden 2024. Kesempatan ini bukan hanya untuk mengamati, tetapi juga untuk aktif terlibat dalam proses demokrasi. Ayo wujudkan perubahan bersama!</p>', '2023-11-27'),
+(2, 1, 'Baksos \"Berbagi Kasih\" Mencerahkan Masyarakat', '<p><img src=\"assets/images/berita/img_6563b383b7a6a.png\"></p><p>\r\nAcara bakti sosial \"Berbagi Kasih\" di Desa Berkoh menyentuh hati banyak orang. Sukarelawan dari berbagai latar belakang bergabung untuk membantu keluarga kurang mampu dengan memberikan bantuan pangan, pakaian, dan perlengkapan sekolah. Kebersamaan dan semangat gotong royong terasa kuat, menciptakan ikatan yang erat di antara warga desa. Aksi ini tidak hanya memberikan manfaat materi, tetapi juga membawa kehangatan dan harapan bagi masyarakat Desa Berkoh.</p>', '2023-11-27'),
+(3, 1, 'Lomba 17 Agustus 2023', '<p><img src=\"assets/images/berita/img_6563b3c32bd0c.png\"></p><p>Desa Berkoh mengadakan lomba 17 Agustus yang meriah dan penuh semangat sebagai bagian dari perayaan Hari Kemerdekaan. Lomba ini dihadiri oleh warga desa yang berkompetisi dalam berbagai cabang perlombaan, mulai dari lomba makan kerupuk, tarik tambang, hingga balap kelereng. Semangat persaingan dan kebersamaan begitu terasa, menciptakan momen keakraban yang tak terlupakan di tengah kemeriahan peringatan Hari Kemerdekaan Desa Berkoh. Acara tersebut juga diramaikan oleh penampilan seni dari anak-anak sekolah setempat, menambah warna ceria dan kehangatan dalam merayakan semangat kemerdekaan. Suasana kegembiraan dan kebanggaan atas kemerdekaan Indonesia begitu kental terasa, memperkuat ikatan sosial di Desa Berkoh.</p>', '2023-11-27'),
+(4, 3, 'test', '<p>test</p>', '2023-11-27');
 
 -- --------------------------------------------------------
 
@@ -405,7 +408,7 @@ ALTER TABLE `pengguna`
 -- AUTO_INCREMENT for table `berita`
 --
 ALTER TABLE `berita`
-  MODIFY `beritaID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `beritaID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `dokumentasi`
