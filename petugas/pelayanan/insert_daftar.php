@@ -23,13 +23,13 @@ if(isset($insert)){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftarkan Pelayanan - Admin</title>
+    <title>Daftarkan Pelayanan - Petugas</title>
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/admin.css">
     <link rel="stylesheet" href="../../css/admin_data.css">
 </head>
 <body>
-    <?php include '../../components/admin/sidenav.php' ?>
+    <?php include '../../components/petugas/sidenav.php' ?>
     <main>
         <h1>Daftarkan Pelayanan</h1>
         <form name='formulir' method='POST' 

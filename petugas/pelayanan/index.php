@@ -52,16 +52,16 @@ if(isset($_GET['nama_pelayanan']) && isset($_GET['tanggal'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pelayanan - Admin</title>
+    <title>Pelayanan - Petugas</title>
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/admin.css">
     <link rel="stylesheet" href="../../css/admin_index.css">
     <link rel="stylesheet" href="../../css/admin_header.css">
 </head>
 <body>
-    <?php include '../../components/admin/sidenav.php' ?>
+    <?php include '../../components/petugas/sidenav.php' ?>
     <main style="margin-bottom: 5rem;">
-    <?php include '../../components/admin/header.php' ?>
+    <?php include '../../components/petugas/header.php' ?>
         <a class="insert" href="insert.php">
             <img src="../../assets/images/circle-add.svg">
             Tambah Data

@@ -54,9 +54,9 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="../../css/admin_header.css">
 </head>
 <body>
-<?php include '../../components/admin/sidenav.php' ?>
+<?php include '../../components/petugas/sidenav.php' ?>
     <main>
-        <?php include '../../components/admin/header.php' ?>
+        <?php include '../../components/petugas/header.php' ?>
         <?php
         if ($user['penggunaID'] != "") {
         ?>

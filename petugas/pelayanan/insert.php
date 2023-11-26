@@ -40,14 +40,14 @@ if(isset($insert)){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Data Pelayanan - Admin</title>
+    <title>Tambah Data Pelayanan - Petugas</title>
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/admin.css">
     <link rel="stylesheet" href="../../css/admin_data.css">
 </head>
 <body>
-    <?php include '../../components/admin/sidenav.php' ?>
+    <?php include '../../components/petugas/sidenav.php' ?>
     <main>
         <h1>Tambah Data Pelayanan</h1>
         <form name='formulir' method='POST' 
