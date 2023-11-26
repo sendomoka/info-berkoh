@@ -14,23 +14,23 @@ if (isset($_POST['import'])) {
             while (($line = fgetcsv($csvFile)) !== FALSE) {
                 $nik = $line[0];
                 $nama = $line[1];
-                $nohp = $line[2];
+                $jenis_kelamin = $line[2];
                 $tempat_lahir = $line[3];
                 $tanggal_lahir = $line[4];
                 $alamat = $line[5];
                 $agama = $line[6];
-                $gol_darah = $line[7];
-                $jenis_kelamin = $line[8];
-                $status_perkawinan = $line[9];
-                $pekerjaan = $line[10];
-                $kewarganegaraan = $line[11];
+                $status_perkawinan = $line[7];
+                $status_keluarga = $line[8];
+                $status_kerja = $line[9];
+                $status_hidup = $line[10];
+                $createdat = $line[11];
                 $prevQuery = "SELECT nik FROM penduduk WHERE nik = '".$line[0]."'";
                 $prevResult = $conn->query($prevQuery);
                 if($prevResult->num_rows > 0){
-                    $update = "UPDATE penduduk SET nama='$nama', nohp='$nohp', tempat_lahir='$tempat_lahir', tanggal_lahir='$tanggal_lahir', alamat='$alamat', agama='$agama', gol_darah='$gol_darah', jenis_kelamin='$jenis_kelamin', status_perkawinan='$status_perkawinan', pekerjaan='$pekerjaan', kewarganegaraan='$kewarganegaraan' WHERE nik='$nik'";
+                    $update = "UPDATE penduduk SET nama='$nama',jenis_kelamin='$jenis_kelamin',tempat_lahir='$tempat_lahir',tanggal_lahir='$tanggal_lahir',alamat='$alamat',agama='$agama',status_perkawinan='$status_perkawinan',status_keluarga='$status_keluarga',status_kerja='$status_kerja',status_hidup='$status_hidup',createdat='$createdat' WHERE nik = '$nik'";
                     $conn->query($update);
                 } else {
-                    $insert = "INSERT INTO penduduk(nik,nama,nohp,tempat_lahir,tanggal_lahir,alamat,agama,gol_darah,jenis_kelamin,status_perkawinan,pekerjaan,kewarganegaraan) VALUES('$nik','$nama','$nohp', '$tempat_lahir','$tanggal_lahir','$alamat','$agama','$gol_darah','$jenis_kelamin','$status_perkawinan','$pekerjaan','$kewarganegaraan')";
+                    $insert = "INSERT INTO penduduk (nik,nama,jenis_kelamin,tempat_lahir,tanggal_lahir,alamat,agama,status_perkawinan,status_keluarga,status_kerja,status_hidup,createdat) VALUES ('$nik','$nama','$jenis_kelamin','$tempat_lahir','$tanggal_lahir','$alamat','$agama','$status_perkawinan','$status_keluarga','$status_kerja','$status_hidup','$createdat')";
                     $conn->query($insert);
                 }
             }
