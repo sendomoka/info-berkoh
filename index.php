@@ -18,23 +18,20 @@ function getInformasi($nama) {
 $heroTitle = getInformasi('hero-title');
 $heroDesc = getInformasi('hero-desc');
 
-// Query to get the count of 'Kawin' status
-$queryKawin = "SELECT COUNT(*) as totalKawin FROM penduduk WHERE status_perkawinan='Kawin'";
-$resultKawin = mysqli_query($conn, $queryKawin);
-$rowKawin = mysqli_fetch_assoc($resultKawin);
-$selectKawin = $rowKawin['totalKawin'];
+$queryPengaduan = "SELECT COUNT(*) as totalPengaduan FROM pengaduan";
+$resultPengaduan = mysqli_query($conn, $queryPengaduan);
+$rowPengaduan = mysqli_fetch_assoc($resultPengaduan);
+$selectPengaduan = $rowPengaduan['totalPengaduan'];
 
-// Query to get the count of 'Wafat' status
-$queryWafat = "SELECT COUNT(*) as totalWafat FROM penduduk WHERE status_hidup='Wafat'";
-$resultWafat = mysqli_query($conn, $queryWafat);
-$rowWafat = mysqli_fetch_assoc($resultWafat);
-$selectWafat = $rowWafat['totalWafat'];
+$queryPelayanan = "SELECT COUNT(*) as totalPelayanan FROM pelayanan";
+$resultPelayanan = mysqli_query($conn, $queryPelayanan);
+$rowPelayanan = mysqli_fetch_assoc($resultPelayanan);
+$selectPelayanan = $rowPelayanan['totalPelayanan'];
 
-// Query to get the count of 'Kepala Keluarga' status
-$queryKeluarga = "SELECT COUNT(*) as totalKeluarga FROM penduduk WHERE status_keluarga='Kepala Keluarga'";
-$resultKeluarga = mysqli_query($conn, $queryKeluarga);
-$rowKeluarga = mysqli_fetch_assoc($resultKeluarga);
-$selectKeluarga = $rowKeluarga['totalKeluarga'];
+$queryBerita = "SELECT COUNT(*) as totalBerita FROM berita";
+$resultBerita = mysqli_query($conn, $queryBerita);
+$rowBerita = mysqli_fetch_assoc($resultBerita);
+$selectBerita = $rowBerita['totalBerita'];
 
 // Function to extract image URLs from HTML content
 function getImageUrls($html) {
@@ -441,16 +438,16 @@ $resultBerita = mysqli_query($conn, $queryBerita);
         </section>
         <section id="data">
             <div class="menikah">
-                <h1><?= $selectKawin ?></h1>
-                <p>Jumlah Warga yang Menikah</p>
+                <h1><?= $selectPengaduan ?></h1>
+                <p>Jumlah Lapor Pengaduan Warga</p>
             </div>
             <div class="wafat">
-                <h1><?= $selectWafat ?></h1>
-                <p>Jumlah Warga yang Wafat</p>
+                <h1><?= $selectPelayanan ?></h1>
+                <p>Jumlah Pelayanan yang Tersedia</p>
             </div>
             <div class="keluarga">
-                <h1><?= $selectKeluarga ?></h1>
-                <p>Jumlah Kepala Keluarga</p>
+                <h1><?= $selectBerita ?></h1>
+                <p>Jumlah Berita yang Diunggah</p>
             </div>
         </section>
         <section id="keuntungan">
@@ -548,7 +545,7 @@ $resultBerita = mysqli_query($conn, $queryBerita);
                     echo '<b>' . $rowBerita['judul'] . '</b>';
                     echo '<p>' . getTextWithoutImagesAndLimit($rowBerita['isi'], 28) . '...</p>';
                     echo '<hr>';
-                    echo '<a href="" style="color: #3e5670"><b>Selengkapnya</b></a>';
+                    echo '<a href="berita-terkini.php" style="color: #3e5670"><b>Selengkapnya</b></a>';
                     echo '</div>';
                     echo '</div>';
                 }
