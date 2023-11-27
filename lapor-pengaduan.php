@@ -1,134 +1,161 @@
+<?php
+include 'config/models.php';
+
+$nik_or_nama = $_POST['nik'];
+$pesan = $_POST['pesan'];
+$insert = $_POST['insert'];
+
+if(isset($insert)){
+    // Pengecekan apakah input adalah NIK atau nama
+    $query_check = "SELECT * FROM penduduk WHERE nik = '$nik_or_nama' OR nama = '$nik_or_nama'";
+    $result_check = mysqli_query($conn, $query_check);
+    if (mysqli_num_rows($result_check) > 0) {
+        // Input valid, dapatkan NIK jika input adalah nama
+        $row = mysqli_fetch_assoc($result_check);
+        $nik = $row['nik'];
+        $pesanmedia = $_POST['pesan'];
+        preg_match_all('/<img[^>]+>/i', $pesan, $matches);
+        $folderPath = 'assets/images/pengaduan/';
+        if (!file_exists($folderPath)) {
+            mkdir($folderPath, 0777, true);
+        }
+        foreach ($matches[0] as $imgTag) {
+            preg_match('/src="([^"]+)"/i', $imgTag, $srcMatch);
+            $imgSrc = $srcMatch[1];
+            if (strpos($imgSrc, 'data:image') !== false) {
+                preg_match('/data:image\/(.*?);/i', $imgSrc, $imageType);
+                $imageExtension = $imageType[1];
+                $imgName = uniqid('img_') . '.' . $imageExtension;
+                $imgPath = $folderPath . $imgName;
+                file_put_contents($imgPath, base64_decode(explode(',', $imgSrc)[1]));
+                $pesan = str_replace($imgSrc, 'assets/images/pengaduan/' . $imgName, $pesan);
+            }
+        }
+        $insert_query="INSERT INTO pengaduan (nik,pesan) VALUES ('$nik','$pesan') ";
+        $query = mysqli_query($conn,$insert_query);
+        if($query){
+            ?>
+            <script>alert('Laporan Anda sudah dikirim! Jangan lupa cek WhatsApp karena staff akan menghubungi Anda!'); document.location='lapor-pengaduan.php';</script>
+            <?php
+        }
+    } else {
+        ?>
+        <script>alert('NIK atau nama tidak ditemukan!'); document.location='lapor-pengaduan.php';</script>
+        <?php
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan Pengaduan</title>
+    <title>Laporan Pengaduan - @infoberkoh</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/main.css">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #f4f4f4;
+        html, body {margin: 0; height: 100%; overflow: hidden}
+        main {
+            padding: 5rem;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh;
+            justify-content: center;
+            gap: 1rem;
         }
-
-        .logo img {
-            max-height: 50px;
-            margin-right: 20px;
+        .form {
+            width: 100%;
+            max-width: 600px;
+            padding: 1rem;
+            background-color: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 0 1rem rgba(0, 0, 0, .1);
         }
-
-            .form-container {
-        padding-top: 80px;
-        display: flex;
-        width: 80%;
-        margin-bottom: auto; /* Adjust margin-bottom as needed */
-    }
-            .form-image {
-                flex: 1;
-                position: relative;
-            }
-
-        .form-image img {
-            width: 500px;
-            height: 500px;
+        .form .input {
+            display: flex;
+            flex-direction: column;
         }
-
-        .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50%;
-    height: 50%;
-    background: rgba(255, 255, 255, 0.8);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* Change align-items to flex-start */
-    align-items: center;
-}
-
-        .form-fields {
-            flex: 1;
-            background-color: white;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            box-sizing: border-box; /* Add this to ensure padding is included in the width */
+        .form .input label {
+            font-weight: 600;
+            margin-bottom: .5rem;
         }
-
-        .form-fields label {
-            font-weight: bold;
-            margin-bottom: 5px;
-            display: block; /* Add display block to labels for better spacing */
+        .form .input input, .form .input select {
+            padding: .5rem;
+            border: 1px solid #ddd;
+            border-radius: .5rem;
+            margin-bottom: 1rem;
         }
-
-        .form-fields input,
-.form-fields textarea,
-.form-fields select {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-    border: 1px solid #577B9D; /* Add border styling */
-    border-radius: 4px; /* Optional: Add border-radius for rounded corners */
-}
-
-.form-fields input[type="file"] {
-    margin-top: 10px;
-}
-
-.form-fields input[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    height: 40px;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    border: 1px solid #577B9D; /* Add border styling */
-    border-radius: 4px; /* Optional: Add border-radius for rounded corners */
-}
-
-.form-fields input[type="submit"]:hover {
-    background-color: #45a049;
-}
+        .form .input input[type="submit"] {
+            padding: .5rem;
+            border: none;
+            border-radius: .5rem;
+            background-color: #000;
+            color: #fff;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        .form .input input[type="submit"]:hover {
+            background-color: #333;
+        }
+        .ql-container.ql-snow {
+            border: 1px solid #ddd;
+            border-radius: .5rem;
+        }
+        .ql-editor {
+            min-height: 200px;
+        }
     </style>
 </head>
 <body>
     <?php include 'components/header.php'; ?>
-    <div class="form-container">
-        <div class="form-image">
-            <img src="assets/images/pengaduan/img_6550aa47de00f.png" alt="Image">
-            <div class="overlay">
-                <div class="overlay-content">
-                    <h2>Halaman Pengaduan</h2>
-                    <p>Sebuah halaman pengaduan biasanya adalah tempat di situs web atau aplikasi yang memungkinkan pengguna untuk melaporkan masalah, memberikan umpan balik, atau mengajukan keluhan.</p>
-                </div>
+    <main>
+        <h1>Lapor Pengaduan</h1>
+        <p>Lapor apabila ada masalah yang terjadi di sekitar anda, kami akan membantu anda untuk menyelesaikan masalah tersebut.</p>
+        <div class="form">
+            <form name="formulir" method="POST" action="<?php $_SERVER['PHP_SELF']; ?>">
+            <div class="input">
+                <label for="nik">NIK atau Nama Lengkap</label>
+                <input type="text" name="nik">
+                <!-- <select name="nik" id="nik">
+                    <?php
+                    // $s = "SELECT * FROM penduduk";
+                    // $q = mysqli_query($conn, $s);
+                    // while ($row = mysqli_fetch_array($q)) {
+                    //     echo "<option value='$row[nik]'>$row[nik] - $row[nama]</option>";
+                    // }
+                    ?>
+                </select> -->
             </div>
+            <div class="input">
+                <label for="pesan">Pesan dan Media</label>
+                <div id="editor-insert"></div>
+                <input type="hidden" name="pesan" id="pesan">
+            </div>
+            <div class="input">
+                <input type="submit" name="insert" value="Submit">
+            </div>
+            </form>
         </div>
-        <div class="form-fields">
-            <label for="fullname">Nama Lengkap</label>
-            <input type="text" name="fullname" id="fullname">
-
-            <label for="address">Alamat</label>
-            <input type="text" name="address" id="address">
-
-            <label for="issue">Perihal Masalah</label>
-            <input type="text" name="issue" id="issue">
-
-            <label for="complaint">Isi Aduan</label>
-            <textarea name="complaint" id="complaint"></textarea>
-
-            <label for="file">Upload File</label>
-            <input type="file" name="file" id="file">
-
-            <input type="submit" value="Submit">
-        </div>
-    </div>
-
+    </main>
     <?php include 'components/footer.php'; ?>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+        var quillInsert = new Quill('#editor-insert', {
+            theme: 'snow',
+            modules: {
+                toolbar: [
+                    ['bold', 'italic', 'underline'],
+                    [{ 'color': [] }, { 'background': [] }],
+                    ['link', 'image'],
+                    ['clean']
+                ]
+            }
+        });
+        document.forms['formulir'].addEventListener('submit', function(){
+            var quillHtml = quillInsert.root.innerHTML.trim();
+            document.getElementById('pesan').value = quillHtml;
+        });
+    </script>
 </body>
 </html>

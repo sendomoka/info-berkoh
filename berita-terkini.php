@@ -18,10 +18,51 @@
         body{
           overflow-x: hidden;
         }
+        
+        /* kontak */
+        #kontak {
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: start;
+            padding: 3rem;
+            height: fit-content;
+            background: #336248;
+            color: white;
+        }
+        #kontak .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+        #kontak .left img {
+            margin-bottom: 1rem;
+        }
+        #kontak .middle {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        #kontak .middle .call {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        #kontak .right .sosmed {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+        #kontak .right .sosmed a:hover {
+            background-color: rgba(0, 0, 0, 0.25);
+        }
     </style>
 </head>
 <body>
 <?php include 'components/header.php'; ?>
+<main>
+<section>
 <div class="Berita" style="width: 100%; height: 100%; position: relative; background: #3E5670">
     <div class="BeritaTerakhir" style="width: 174px; height: 20px; left: 45px; top: 702px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Plus Jakarta Sans; font-weight: 700; line-height: 48px; word-wrap: break-word">Berita Terakhir</div>
     <div class="LihatSemua" style="left: 1000px; top: 702px; position: absolute; color: #F5F5F5; font-size: 25px; font-family: Plus Jakarta Sans; font-weight: 700; line-height: 48px; word-wrap: break-word">Lihat Semua<img src="assets/images/ep_right.svg"></div>
@@ -54,45 +95,38 @@
     <img class="Rectangle54" style="width: 500px; height: 350px; left: 120px; top: 274px; position: absolute; border-radius: 10px" src="https://s3-alpha-sig.figma.com/img/e761/b9f3/a3b032c81432923ef5feb854bc79ca0b?Expires=1701648000&Signature=PuDg1pSgqDUjNM0ZiVPNcgDqn4b-NXMbIM8VvGw5gDvDauIrUf98ZIdzM70u5SRyVX8z0aKwse9AXB4a5MC9f-AmP358OVdDYU-6A4Ym~WWHrJayh7xEn-wIW6WTO54c1Wf6QopU3yjcUPAMBoDGXMODSbwupUc~k099xDfVpZemSNnpHfvXBqeMzbKjaB58SxTm9Olf4rCRxjlPdlfDsTiuLA2xRnVaNPBzk35FKyVDVujTvrteReEWGaK1FAz7xz~OWeelcfdN8VOL8lsn97Qyz4vGAS3sNxJrOknTBTpLD9DewRLBVYR-gG-GWgjje2jeKWsuuIqbMA~9WXlziQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4" />
     <div class="SuksesProgramImunisasiMasyarakatDesaBerkoh" style="width: 600px; left: 650px; top: 285px; position: absolute; color: #3E5670; font-size: 40px; font-family: Plus Jakarta Sans; font-weight: 700; line-height: 45px; word-wrap: break-word">Sukses! Program Imunisasi Masyarakat Desa Berkoh</div>
     <div class="DesaBerkoh20Juli2023ProgramImunisasiDiDesaBerkohMencapaiKesuksesanBesarDenganMelibatkanBanyakWargaImunisasiAdalahLangkahPentingDalamMenjagaKesehatanDanMencegahPenyakitMenularDalamProgramIniBanyakAnakDanOrangDewasaMenerimaVaksinasiYangPentingUntukMelindungiDiriDanKomunitasIniAdalahContohPartisipasiAktifMasyarakatDalamUpayaKesehatanBersama" style="width: 490px; left: 650px; top: 380px; position: absolute; text-align: justify; color: #3E5670; font-size: 20px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">Desa Berkoh, 20 Juli 2023 - Program imunisasi di Desa Berkoh mencapai kesuksesan besar dengan melibatkan banyak warga. Imunisasi adalah langkah penting dalam menjaga kesehatan dan mencegah penyakit menular. Dalam program ini, banyak anak dan orang dewasa menerima vaksinasi yang penting untuk melindungi diri dan komunitas. Ini adalah contoh partisipasi aktif masyarakat dalam upaya kesehatan bersama.</div>
-    <div class="Group35" style="width: 1920px; height: 400px; left: 0px; top: 1227px; position: absolute">
-        <div class="Rectangle11" style="width: 1920px; height: 400px; left: 0px; top: 0px; position: absolute; background: #468662"></div>
-        <div class="Follow" style="left: 1000px; top: 54px; position: absolute; color: #F5F5F5; font-size: 28px; font-family: Plus Jakarta Sans; font-weight: 700; line-height: 48px; word-wrap: break-word">Follow</div>
-        <div class="JlGerilyaTimurNo26SokabaruBerkohKecPurwokertoSelKabupatenBanyumasJawaTengah53146" style="width: 332px; left: 600px; top: 120px; position: absolute; color: #F5F5F5; font-size: 20px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">Jl. Gerilya Timur No.26, Sokabaru, Berkoh, Kec. Purwokerto Sel., Kabupaten Banyumas, Jawa Tengah 53146</div>
-        <div class="HubungiKami" style="left: 600px; top: 54px; position: absolute; color: #F5F5F5; font-size: 28px; font-family: Plus Jakarta Sans; font-weight: 700; line-height: 48px; word-wrap: break-word">Hubungi Kami</div>
-        <div class="Logo" style="width: 272px; height: 60px; left: 76px; top: 58px; position: absolute; justify-content: flex-start; align-items: center; gap: 24px; display: inline-flex">
-            <img class="Logo" style="width: 46.10px; height: 60px" src="https://s3-alpha-sig.figma.com/img/61d1/2d5f/8f8a38b5fb576bbd8441a5f750b3657e?Expires=1701648000&Signature=n05Ryli3HA0nozm9WCgRAjl8XL640BRwPENnH7-OeIHJl9TWZaGCinsxXYK2f~T89plRg~Ak2UXrum38Lni860Sz8OlUNDOuRgALBRjx06zI5TcFo1FWLzrRq989RZu-jAd39SCK9TXsCWuu3zVqHSRbU3dSpa3KY2pzqnd3n~yzP6jkHI0RepSVVYJX8dbgrLhPAiOzLiHxHn-7CDyJFS969x-3FinDSA1TXhRyXGxmNwq6dJHwAB60ICaqz4qGl0TvT~yd-AHlv9pZxs6u7vT-wAwxlfaSpPMEahTRDgOIsc4zQs78nJuzL4p-14m1loniNSqWRcL7X2rQJ2Gn1Q__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4" />
-            <div class="Frame4" style="flex-direction: column; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
-                <div class="InfoBerkoh" style="color: #F5F5F5; font-size: 28px; font-family: Plus Jakarta Sans; font-weight: 600; line-height: 20px; word-wrap: break-word">INFO BERKOH</div>
-                <div class="IntegrasiNavigasiDanFaktaOnlineDesaBerkoh" style="color: #F5F5F5; font-size: 8.20px; font-family: Plus Jakarta Sans; font-weight: 700; line-height: 20px; word-wrap: break-word">Integrasi Navigasi dan Fakta Online Desa Berkoh</div>
+</section>
+    <section id="kontak">
+            <div class="grid">
+                <div class="left">
+                    <img src="assets/images/logowhite.svg" height="50px">
+                    <p>Website Resmi Pemerintah Desa Berkoh, Kecamatan Purwokerto Selatan, Kabupaten Banyumas</p>
+                </div>
+                <div class="middle">
+                    <h3>Hubungi Kami</h3>
+                    <p>Jl. Gerilya Timur No.26, Sokabaru, Berkoh, Kec. Purwokerto Sel., Kabupaten Banyumas, Jawa Tengah 53146</p>
+                    <div class="call">
+                        <img src="assets/images/telp.svg" height="24px">
+                        <p>Telepon/Fax: 0281633014</p>
+                    </div>
+                    <div class="call">
+                        <img src="assets/images/email.svg" height="24px">
+                        <p>Email: berkoh.banyumas@gmail.com</p>
+                    </div>
+                </div>
+                <div class="right">
+                    <h3>Ikuti Kami</h3>
+                    <div class="sosmed">
+                        <a href=""><img src="assets/images/insta.svg"></a>
+                        <a href=""><img src="assets/images/twit.svg"></a>
+                        <a href=""><img src="assets/images/fb.svg"></a>
+                        <a href=""><img src="assets/images/linked.svg"></a>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="WebsiteResmiPemerintahDesaBerkohKecamatanPurwokertoSelatanKabupatenBanyumas" style="width: 476px; left: 76px; top: 142px; position: absolute; color: #F5F5F5; font-size: 20px; font-family: Plus Jakarta Sans; font-weight: 500; word-wrap: break-word">Website Resmi Pemerintah Desa Berkoh, Kecamatan Purwokerto Selatan, Kabupaten Banyumas</div>
-        <div class="Group23" style="width: 292px; height: 37px; left: 852px; top: 242px; position: absolute">
-            <div class="TeleponFax0281633014" style="left: -200px; top: 10px; position: absolute; color: #F5F5F5; font-size: 20px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">Telepon/Fax: 0281633014</div>
-            <div class="PhPhoneBold" style="width: 37px; height: 37px; left: 0px; top: 0px; position: absolute">
-                <div class="Vector" style="width: 30.06px; height: 30.06px; left: -250px; top: 2.89px; position: absolute; background: #F5F5F5"></div>
-            </div>
-        </div>
-        <div class="Group24" style="width: 400px; height: 37px; left: 852px; top: 296px; position: absolute">
-            <div class="EmailBerkohBanyumasGmailCom" style="left: -200px; top: 11px; position: absolute; color: #F5F5F5; font-size: 20px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">Email: berkoh.banyumas@gmail.com</div>
-            <div class="IcOutlineEmail" style="width: 37px; height: 37px; left: 0px; top: 0px; position: absolute">
-                <div class="Vector" style="width: 30.83px; height: 24.67px; left: -250px; top: 6.17px; position: absolute; background: #F5F5F5"></div>
-            </div>
-        </div>
-        <div class="MdiInstagram" style="width: 30px; height: 30px; left: 1000px; top: 99px; position: absolute">
-            <div class="Vector" style="width: 25px; height: 25px; left: 2.50px; top: 2.50px; position: absolute; background: #F5F5F5"></div>
-        </div>
-        <div class="IcBaselineFacebook" style="width: 30px; height: 30px; left: 1050px; top: 99px; position: absolute">
-            <div class="Vector" style="width: 25px; height: 24.94px; left: 2.50px; top: 2.50px; position: absolute; background: #F5F5F5"></div>
-        </div>
-        <div class="MdiTwitter" style="width: 30px; height: 30px; left: 1100px; top: 99px; position: absolute">
-            <div class="Vector" style="width: 26.15px; height: 21.25px; left: 1.92px; top: 5px; position: absolute; background: #F5F5F5"></div>
-        </div>
-        <div class="MdiLinkedin" style="width: 30px; height: 30px; left: 1150px; top: 102px; position: absolute">
-            <div class="Vector" style="width: 22.50px; height: 22.50px; left: 3.75px; top: 3.75px; position: absolute; background: #F5F5F5"></div>
-        </div>
+        </section>
     </div>
-</div>
+</main>
 <?php include 'components/footer.php'; ?>
 </body>
 

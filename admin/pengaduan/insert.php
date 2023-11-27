@@ -70,8 +70,7 @@ if(isset($insert)){
     <?php include '../../components/admin/sidenav.php' ?>
     <main>
     <h1>Tambah Data Pengaduan</h1>
-    <form name='formulir' method='POST' 
-action='<?php $_SERVER['PHP_SELF']; ?>'>
+    <form name='formulir' method='POST' action='<?php $_SERVER['PHP_SELF']; ?>'>
     <table>
         <tr>
             <td>NIK</td>
