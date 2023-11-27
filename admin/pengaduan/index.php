@@ -71,7 +71,7 @@ $query = mysqli_query($conn,$sql);
         <table>
             <tr>
                 <th>No</th>
-                <th>NIK</th>
+                <th>Nama</th>
                 <th>Pesan</th>
                 <th>Aksi</th>
             </tr>
