@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 26, 2023 at 10:44 PM
+-- Generation Time: Nov 27, 2023 at 09:10 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -40,7 +40,7 @@ CREATE TABLE `berita` (
 --
 
 INSERT INTO `berita` (`beritaID`, `penggunaID`, `judul`, `isi`, `tanggal_dikirim`) VALUES
-(1, 1, 'Open Recuitment Panitia Pemilu', '<p><img src=\"assets/images/berita/img_6563b2fdf3209.png\"></p><p>Dalam rangka mensukseskan acara historis ini, dengan ini mengumumkan pembukaan rekrutmen untuk individu yang berkomitmen untuk turut serta dalam penyelenggaraan pemilihan presiden yang berlangsung pada tahun 2024. Bergabunglah dalam panitia pemilihan presiden kami dan berkontribusi dalam mewujudkan peristiwa bersejarah ini. Jadilah bagian dari tim yang bertanggung jawab atas kelancaran dan keberhasilan pemilihan presiden 2024. Kesempatan ini bukan hanya untuk mengamati, tetapi juga untuk aktif terlibat dalam proses demokrasi. Ayo wujudkan perubahan bersama!</p>', '2023-11-27'),
+(1, 1, 'Open Recuitment Panitia Pemilu', '<p><img src=\"assets/images/berita/img_6563b2fdf3209.png\"></p><p>Dengan penuh semangat dan antusias, kami dengan bangga mengumumkan kesempatan emas bagi Anda untuk bergabung dalam perjalanan sejarah demokrasi kita. Pada tahun 2024, kami membuka rekrutmen untuk individu yang memiliki komitmen tinggi dan keinginan kuat untuk ikut serta dalam penyelenggaraan pemilihan presiden. Inilah momen untuk menjadi bagian dari panitia pemilihan presiden kami, tempat di mana Anda tidak hanya dapat mengamati, tetapi juga secara aktif berkontribusi dalam mewujudkan peristiwa bersejarah ini.\r\n\r\nDengan bergabung dalam tim panitia, Anda akan menjadi bagian integral dari kelancaran dan keberhasilan pemilihan presiden 2024. Tantangan ini bukan hanya sekadar kesempatan untuk menyaksikan proses demokrasi, tetapi juga untuk merasakan getaran langsungnya, menjadi penggerak perubahan, dan memberikan sumbangsih berarti untuk masa depan demokratis kita.\r\n\r\nKami mengundang Anda untuk melibatkan diri, berkolaborasi dengan individu yang berkomitmen, dan menjadikan diri Anda sebagai agen perubahan. Dengan bergabung dalam panitia pemilihan presiden, Anda tidak hanya menjadi saksi sejarah, tetapi juga penulis sejarah. Mari bersama-sama wujudkan perubahan dan keberhasilan dalam pemilihan presiden 2024. Ayo, bergabunglah, dan menjadi bagian dari gerbong demokrasi yang berkobar-kobar!</p>', '2023-11-27'),
 (2, 1, 'Baksos \"Berbagi Kasih\" Mencerahkan Masyarakat', '<p><img src=\"assets/images/berita/img_6563b383b7a6a.png\"></p><p>\r\nAcara bakti sosial \"Berbagi Kasih\" di Desa Berkoh menyentuh hati banyak orang. Sukarelawan dari berbagai latar belakang bergabung untuk membantu keluarga kurang mampu dengan memberikan bantuan pangan, pakaian, dan perlengkapan sekolah. Kebersamaan dan semangat gotong royong terasa kuat, menciptakan ikatan yang erat di antara warga desa. Aksi ini tidak hanya memberikan manfaat materi, tetapi juga membawa kehangatan dan harapan bagi masyarakat Desa Berkoh.</p>', '2023-11-27'),
 (3, 1, 'Lomba 17 Agustus 2023', '<p><img src=\"assets/images/berita/img_6563b3c32bd0c.png\"></p><p>Desa Berkoh mengadakan lomba 17 Agustus yang meriah dan penuh semangat sebagai bagian dari perayaan Hari Kemerdekaan. Lomba ini dihadiri oleh warga desa yang berkompetisi dalam berbagai cabang perlombaan, mulai dari lomba makan kerupuk, tarik tambang, hingga balap kelereng. Semangat persaingan dan kebersamaan begitu terasa, menciptakan momen keakraban yang tak terlupakan di tengah kemeriahan peringatan Hari Kemerdekaan Desa Berkoh. Acara tersebut juga diramaikan oleh penampilan seni dari anak-anak sekolah setempat, menambah warna ceria dan kehangatan dalam merayakan semangat kemerdekaan. Suasana kegembiraan dan kebanggaan atas kemerdekaan Indonesia begitu kental terasa, memperkuat ikatan sosial di Desa Berkoh.</p>', '2023-11-27'),
 (4, 3, 'test', '<p>test</p>', '2023-11-27');
@@ -65,7 +65,12 @@ CREATE TABLE `daftar_pelayanan` (
 INSERT INTO `daftar_pelayanan` (`pelayananID`, `nik`, `tanggal`, `status`) VALUES
 (1, '123456789, 234567809, 1234567809', '2023-10-23', 'Selesai'),
 (1, '4567810234,8091234567,33218032843452', '2023-12-09', 'Belum Dilaksanakan'),
-(2, '1234567810, 1234567890, 1345678091, 2345678091, 2345678102', '2023-11-26', 'Berlangsung');
+(2, '1234567810, 1234567890, 1345678091, 2345678091, 2345678102', '2023-11-26', 'Berlangsung'),
+(11, '330218031803827,330218031803826,330218031803824,330218031803831,330218031803824,330218031803829', '2021-06-12', 'Berlangsung'),
+(12, '330218031803825,330218031803826,330218031803827,330218031803828,330218031803830,330218031803831,330218031803832,330218031803833,330218031803835,330218031803836', '2022-11-23', 'Selesai'),
+(13, '330218031803824,330218031803826,330218031803828,330218031803969,330218031803919,330218031803967,330218031803963,330218031803968,330218031803972', '2020-03-25', 'Belum Dilaksanakan'),
+(16, '330218031803965,330218031803916,330218031803902,330218031803960,330218031803962,330218031803959,330218031803961,330218031803970', '2022-05-24', 'Selesai'),
+(17, '330218031803827,330218031803956,330218031803964,330218031803971,330218031803973,330218031803972,330218031803824,330218031803824', '2023-08-30', 'Berlangsung');
 
 -- --------------------------------------------------------
 
@@ -84,7 +89,14 @@ CREATE TABLE `dokumentasi` (
 --
 
 INSERT INTO `dokumentasi` (`dokumentasiID`, `nama`, `media`) VALUES
-(10, 'Perempatan', '1700885127_foto-berkoh.png');
+(1, 'Perempatan', '1700885127_foto-berkoh.png'),
+(11, 'Gapura Kampung KB', '1701046722_gapura kampung kb.jpeg'),
+(12, 'TK Aisyiyah', '1701046737_tkaisyiyah.jpg'),
+(13, 'Taman Satria', '1701046753_taman satria.jpg'),
+(14, 'SDN 1', '1701046766_sdn1.jpg'),
+(15, 'SDN 3', '1701046782_sdn3.jpg'),
+(16, 'Taman RW 003', '1701046802_taman.jpg'),
+(17, 'Kantor Desa', '1701046815_kantordesa.jpg');
 
 -- --------------------------------------------------------
 
@@ -124,9 +136,18 @@ CREATE TABLE `pelayanan` (
 --
 
 INSERT INTO `pelayanan` (`pelayananID`, `penggunaID`, `nama_pelayanan`, `deskripsi`) VALUES
-(1, 2, 'Posyandu Lansia', '<p><img src=\"../../assets/images/pelayanan/img_65629843a7e65.jpeg\"></p><p>Posyandu Lansia untuk orang lanjut usia, bertempat di rumah ibu Indah RT 01 RW 02.</p>'),
-(2, 3, 'Air Bersih', '<p><img src=\"../../assets/images/pelayanan/img_65629856cbf52.jpeg\"></p><p>Program Air Bersih untuk warga yang sumurnya kering.</p>'),
-(10, 3, 'Pemberdayaan Masyarakat Kurang Mampu', '<p>test</p>');
+(11, 14, 'Posyandu untuk Ibu Hamil dan Balita', '<p>Posyandu merupakan pusat pelayanan kesehatan yang fokus pada ibu hamil dan balita. Di sini, para ibu dapat memperoleh informasi, konsultasi, serta layanan kesehatan yang mendukung perkembangan optimal bagi mereka dan balita mereka.</p><p><img src=\"../../assets/images/pelayanan/img_65644c7d658ce.jpeg\"></p>'),
+(12, 1, 'Imunisasi dan Konsultasi Kesehatan Masyarakat', '<p>Memberikan pelayanan imunisasi kepada masyarakat untuk melindungi mereka dari penyakit tertentu. Selain itu, memberikan konsultasi kesehatan secara umum, memberikan informasi kesehatan preventif, dan memberdayakan masyarakat untuk hidup sehat.</p><p><img src=\"../../assets/images/pelayanan/img_65644c4b75cfc.jpeg\"></p>'),
+(13, 2, 'Pengelolaan Sampah Rumah Tangga', '<p>Program ini bertujuan untuk mengelola sampah rumah tangga secara efisien. Melibatkan pemberdayaan masyarakat dalam praktik-praktik daur ulang dan pengurangan sampah untuk menciptakan lingkungan yang bersih dan sehat.</p><p><img src=\"../../assets/images/pelayanan/img_65644cba514de.jpeg\"></p>'),
+(14, 5, 'Penerbitan Surat Keterangan untuk Keperluan Usaha dan Kegiatan Ekonomi', '<p>Memberikan dukungan administratif untuk usaha dan kegiatan ekonomi masyarakat dengan menerbitkan surat keterangan yang diperlukan untuk proses perizinan dan kegiatan bisnis.</p><p><img src=\"../../assets/images/pelayanan/img_65644d0146e3f.jpeg\"></p>'),
+(15, 1, 'Informasi dan Bantuan Terkait Sertifikat Tanah', '<p>Menyediakan informasi dan bantuan kepada masyarakat terkait perolehan, perpanjangan, atau pemahaman terhadap sertifikat tanah. Membantu dalam mengatasi permasalahan terkait kepemilikan tanah.</p><p><img src=\"../../assets/images/pelayanan/img_65644d5735c5c.jpeg\"></p>'),
+(16, 6, 'Program Pemberdayaan Masyarakat', '<p>Mengembangkan program-program yang memberdayakan masyarakat secara ekonomi, sosial, dan budaya. Bertujuan untuk meningkatkan kemandirian dan kesejahteraan masyarakat.</p><p><img src=\"../../assets/images/pelayanan/img_65644d88d1f13.jpeg\"></p>'),
+(17, 7, 'Program Beasiswa untuk Siswa Berprestasi', '<p>Memberikan peluang pendidikan lebih lanjut dengan memberikan beasiswa kepada siswa yang telah menunjukkan prestasi akademik atau prestasi di berbagai bidang. Mendorong pengembangan potensi generasi muda.</p><p><img src=\"../../assets/images/pelayanan/img_65644dc302b55.jpeg\"></p>'),
+(18, 8, 'Perencanaan dan Pembangunan Infrastruktur', '<p>Melibatkan perencanaan dan pembangunan jalan, jembatan, dan fasilitas umum untuk meningkatkan konektivitas dan aksesibilitas masyarakat terhadap fasilitas penting.</p><p><img src=\"../../assets/images/pelayanan/img_65644df2898e2.png\"></p>'),
+(19, 9, 'Mediasi dalam Penyelesaian Sengketa', '<p>Menyediakan layanan mediasi untuk membantu masyarakat dalam menyelesaikan sengketa secara damai dan adil tanpa melibatkan proses hukum yang panjang.</p><p><img src=\"../../assets/images/pelayanan/img_65644e1d0d62a.jpeg\"></p>'),
+(20, 10, 'Pengelolaan Air Bersih dan Sanitasi', '<p>Memastikan ketersediaan air bersih dan penyediaan fasilitas sanitasi yang baik. Program ini bertujuan untuk meningkatkan kesehatan masyarakat dan mencegah penyakit terkait air.</p><p><img src=\"../../assets/images/pelayanan/img_65644e7044907.jpeg\"></p>'),
+(21, 11, 'Pencatatan Resmi Kelahiran dan Kematian', '<p>Memberikan layanan pencatatan resmi terkait kelahiran dan kematian, termasuk penerbitan akta kelahiran dan kematian. Penting untuk administrasi dan hak-hak hukum.</p><p><img src=\"../../assets/images/pelayanan/img_65644eae31c89.png\"></p>'),
+(22, 12, 'Program Keagamaan untuk Masyarakat Desa', '<p>Mengorganisir program-program keagamaan, seperti kegiatan ibadah, pelatihan agama, dan kegiatan sosial keagamaan untuk memenuhi kebutuhan spiritual masyarakat desa.</p><p><img src=\"../../assets/images/pelayanan/img_65644ed647711.jpeg\"></p>');
 
 -- --------------------------------------------------------
 
@@ -317,6 +338,17 @@ CREATE TABLE `pengaduan` (
   `pesan` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `pengaduan`
+--
+
+INSERT INTO `pengaduan` (`pengaduanID`, `nik`, `pesan`) VALUES
+(22, 330218031803824, '<p>test</p>'),
+(23, 330218031803824, '<p>test kedua</p>'),
+(24, 330218031803836, '<p>test ketiga</p>'),
+(25, 330218031803824, '<p>dsasd</p>'),
+(26, 330218031803944, '<p>Dalam rangka agustusan saya tidak diajak.</p>');
+
 -- --------------------------------------------------------
 
 --
@@ -339,9 +371,19 @@ CREATE TABLE `pengguna` (
 --
 
 INSERT INTO `pengguna` (`penggunaID`, `username`, `nama_pengguna`, `email`, `password`, `role`, `jabatan`, `avatar`) VALUES
-(1, 'rosikin', 'Rosikin Supardi', 'rosikin@gmail.com', 'rosikin123', 'Admin', 'Kepala Desa', '1700876760_1517479205212.jpg'),
+(1, 'rosikin', 'Rosikin Supardi', 'rosikin@gmail.com', 'rosikin123', 'Admin', 'Kepala Desa', '1701044644_rosi.jpg'),
 (2, 'indriyati', 'Indriyati Suwidah R', 'indriyati@gmail.com', 'indri123', 'Admin', 'Sekretaris', '1700876767_indriyati.jpg'),
-(3, 'mariadi', 'Mariadi Slamet', 'mar@gmail.com', 'mari', 'Petugas', 'Kepala Dusun', '1700886839_MARIADI.jpg');
+(3, 'mariadi', 'Mariadi Slamet', 'mar@gmail.com', 'mari', 'Petugas', 'Kepala Dusun', '1700886839_MARIADI.jpg'),
+(5, 'andi', 'Andiono', 'andiono@gmail.com', 'andi123', 'Petugas', 'Kepala Dusun', '1701070830_d8a5fe22d03f141fc8b7e81822c67a18.jpg'),
+(6, 'fendi', 'Fendi Salim', 'fendi@gmail.com', 'fendi123', 'Admin', 'Kasi Pemerintahan', '1701070841_87ag0N_WhatsApp+Image+2021-02-15+at+11.20.55.jpeg'),
+(7, 'agus', 'Agus Burdiyanto', 'agus@gmail.com', 'agus123', 'Petugas', 'Kasi Kesejahteraan', '1701070853_pejabat-pajak-rafael-alun-trisambodo-1_169.jpeg'),
+(8, 'gunawan', 'Gunawan Wibisono', 'gunawan@gmail.com', 'gunawan123', 'Admin', 'Kasi Pelayanan', '1701070939_EH4d4-LUEAEmZDs.jpg'),
+(9, 'puji', 'Pujiyanto', 'pujiyanto@gmail.com', 'puji123', 'Petugas', 'Kepala Dusun', '1701070947_1438497-1000xauto-potret-lawas-abdul-rozak-pns.jpg'),
+(10, 'rizal', 'Rizal Ardianto', 'rizal@gmail.com', 'rizal123', 'Admin', 'Kaur Keuangan', '1701071090_IMG-20221004-WA0015.jpg'),
+(11, 'sulaeman', 'Sulaeman', 'sulaeman@gmail.com', 'sula123', 'Petugas', 'Kaur Perencanaan', '1701071100_20131104094554@34.jfif'),
+(12, 'akhmad', 'Akhmad Rifai', 'akhmad@gmail.com', 'akhmad123', 'Admin', 'Kepala Dusun', '1701071116_images.jfif'),
+(13, 'levi', 'Levi Ackerman', 'levi@gmail.com', 'levi123', 'Petugas', 'Kepala Dusun', '1701071215_13236283_1317018051645674_378171881_n.png(FILEminimizer).jpg'),
+(14, 'annisa', 'Annisa Azkiya', 'annisa@gmail.com', 'annisa123', 'Admin', 'Kepala Dusun', '1701071224_ARDI-SUSANTI-S.PD_.-IMG_0241-300x400.jpg');
 
 --
 -- Indexes for dumped tables
@@ -414,7 +456,7 @@ ALTER TABLE `berita`
 -- AUTO_INCREMENT for table `dokumentasi`
 --
 ALTER TABLE `dokumentasi`
-  MODIFY `dokumentasiID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `dokumentasiID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `informasi`
@@ -426,19 +468,19 @@ ALTER TABLE `informasi`
 -- AUTO_INCREMENT for table `pelayanan`
 --
 ALTER TABLE `pelayanan`
-  MODIFY `pelayananID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `pelayananID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `pengaduan`
 --
 ALTER TABLE `pengaduan`
-  MODIFY `pengaduanID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `pengaduanID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `pengguna`
 --
 ALTER TABLE `pengguna`
-  MODIFY `penggunaID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `penggunaID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
