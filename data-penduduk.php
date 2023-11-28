@@ -1,31 +1,43 @@
 <?php
 include 'config/models.php';
 
-$queryPenduduk = "SELECT COUNT(*) as totalPenduduk FROM penduduk WHERE createdat >= DATE_SUB(NOW(), INTERVAL 1 YEAR)";
-$resultPenduduk = mysqli_query($conn, $queryPenduduk);
+$queryPendudukLastYear = "SELECT COUNT(*) as totalPenduduk FROM penduduk WHERE createdat >= DATE_SUB(NOW(), INTERVAL 1 YEAR)";
+$queryPendudukAll = "SELECT COUNT(*) as totalPenduduk FROM penduduk";
+$resultPenduduk = mysqli_query($conn, 
+    $_GET['timeOption'] === 'all' ? $queryPendudukAll : $queryPendudukLastYear
+);
 $rowPenduduk = mysqli_fetch_assoc($resultPenduduk);
 $selectPenduduk = $rowPenduduk['totalPenduduk'];
 
-// Query to get the count of 'Kawin' status
-$queryKawin = "SELECT COUNT(*) as totalKawin FROM penduduk WHERE status_perkawinan='Kawin' AND createdat >= DATE_SUB(NOW(), INTERVAL 1 YEAR)";
-$resultKawin = mysqli_query($conn, $queryKawin);
+$queryKawinLastYear = "SELECT COUNT(*) as totalKawin FROM penduduk WHERE status_perkawinan='Kawin' AND createdat >= DATE_SUB(NOW(), INTERVAL 1 YEAR)";
+$queryKawinAll = "SELECT COUNT(*) as totalKawin FROM penduduk WHERE status_perkawinan='Kawin'";
+$resultKawin = mysqli_query($conn, 
+    $_GET['timeOption'] === 'all' ? $queryKawinAll : $queryKawinLastYear
+);
 $rowKawin = mysqli_fetch_assoc($resultKawin);
 $selectKawin = $rowKawin['totalKawin'];
 
-// Query to get the count of 'Wafat' status
-$queryWafat = "SELECT COUNT(*) as totalWafat FROM penduduk WHERE status_hidup='Wafat' AND createdat >= DATE_SUB(NOW(), INTERVAL 1 YEAR)";
-$resultWafat = mysqli_query($conn, $queryWafat);
+$queryWafatLastYear = "SELECT COUNT(*) as totalWafat FROM penduduk WHERE status_hidup='Wafat' AND createdat >= DATE_SUB(NOW(), INTERVAL 1 YEAR)";
+$queryWafatAll = "SELECT COUNT(*) as totalWafat FROM penduduk WHERE status_hidup='Wafat'";
+$resultWafat = mysqli_query($conn, 
+    $_GET['timeOption'] === 'all' ? $queryWafatAll : $queryWafatLastYear
+);
 $rowWafat = mysqli_fetch_assoc($resultWafat);
 $selectWafat = $rowWafat['totalWafat'];
 
-// Query to get the count of 'Kepala Keluarga' status
-$queryKeluarga = "SELECT COUNT(*) as totalKeluarga FROM penduduk WHERE status_keluarga='Kepala Keluarga' AND createdat >= DATE_SUB(NOW(), INTERVAL 1 YEAR)";
-$resultKeluarga = mysqli_query($conn, $queryKeluarga);
+$queryKeluargaLastYear = "SELECT COUNT(*) as totalKeluarga FROM penduduk WHERE status_keluarga='Kepala Keluarga' AND createdat >= DATE_SUB(NOW(), INTERVAL 1 YEAR)";
+$queryKeluargaAll = "SELECT COUNT(*) as totalKeluarga FROM penduduk WHERE status_keluarga='Kepala Keluarga'";
+$resultKeluarga = mysqli_query($conn, 
+    $_GET['timeOption'] === 'all' ? $queryKeluargaAll : $queryKeluargaLastYear
+);
 $rowKeluarga = mysqli_fetch_assoc($resultKeluarga);
 $selectKeluarga = $rowKeluarga['totalKeluarga'];
 
-$queryChart = "SELECT MONTHNAME(createdat) AS namabulan, COUNT(*) AS jumlahpenduduk FROM penduduk WHERE createdat >= CURDATE() - INTERVAL 1 YEAR GROUP BY namabulan;";
-foreach ($conn->query($queryChart) as $rowChart) {
+$queryChartLastYear = "SELECT MONTHNAME(createdat) AS namabulan, COUNT(*) AS jumlahpenduduk FROM penduduk WHERE createdat >= CURDATE() - INTERVAL 1 YEAR GROUP BY namabulan;";
+$queryChartAll = "SELECT YEAR(createdat) AS namabulan, COUNT(*) AS jumlahpenduduk FROM penduduk GROUP BY namabulan;";
+foreach ($conn->query(
+    $_GET['timeOption'] === 'all' ? $queryChartAll : $queryChartLastYear
+) as $rowChart) {
     $namaBulan[] = $rowChart['namabulan'];
     $jumlahPenduduk[] = $rowChart['jumlahpenduduk'];
 }
@@ -37,12 +49,13 @@ foreach ($conn->query($queryChart) as $rowChart) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Penduduk - @infoberkoh</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.svg">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/main.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         main {
-            padding-top: 8rem;
+            padding-top: 4rem;
             background: #3e5670;
             color: #fff;
         }
@@ -78,8 +91,27 @@ foreach ($conn->query($queryChart) as $rowChart) {
             font-weight: 700;
             margin: .5rem 0;
         }
-        #statistik .item p:last-child {
-            color: gray;
+        .filter {
+            display: flex;
+            align-items: flex-end;
+            flex-direction: column;
+            padding: 1rem;
+        }
+        .filter .time {
+            display: flex;
+            gap: 1rem;
+        }
+        .filter .time .time-option {
+            cursor: pointer;
+            transition: background-color 0.3s;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+        }
+        .filter .time .time-option:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        .filter .time .time-option.selected {
+            background-color: rgba(0, 0, 0, 0.5);
         }
         #kenaikan {
             display: flex;
@@ -143,28 +175,31 @@ foreach ($conn->query($queryChart) as $rowChart) {
 <body>
 <?php include 'components/header.php'; ?>
 <main>
+    <div class="filter">
+        <p style="margin-right: 11.6rem">Filter :</p>
+        <div class="time">
+            <p class="time-option" data-option="lastYear">1 Tahun Terakhir</p>
+            <p class="time-option" data-option="all">Keseluruhan</p>
+        </div>
+    </div>
     <section id="statistik">
         <h1>Statistik Penduduk</h1>
         <div class="grid">
             <div class="item">
                 <p>Jumlah Penduduk</p>
                 <h3><?= $selectPenduduk ?></h3>
-                <p>Satu Tahun Terakhir</p>
             </div>
             <div class="item">
                 <p>Jumlah Penduduk yang sudah Menikah</p>
                 <h3><?= $selectKawin ?></h3>
-                <p>Satu Tahun Terakhir</p>
             </div>
             <div class="item">
                 <p>Jumlah Penduduk yang sudah Wafat</p>
                 <h3><?= $selectWafat ?></h3>
-                <p>Satu Tahun Terakhir</p>
             </div>
             <div class="item">
                 <p>Jumlah Kepala Keluarga</p>
                 <h3><?= $selectKeluarga ?></h3>
-                <p>Satu Tahun Terakhir</p>
             </div>
         </div>
     </section>
@@ -206,11 +241,48 @@ foreach ($conn->query($queryChart) as $rowChart) {
 </main>
 <?php include 'components/footer.php'; ?>
 <script>
+const timeOptions = document.querySelectorAll('.time-option');
+
+// Menetapkan kelas "selected" pada opsi waktu sesuai dengan URL saat ini
+const setSelectedOption = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedOption = urlParams.get('timeOption');
+
+    timeOptions.forEach(option => {
+        option.classList.remove('selected');
+        if (option.getAttribute('data-option') === selectedOption) {
+            option.classList.add('selected');
+        }
+    });
+};
+
+// Memanggil fungsi untuk menetapkan kelas "selected" saat halaman dimuat
+setSelectedOption();
+
+timeOptions.forEach(option => {
+    option.addEventListener('click', function () {
+        // Hapus kelas "selected" dari semua opsi waktu
+        timeOptions.forEach(opt => opt.classList.remove('selected'));
+
+        // Tambahkan kelas "selected" pada opsi waktu yang dipilih
+        this.classList.add('selected');
+
+        const selectedOption = this.getAttribute('data-option');
+
+        // Kirim opsi waktu ke server (misalnya menggunakan AJAX atau URL parameter)
+        window.location.href = `?timeOption=${selectedOption}`;
+    });
+});
+
+// Menanggapi perubahan URL (misalnya saat menggunakan tombol back/forward browser)
+window.addEventListener('popstate', setSelectedOption);
+</script>
+<script>
     const labels = <?= json_encode($namaBulan) ?>;
     const data = {
     labels: labels,
     datasets: [{
-        label: 'Jumlah Penduduk per Bulan (Satu Tahun Terakhir)',
+        label: 'Jumlah Penduduk per <?= $_GET['timeOption'] === 'all' ? 'Tahun' : 'Bulan' ?> (<?= $_GET['timeOption'] === 'all' ? 'Keseluruhan' : '1 Tahun Terakhir' ?>)',
         data: <?= json_encode($jumlahPenduduk) ?>,
         backgroundColor: [
         'rgba(255, 99, 132, 0.2)',

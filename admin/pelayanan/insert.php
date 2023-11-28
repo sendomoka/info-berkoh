@@ -41,6 +41,7 @@ if(isset($insert)){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah Data Pelayanan - Admin</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.svg">
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/admin.css">

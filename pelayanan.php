@@ -58,6 +58,16 @@ function getTextWithoutImagesAndLimit($html, $limit)
 // Query to get data from 'Pelayanan' table
 $queryPelayanan = "SELECT * FROM pelayanan ";
 $resultPelayanan = mysqli_query($conn, $queryPelayanan);
+
+// Query untuk mendapatkan jumlah NIK terdaftar di setiap layanan
+$queryJumlahNIK = "SELECT pelayananID, COUNT(SUBSTRING_INDEX(SUBSTRING_INDEX(nik, ',', numbers.n), ',', -1)) AS jumlahNIK FROM daftar_pelayanan JOIN (SELECT 1 n UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8) numbers ON CHAR_LENGTH(nik) -CHAR_LENGTH(REPLACE(nik, ',', '')) >= numbers.n - 1 GROUP BY pelayananID";
+$resultJumlahNIK = mysqli_query($conn, $queryJumlahNIK);
+
+// Buat array untuk menyimpan jumlah NIK terdaftar di setiap layanan
+$jumlahNIKTerdaftar = [];
+while ($rowJumlahNIK = mysqli_fetch_assoc($resultJumlahNIK)) {
+    $jumlahNIKTerdaftar[$rowJumlahNIK['pelayananID']] = $rowJumlahNIK['jumlahNIK'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,7 +75,8 @@ $resultPelayanan = mysqli_query($conn, $queryPelayanan);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan Pengaduan - @infoberkoh</title>
+    <title>Pelayanan Publik - @infoberkoh</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.svg">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/main.css">
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
@@ -226,16 +237,18 @@ $resultPelayanan = mysqli_query($conn, $queryPelayanan);
                 echo '<div class="text">';
                 echo '<img src="' . $imageUrls[0] . '">';
                 echo '<p style="font-weight: bold; font-size: 1.3em; margin-bottom: 10px; text-align: center;">' . $rowPelayanan['nama_pelayanan'] . '</p>';
-                echo '<p style="font-weight: bold; font-size: 1em; margin-bottom: 5px;"> Penanggung Jawab : ' .  $penanggungjawab . '</p>'; // Menggunakan variabel penanggungjawab
-                echo '<p style="font-size: 0.9em; margin-bottom: 0;">' . getTextWithoutImagesAndLimit($rowPelayanan['deskripsi'], 2000) . '</p>';
+                echo '<p style="font-weight: bold; font-size: 1em; margin-bottom: 5px;"> Penanggung Jawab : ' .  $penanggungjawab . '</p>';
+                if ($jumlahNIKTerdaftar[$rowPelayanan['pelayananID']] > 0) {
+                    echo '<p style="font-size: 0.9em; margin-bottom: 0; margin-top: 0px">Jumlah Pendaftar : ' . $jumlahNIKTerdaftar[$rowPelayanan['pelayananID']] . '</p>';
+                } else {
+                    echo '<p style="font-size: 0.9em; margin-bottom: 0; margin-top: 0px">Belum Terdaftar</p>';
+                }
+                echo '<p style="font-size: 0.9em; margin-bottom: 0; margin-top: 10px">' . getTextWithoutImagesAndLimit($rowPelayanan['deskripsi'], 50) . '.</p>';
                 echo '</div>';
                 echo '</div>';
             }
             ?>
         </div>
-
-
-
     </section>
     <section id="kontak">
         <div class="grid">

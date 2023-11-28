@@ -20,6 +20,7 @@ if (isset($_POST['login'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - @infoberkoh</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.svg">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/login.css">
 </head>
@@ -35,7 +36,7 @@ if (isset($_POST['login'])) {
         </div>
         <div class="password">
             <img src="assets/images/mdi_eye.png">
-            <input type="password" name="password" placeholder="Masukkan password" required>
+            <input type="password" name="password" placeholder="Masukkan Password" required>
         </div>
         <div class="buttons">
             <button name="login" type="submit">Login</button>

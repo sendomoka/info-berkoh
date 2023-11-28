@@ -94,6 +94,7 @@ $resultBerita = mysqli_query($conn, $queryBerita);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@infoberkoh</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.svg">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/main.css">
     <style>
@@ -555,7 +556,7 @@ $resultBerita = mysqli_query($conn, $queryBerita);
         <section id="ucapan">
             <div class="left">
                 <h1>Mari Bersama Menjadikan <span style="color: #468662">Desa</span> Lebih Maju dan Terintegrasi</h1>
-                <a href="">Login</a>
+                <a href="login.php">Login</a>
             </div>
             <div class="right">
                 <img src="assets/images/ucapan.png">
